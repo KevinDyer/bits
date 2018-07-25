@@ -1,3 +1,14 @@
+<a name="2.20.1"></a>
+## 2.20.1 (2018-07-10)
+
+
+### Bug Fixes
+
+* **scopes-firefox:** fix inability to change user scopes in Firefox   (00f03c7), closes BITS-34
+* **upgrade-script:** copy pre-populated module data to the correct location   (6297ad3), closes BITS-135
+
+---
+
 <a name="2.20.0"></a>
 # 2.20.0 (2018-05-29)
 

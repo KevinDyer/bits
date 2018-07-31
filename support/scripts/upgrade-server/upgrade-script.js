@@ -529,14 +529,14 @@ limitations under the License.
     }
 
     _loadEnvironment() {
-      return Environment.load(path.join(Environment.get('TARGET_EXTRACT'), 'support/scripts/prehooks/.env'));
+      return Environment.load(path.join(__dirname, '..', 'prehooks', '.env'));
     }
 
     _enumeratePrehookScripts() {
-      // if there is a .../support/scripts/prehooks folder, add the names of
+      // if there is a support/scripts/prehooks folder in the extracted upgrade dir, add the names of
       // those scripts to our _prehookScripts array
       this._prehookScripts = []; // start with an empty array
-      const scriptPath = path.join(Environment.get('TARGET_EXTRACT'), 'support/scripts/prehooks');
+      const scriptPath = path.join(__dirname, '..', 'prehooks');
       return Promise.resolve()
       .then(() => this._actionStatus('_enumeratePrehookScripts'))
       .then(() => this._readDir(scriptPath))
@@ -556,10 +556,10 @@ limitations under the License.
     }
 
     _enumeratePosthookScripts() {
-      // if there is a .../support/scripts/posthooks folder, add the
+      // if there is a support/scripts/posthooks folder in the extracted upgrade dir, add the
       // names of those scripts to our _posthookScripts array
       this._posthookScripts = []; // start with an empty array
-      const scriptPath = path.join(Environment.get('TARGET_EXTRACT'), 'support/scripts/posthooks');
+      const scriptPath = path.join(__dirname, '..', 'posthooks');
       return Promise.resolve()
       .then(() => this._actionStatus('_enumeratePosthookScripts'))
       .then(() => this._readDir(scriptPath))
@@ -584,7 +584,7 @@ limitations under the License.
     }
 
     _runPrehookScripts() {
-      const scriptPath = path.join(Environment.get('TARGET_EXTRACT'), 'support/scripts/prehooks');
+      const scriptPath = path.join(__dirname, '..', 'prehooks');
       const options = {cwd: scriptPath, env: Environment.all};
 
       return Promise.resolve()
@@ -623,7 +623,7 @@ limitations under the License.
     }
 
     _runPosthookScripts() {
-      const scriptPath = path.join(Environment.get('BASE_DIR'), 'support/scripts/posthooks');
+      const scriptPath = path.join(__dirname, '..', 'posthooks');
       const options = {cwd: scriptPath, env: Environment.all};
 
       return Promise.resolve()

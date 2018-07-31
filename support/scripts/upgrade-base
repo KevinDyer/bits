@@ -136,7 +136,7 @@ if (argumentError) {
 
 // Unpack the components we need into our TMPDIR
 const untarResults = spawnSync('tar',
-  ['xf', args.target, '--strip-components=4', '-C', tmpdir, './support/scripts/upgrade-server'],
+  ['xf', args.target, '--strip-components=3', '-C', tmpdir, './support/scripts'],
   {});
 if (untarResults.output.join('').length > 0) {
   log('* Untar Results:\n' + untarResults.output.join('\n').trim());
@@ -151,7 +151,7 @@ const execResults = spawnSync('node',
     '-d', args.rootDataDir,
     '-o', LOG_FILE_NAME,
     '-l', args.logLevel],
-  {cwd: tmpdir});
+  {cwd: path.join(tmpdir, 'upgrade-server')});
 if (execResults.output.join('').length > 0) {
   log('* Upgrade App Results:\n' + execResults.output.join('\n').trim());
 }
@@ -161,20 +161,20 @@ log(`* Back from Upgrade App (${yarnInstallError})`);
 
 if (yarnInstallError > 0) {
   log('* Cleaning up working files');
-  let results = spawnSync('rm', ['-rf', path.join(tmpdir, 'node_modules')], {});
-  log('* rm (' + path.join(tmpdir, 'node_modules') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'public')], {});
-  log('* rm (' + path.join(tmpdir, 'public') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, '*.js')], {});
-  log('* rm (' + path.join(tmpdir, '*.js') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, '*.json')], {});
-  log('* rm (' + path.join(tmpdir, '*.json') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, '*.lock')], {});
-  log('* rm (' + path.join(tmpdir, '*.lock') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, '*.txt')], {});
-  log('* rm (' + path.join(tmpdir, '*.txt') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, '*.MD')], {});
-  log('* rm (' + path.join(tmpdir, '*.MD') + ') results: ' + results.output.join('\n').trim());
+  let results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'node_modules')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', 'node_modules') + ') results: ' + results.output.join('\n').trim());
+  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'public')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', 'public') + ') results: ' + results.output.join('\n').trim());
+  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.js')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.js') + ') results: ' + results.output.join('\n').trim());
+  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.json')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.json') + ') results: ' + results.output.join('\n').trim());
+  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.lock')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.lock') + ') results: ' + results.output.join('\n').trim());
+  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.txt')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.txt') + ') results: ' + results.output.join('\n').trim());
+  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.MD')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.MD') + ') results: ' + results.output.join('\n').trim());
   // if (results.output.join('').length > 0) {
   //   log('* rm Results: ' + results.output.join('\n').trim());
   // }

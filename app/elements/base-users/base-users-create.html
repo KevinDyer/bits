@@ -32,7 +32,7 @@ limitations under the License.
     <style include="base-shared-styles"></style>
     <style>
       :host {
-        display: block;
+        @apply --layout-vertical;
       }
 
       app-toolbar {
@@ -42,8 +42,8 @@ limitations under the License.
       }
 
       .icon {
-        @apply(--layout-vertical);
-        @apply(--layout-center);
+        @apply --layout-vertical;
+        @apply --layout-center;
         width: 64px;
         margin-left: -16px;
       }
@@ -52,8 +52,13 @@ limitations under the License.
       }
 
       paper-button {
-        @apply(--paper-font-body1);
+        @apply --paper-font-body1;
         color: var(--primary-color);
+      }
+
+      .wrapper {
+        @apply --layout-flex;
+        overflow-y: auto;
       }
 
       .content {
@@ -85,31 +90,34 @@ limitations under the License.
       </a>
     </app-toolbar>
 
-    <div class="content">
-      <paper-input
-        id="username"
-        label="Username"
-        value="{{username}}"
-        invalid="{{invalidUsername}}"
-        auto-focus
-        auto-validate
-        required
-        error-message="Username is required."
-        tabindex="0">
-      </paper-input>
-
-      <base-users-password-input
-          id="password"
-          password="{{password}}"
-          invalid="{{invalidPassword}}">
-      </base-users-password-input>
-
-      <base-users-scopes-input
-          scopes="[[scopes]]"
-          selected-scopes="{{selectedScopes}}"
-          invalid="{{invalidScopes}}">
-      </base-users-scopes-input>
+    <div class="wrapper">
+      <div class="content">
+        <paper-input
+          id="username"
+          label="Username"
+          value="{{username}}"
+          invalid="{{invalidUsername}}"
+          auto-focus
+          auto-validate
+          required
+          error-message="Username is required."
+          tabindex="0">
+        </paper-input>
+  
+        <base-users-password-input
+            id="password"
+            password="{{password}}"
+            invalid="{{invalidPassword}}">
+        </base-users-password-input>
+  
+        <base-users-scopes-input
+            scopes="[[scopes]]"
+            selected-scopes="{{selectedScopes}}"
+            invalid="{{invalidScopes}}">
+        </base-users-scopes-input>
+      </div>
     </div>
+
 
   </template>
   <script>

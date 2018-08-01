@@ -1,7 +1,5 @@
 {
-  "name": "upgrade-server",
-  "version": "0.8.0",
-  "description": "BITS Upgrade Server",
+  "private": true,
   "author": "LGS Innovations",
   "license": "Apache-2.0",
   "bugs": {
@@ -9,20 +7,9 @@
   },
   "homepage": "https://github.com/LGSInnovations/bits#readme",
   "scripts": {
-    "build": "yarn && npm run lint",
+    "build": "yarn",
     "bits:install": "yarn --prod",
-    "postinstall": "cp ./node_modules/socket.io-client/dist/socket.io.min.js ./public/socket.io.js",
-    "lint": "eslint --fix --ext js,html . && eslint --fix ../upgrade-base",
-    "clean": "rm -rf node_modules/ app/bower_components/ data/ npm-error.log yarn-error.log",
-    "dev": "HTTP_PORT=9000 HTTPS_PORT=9001 node app.js -v"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "eslint": "^4.4.1",
-    "eslint-config-google": "^0.9.1",
-    "eslint-plugin-html": "^3.2.0",
-    "mocha": "^3.2.0"
+    "postinstall": "cp ./node_modules/socket.io-client/dist/socket.io.min.js ./public/socket.io.js"
   },
   "dependencies": {
     "express": "^4.14.0",

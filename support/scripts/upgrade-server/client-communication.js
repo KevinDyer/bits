@@ -72,7 +72,7 @@ limitations under the License.
     }
 
     _onDisconnect() {
-      if(socket !== null) {
+      if (socket !== null) {
         socket.removeListener('disconnect', this._boundOnDisconnect);
         socket.removeListener('update-activity', this._boundOnUpdateActivity);
         socket = null;

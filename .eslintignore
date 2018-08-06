@@ -8,7 +8,7 @@ yarn.lock
 app/bower_components
 
 # BITS
-support/
+support/yarn-cache/
 test/fixtures/
 data/
 support/scripts/upgrade-server/public/socket.io.js

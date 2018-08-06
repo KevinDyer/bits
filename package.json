@@ -9,8 +9,8 @@
   },
   "homepage": "https://github.com/LGSInnovations/bits#readme",
   "scripts": {
-    "build": "yarn && bower install && npm run lint && npm run test && npm run upgrade-build && npm run autoclean",
-    "upgrade-build": "cd support/scripts/upgrade-server && npm run build",
+    "build": "yarn && bower install && npm run build:upgrade && npm run lint && npm run test && npm run autoclean",
+    "build:upgrade": "cd support/scripts/upgrade-server && npm run build",
     "autoclean": "yarn autoclean --force",
     "bits:install": "yarn --prod && npm run autoclean",
     "polymerLint": "polymer-lint --rules component-name-matches-filename,no-missing-import,no-unused-import,one-component,style-inside-template ./app/elements",
@@ -25,7 +25,7 @@
     "chai-as-promised": "^7.1.1",
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
-    "eslint-plugin-html": "^4.0.3",
+    "eslint-plugin-html": "^4.0.5",
     "mocha": "^5.2.0",
     "polymer-lint": "^0.8.3",
     "supertest": "^3.1.0"

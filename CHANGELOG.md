@@ -1,3 +1,56 @@
+<a name="3.0.0"></a>
+# 3.0.0 (2018-08-10)
+
+
+### Bug Fixes
+
+* **activity-cleanup:** prevent unhandled rejection on activity cleanup   (1d00aaf)
+* Load modules that do not define scopes   (1c2cf9b), closes BITS-134
+* **missing-arg:** fix missing arg causing error   (24b4d5d)
+* **missing-arg:** fix missing arg causing error   (29060f7)
+* added logger to the upgrade manager   (0432848)
+* Address a race condition between modules and helpers   (0d8b285), closes BSUM-58
+* Dependency version check   (c5767b6), closes BITS-143
+* Fix an issue when the module can not load   (ae5de8b)
+* fix lazy-load and test linter   (e5708e6)
+* fix race condition in adding APIs   (1024b10), closes BSUM-58
+* Fixed spelling in a comment   (fa2c76a), closes BITS-126
+* load issues fixed for 3.0   (6f78976), closes BITS-139
+* mobile fixes and import fixes   (581ee56)
+* Null check on socket disconnect   (3c21a62), closes BSUM-68
+* scopes must be an array   (aa2db70), closes bits-134
+* Ui supports module management features   (fa032cf)
+* updated toolbar to work with the new format   (73baca4)
+* **scopes-firefox:** fix inability to change user scopes in Firefox   (8075941), closes BITS-34
+* Upgrade server minimist dependency   (3866be9), closes BITS-144
+* use async for import   (78bd74d)
+* **module-manager:** fix when module would crash it would get removed from the system   (f38bf88), closes BITS-127
+* **npm-path:** fix path for node package   (9ce9525)
+* **npm-path:** fix path for node package   (59a3033)
+* **scopes:** use the proper scopes   (a1a91b7)
+* **user-create:** fix non-scrolling page for user creation   (90d7e65), closes BITS-137
+
+
+### Code Refactoring
+
+* (Module Manager)   (aef8289), closes BITS-121 BITS-120
+
+
+### Features
+
+* **link:** add link function   (a9a71f7)
+* **link:** add link function   (964ffba)
+* Adds upgrade logs to log bundle   (97cd0f0), closes BITS-128
+* **modules-loaded-event:** add event for when modules have finished loading   (4d1dce2)
+* **upgrade-script:** run all upgrade scripts from tmp   (f6a4a97)
+
+
+### BREAKING CHANGES
+
+* refactor of the module management subsystem to use CRUD. Old events are removed and the api has been simplified
+
+---
+
 <a name="2.20.1"></a>
 ## 2.20.1 (2018-07-10)
 

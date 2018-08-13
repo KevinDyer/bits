@@ -34,7 +34,7 @@ limitations under the License.
 
       .contentContainer {
         height: 100%;
-        @apply(--layout-vertical);
+        @apply --layout-vertical;
       }
 
       .toolbar {
@@ -54,8 +54,8 @@ limitations under the License.
         color: var(--dark-primary-color);
       }
       .toolbar .icon {
-        @apply(--layout-vertical);
-        @apply(--layout-center);
+        @apply --layout-vertical;
+        @apply --layout-center;
         width: 64px;
         margin-left: -16px;
       }
@@ -66,7 +66,7 @@ limitations under the License.
       }
 
       .categories-wrapper {
-        @apply(--layout-flex);
+        @apply --layout-flex;
         overflow-y: auto;
       }
 
@@ -99,13 +99,6 @@ limitations under the License.
           </template>
         </div>
       </div>
-
-      <app-toolbar class="toolbar account">
-        <div class="icon">
-          <iron-icon icon="[[_computeIcon(user)]]"></iron-icon>
-        </div>
-        <div main-title>[[_computeUsername(user)]]</div>
-      </app-toolbar>
     </div>
 
   </template>
@@ -170,26 +163,6 @@ limitations under the License.
             }, []);
           } else {
             return [];
-          }
-        },
-
-        _computeIcon: function(user) {
-          if (!user) {
-            return 'icons:help';
-          } else if (user.isAnonymous) {
-            return 'icons:account-box';
-          } else {
-            return 'icons:account-circle';
-          }
-        },
-
-        _computeUsername: function(user) {
-          if (!user) {
-            return 'No user';
-          } else if (user.isAnonymous) {
-            return 'Anonymous';
-          } else {
-            return user.username;
           }
         },
 

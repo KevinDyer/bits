@@ -54,7 +54,7 @@ limitations under the License.
       }
     </style>
 
-    <base-auth id="auth"></base-auth>
+    <base-auth id="auth" user="{{user}}"></base-auth>
     <base-system id="system"></base-system>
 
     <paper-menu-button
@@ -67,14 +67,18 @@ limitations under the License.
           icon="icons:power-settings-new"
           class="dropdown-trigger icon">
       </paper-icon-button>
-      <iron-selector
-          class="actions dropdown-content"
+      <div class="dropdown-content">
+        <paper-item>[[_computeUsername(user)]]</paper-item>
+        <hr />
+        <iron-selector
+          class="actions"
           attr-for-selected="data-route"
           selected="{{selectedAction}}">
-        <paper-item class="action" data-route="reboot">Reboot</paper-item>
-        <paper-item class="action" data-route="powerOff">Power off</paper-item>
-        <paper-item class="action" data-route="signOut">Sign out</paper-item>
-      </iron-selector>
+          <paper-item class="action" data-route="reboot">Reboot</paper-item>
+          <paper-item class="action" data-route="powerOff">Power off</paper-item>
+          <paper-item class="action" data-route="signOut">Sign out</paper-item>
+        </iron-selector>
+      </div>
     </paper-menu-button>
 
   </template>
@@ -94,6 +98,9 @@ limitations under the License.
         verticalAlign: {
           type: String,
           value: 'top'
+        },
+        user: {
+          type: Object
         }
       },
 
@@ -112,6 +119,16 @@ limitations under the License.
           .catch((err) => console.warn(err.message));
         }
         this.selectedAction = null;
+      },
+
+      _computeUsername: function(user) {
+        if (!user) {
+          return 'No user';
+        } else if (user.isAnonymous) {
+          return 'Anonymous';
+        } else {
+          return user.username;
+        }
       }
     });
   })();

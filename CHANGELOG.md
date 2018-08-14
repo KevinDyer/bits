@@ -1,3 +1,14 @@
+<a name="3.0.1"></a>
+## 3.0.1 (2018-08-14)
+
+
+### Bug Fixes
+
+* **crud-router-get:** fix get for CrudRouter silently failing   (b481ed0), closes BITS-145
+* widget loading, toolbar loading, socket fixes   (5594dc8), closes BITS-153 BITS-80
+
+---
+
 <a name="3.0.0"></a>
 # 3.0.0 (2018-08-10)
 

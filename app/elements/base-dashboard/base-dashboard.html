@@ -135,19 +135,11 @@ limitations under the License.
             });
           }
 
-          const content = Polymer.dom(this.$.grid);
-          return Promise.all(this.widgets.map((widget) => this._loadWidget(widget)))
-          .then((elements) => {
-            while (0 < content.children.length) {
-              content.removeChild(content.firstChild);
-            }
-            return Promise.all(elements.map((element) => {
-              this.$.grid.appendChild(element);
-              this.masonry.appended(element);
-              this.refreshLayout();
-            }));
-          })
-          .catch((err) => console.warn(err));
+          this.debounce('widget-changes', () => {
+            this.widgets.reduce((chain, widget) => {
+              return chain.then(() => this._loadWidget(widget));
+            }, Promise.resolve());
+          }, 100);
         },
 
         _onBaseDashboardRefreshLayout: function() {
@@ -160,18 +152,30 @@ limitations under the License.
 
         _loadWidget: function(widget) {
           const element = this.create(widget.element, {});
+          let importTimeout;
           this.toggleClass('card', true, element);
           if (!this._cache[widget.id]) {
             if (Polymer.isInstance(element)) {
-              this._cache[widget.id] = Promise.resolve();
+              this.$.grid.appendChild(element);
+              this.masonry.appended(element);
+              this.refreshLayout();
+              this._cache[widget.id] = element;
             } else {
-              this._cache[widget.id] = new Promise((resolve, reject) => {
+              return new Promise((resolve, reject) => {
+                importTimeout = setTimeout(() => {
+                  this.importHref(widget.import, resolve, reject, true);
+                }, 500);
                 this.importHref(widget.import, resolve, reject, false);
+              })
+              .then(() => {
+                clearTimeout(importTimeout);
+                this.$.grid.appendChild(element);
+                this.masonry.appended(element);
+                this.refreshLayout();
+                this._cache[widget.id] = element;
               });
             }
           }
-          return this._cache[widget.id]
-          .then(() => element);
         },
 
         refreshLayout: function() {

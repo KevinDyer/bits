@@ -181,14 +181,14 @@ limitations under the License.
       },
 
       _waitUntilConnected: function() {
-        if (this.connected) {
+        if (this.socket && this.connected) {
           return Promise.resolve(this);
         } else {
           return new Promise((resolve, reject) => {
             const onConnectedChanged = (event) => {
-              if (this.connected) {
+              if (this.socket && this.connected) {
                 this.removeEventListener('connected-changed', onConnectedChanged);
-                resolve(this);
+                return resolve(this);
               }
             };
             this.addEventListener('connected-changed', onConnectedChanged);
@@ -199,8 +199,8 @@ limitations under the License.
       sendRequest: function(event, ...data) {
         this._startLoading();
         return this._waitUntilConnected()
-        .then(() => {
-          const socket = this.socket;
+        .then((context) => {
+          const socket = context.socket;
           return new Promise((resolve, reject) => {
             const requestId = getNextRequestId();
             const onResponse = (meta, err, data) => {

@@ -1,0 +1,97 @@
+<!--
+Copyright 2018 LGS Innovations
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<!-- bplint-disable no-unused-import -->
+<link rel="import" href="../base-message-center/base-message-center-behavior.html">
+<!-- bplint-enable no-unused-import -->
+
+<script>
+  ((global) => {
+    'use strict';
+
+    global.Bits = global.Bits || {};
+
+    global.Bits.BasePagesBehaviorImpl = {
+      properties: {
+        tag: {
+          type: String,
+          observer: '_tagChanged',
+          value: null
+        },
+        pages: {
+          type: Array,
+          notify: true,
+          readOnly: true,
+          value: () => []
+        },
+        user: {
+          type: Object,
+          observer: '_userChanged'
+        }
+      },
+
+      _tagChanged(tag, oldTag) {
+        if (oldTag) {
+          this.removeSocketEventListener(`${oldTag} pageListChanged`, this._boundPageListChanged);
+        }
+        if (tag) {
+          this.addSocketEventListener(`${tag} pageListChanged`, this._boundPageListChanged)
+          .then(() => this.sendRequest(`${tag} list`))
+          .then((pageList) => this._filterAndSetPages(pageList));
+        }
+      },
+
+      _userChanged() {
+        this._filterAndSetPages(this.pages);
+      },
+
+      _filterAndSetPages(pages) {
+        if (!this.user || !Array.isArray(this.user.scopes)) {
+          this.__setPages(pages.filter((page) => !page.hasOwnProperty('scopes') || !Array.isArray(page.scopes)), true);
+        } else {
+          const filteredPages = pages.filter((page) => {
+            if (!page.hasOwnProperty('scopes') || !Array.isArray(page.scopes)) return true;
+            const userScopeNames = this.user.scopes.map((scope) => scope.name);
+            return page.scopes.some((scopeName) => userScopeNames.includes(scopeName));
+          });
+          this.__setPages(filteredPages, true);
+        }
+      },
+
+      __setPages(pages, sort) {
+        if (sort) pages = pages.sort((a, b) => a.order - b.order);
+        this._setPages(pages);
+        this.fire('base-pages-page-list-changed', {
+          tag: this.tag,
+          pages: pages
+        });
+      },
+
+      ready() {
+        this._boundPageListChanged = this._pageListChanged.bind(this);
+      },
+
+      _pageListChanged(pageList) {
+        this._filterAndSetPages(pageList);
+      }
+    };
+
+    global.Bits.BasePagesBehavior = [
+      global.Bits.BaseMessageCenterBehavior,
+      global.Bits.BasePagesBehaviorImpl
+    ];
+  })(this);
+</script>

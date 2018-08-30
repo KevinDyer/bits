@@ -1,5 +1,5 @@
 <!--
-Copyright 2017 LGS Innovations
+Copyright 2018 LGS Innovations
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,7 +15,10 @@ limitations under the License.
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../base-layout/base-drawer-layout/base-drawer-layout.html">
-<link rel="import" href="/elements/base-auth/base-auth.html">
+<link rel="import" href="../base-auth/base-auth.html">
+<!-- bplint-disable no-unused-import -->
+<link rel="import" href="../base-pages/base-pages-behavior.html">
+<!-- bplint-enable no-unused-import -->
 
 <dom-module id="base-home">
   <template>
@@ -28,8 +31,8 @@ limitations under the License.
     </style>
 
     <base-auth
-     user="{{user}}">
-   </base-auth>
+      user="{{user}}">
+    </base-auth>
 
     <base-drawer-layout
       id="layout"
@@ -42,77 +45,24 @@ limitations under the License.
 
   </template>
   <script>
-  (() => {
+  ((global) => {
     'use strict';
 
     Polymer({
       is: 'base-home',
 
       properties: {
-        pages: {
-          type: Array,
-          computed: '_computeSideBar(user)'
+        tag: {
+          value: 'base#HomePages'
         }
       },
 
-      _computeSideBar(user) {
-        return [{
-          name: 'dashboard',
-          element: 'base-dashboard',
-          import: '/elements/base-dashboard/base-dashboard.html',
-          displayName: 'Dashboard',
-          icon: 'icons:dashboard'
-        }, {
-          name: 'activity',
-          element: 'base-activity',
-          import: '/elements/base-activity/base-activity.html',
-          displayName: 'Activity',
-          icon: 'icons:list'
-        }, {
-          name: 'users',
-          element: 'base-users-content',
-          import: '/elements/base-users/base-users-content.html',
-          displayName: 'Users',
-          icon: 'social:people',
-          visible: this._showAccountManager(user)
-        }, {
-          name: 'omgs',
-          element: 'base-omgs-content',
-          import: '/elements/base-omgs/base-omgs-content.html',
-          displayName: 'OMGs',
-          icon: 'icons:group-work'
-        }, {
-          name: 'modules',
-          element: 'base-modules-list',
-          import: '/elements/base-modules/base-modules-list.html',
-          displayName: 'Modules',
-          icon: 'icons:view-module'
-        }, {
-          name: 'logs',
-          element: 'base-logs-content',
-          import: '/elements/base-logs/base-logs-content.html',
-          displayName: 'Logs',
-          icon: 'icons:timeline'
-        }];
-      },
-
-      _showAccountManager(user) {
-        if ('object' !== typeof(user) || null === user) {
-          return false;
-        }
-        if (!Array.isArray(user.scopes)) {
-          return false;
-        }
-        if (!user.scopes.some((scope) => scope.name === 'account')) {
-          return false;
-        }
-        return true;
-      },
+      behaviors: [global.Bits.BasePagesBehavior],
 
       toggleSidenav: function() {
         this.$.layout.toggleSidenav();
       }
     });
-  })();
+  })(this);
   </script>
 </dom-module>

@@ -199,8 +199,10 @@ limitations under the License.
       sendRequest: function(event, ...data) {
         this._startLoading();
         return this._waitUntilConnected()
-        .then((context) => {
-          const socket = context.socket;
+        .then(({socket}) => {
+          if (!socket) {
+            return Promise.reject(new Error('Socket not ready'));
+          }
           return new Promise((resolve, reject) => {
             const requestId = getNextRequestId();
             const onResponse = (meta, err, data) => {

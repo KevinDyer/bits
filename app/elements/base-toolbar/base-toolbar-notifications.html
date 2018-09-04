@@ -53,10 +53,22 @@ limitations under the License.
 
       paper-menu-button .dropdown-section {
         max-height: 500px;
+        overflow-y: hidden;
       }
 
       paper-menu-button .dropdown-group-scroll {
-        max-height: 400px;
+        max-height: 350px;
+        overflow: auto;
+      }
+
+      @media screen and (max-height:750px) {
+        paper-menu-button .dropdown-section {
+          max-height: 400px;
+        }
+
+        paper-menu-button .dropdown-group-scroll {
+          max-height: 250px;
+        }
       }
 
       .dropdown-trigger {
@@ -157,7 +169,7 @@ limitations under the License.
 
     <base-notification id="notification"></base-notification>
 
-    <paper-menu-button id="menu" opened="{{opened}}" on-tap="_notificationsButtonTap" horizontal-align="right" close-on-activate no-overlap no-animations>
+    <paper-menu-button id="menu" opened="{{opened}}" on-tap="_notificationsButtonTap" horizontal-align="right" horizontal-offset="[[menuOffset]]" close-on-activate no-overlap no-animations>
       <div class="dropdown-trigger">
         <paper-spinner-lite active="[[hasOngoing]]"></paper-spinner-lite>
         <paper-icon-button icon="social:notifications" class="action-btn"></paper-icon-button>
@@ -237,6 +249,10 @@ limitations under the License.
         opened: {
           type: Boolean,
           observer: '_openedChanged'
+        },
+        menuOffset: {
+          type: Number,
+          value: -20
         }
       },
 
@@ -289,6 +305,9 @@ limitations under the License.
       },
 
       ready: function() {
+        if (window.matchMedia('(max-width: 375px)').matches) {
+          this.set('menuOffset', -80);
+        }
         this.$.notification.requestPermission();
         this._getItems();
       },

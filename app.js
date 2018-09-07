@@ -18,6 +18,10 @@ limitations under the License.
 
   const parseArgs = require('minimist');
   const path = require('path');
+  const process = require('process');
+
+  process.chdir(__dirname);
+  console.log('New directory: ' + process.cwd());
 
   // Parsing args
   const args = parseArgs(process.argv, {

@@ -9,8 +9,7 @@
   },
   "homepage": "https://github.com/LGSInnovations/bits#readme",
   "scripts": {
-    "build": "yarn && npm run build:upgrade && npm run lint && npm run test && npm run autoclean",
-    "build:upgrade": "cd support/scripts/upgrade-server && npm run build",
+    "build": "yarn && npm run lint && npm run test && npm run autoclean",
     "autoclean": "yarn autoclean --force",
     "bits:install": "yarn --prod && npm run autoclean",
     "lint": "bits-eslint --ext js --fix ./",

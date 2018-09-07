@@ -98,7 +98,8 @@ BITS should now be running and is accessible at https://localhost:9001
 
 BITS is a framework built around modules. The base BITS framework is made useful with the creation and addition of module functionality. A module is run by BITS and provides a concrete and specific feature addition to the system. Examples of modules are GNSS (GPS), Networking, and MongoDB. Chances are you are interested in BITS as a means to build a module, or to use somebody else's module. Groups of modules that work together for a specific use case are Optimized Module Groupings (OMG).
 
-Every module runs inside their own process and are installed to the base data directory in &lt;datadir&gt;/base/modules/modules.
+Every module runs inside their own process and are installed by default &lt;datadir&gt;/base/modules/modules, but can be installed to any directory.  If an alternate module
+directory is desired then it should be passed to app.js on the command line as an absolute path with the -m flag.
 
 ## package.json
 
@@ -496,7 +497,7 @@ The data dir can be any directory and if not specified will default to `./bits/d
 
 # Running Modules
 
-In a normal production environment modules are installed to `<data>/base/modules/modules` after their packages are uploaded to `<data>/base/modules/modules-packages`. For development it is advised that you add a soft symlink from your module to the data directory.
+In a normal production environment modules are installed to `<data>/base/modules/modules` after their packages are uploaded to `<data>/base/modules/modules-packages`. For development it is advised that you add a soft symlink from your module to the data directory.  If an alternate module directory is desired then it should be passed to app.js on the command line as an absolute path with the -m flag.
 
 For example:
 ```bash

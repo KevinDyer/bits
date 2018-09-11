@@ -200,6 +200,10 @@ limitations under the License.
         },
 
         _determinePageChanged: function(changes, pageName, defaultPageName) {
+          if (!Array.isArray(this.pages) || !this.pages.length) {
+            this.async(() => this._determinePageChanged(changes, pageName, defaultPageName), 1);
+            return;
+          }
           let page = null;
           if (Array.isArray(this.pages)) {
             page = this.pages.find((page) => pageName === page.name);
@@ -217,6 +221,7 @@ limitations under the License.
             this.set('routeData.pageName', page);
           }
         },
+
         _hidePage: function(page) {
           if (page.visible === undefined || page.visible === null) {
             return false;

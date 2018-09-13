@@ -31,6 +31,7 @@ limitations under the License.
   if (!global.hasOwnProperty('paths')) {
     global.paths = {};
   }
+  global.paths.base = __dirname;
   global.paths.data = args.rootDataDir;
   if (!args.modulesDir) {
     args.modulesDir = path.join(args.rootDataDir, 'base', 'modules', 'modules');

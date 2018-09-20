@@ -1,3 +1,21 @@
+<a name="3.1.0"></a>
+# 3.1.0 (2018-09-20)
+
+
+### Bug Fixes
+
+* no horizontal scrolling, correct query selector sizes   (999529c), closes BITS-159
+* race condition mitigated. Failure does not stop all UI loading.   (186c954), closes BITS-156
+* **custom-pages:** return to same page upon refresh   (801bd10), closes BITS-166
+* **page-order:** fix ordering of incoming pages   (854d9bb)
+
+
+### Features
+
+* **pages-manager:** add ability for modules to override/extend a module's pages   (6924bbc), closes BITS-151
+
+---
+
 <a name="3.0.1"></a>
 ## 3.0.1 (2018-08-14)
 

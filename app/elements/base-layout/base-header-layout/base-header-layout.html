@@ -67,7 +67,14 @@ Example:
 
       .main-title[has-siblings] {
         @apply(--paper-font-common-nowrap);
-        min-width: 20%;
+        min-width: 30%;
+      }
+
+      @media (max-width: 840px) {
+        .main-title[has-siblings] {
+          @apply(--paper-font-common-nowrap);
+          min-width: 50%;
+        }
       }
     </style>
 
@@ -79,7 +86,7 @@ Example:
               <paper-icon-button icon="icons:arrow-back"></paper-icon-button>
             </a>
           </div>
-          <div class="main-title" has-siblings$="[[hasSiblings]]" main-title>[[xTitle]]</div>
+          <div class="main-title" has-siblings$="[[hasSiblings]]" hidden$="[[_shouldHideTitle(xTitle)]]" main-title>[[xTitle]]</div>
           <content id="headerToolbar" select=".header-toolbar"></content>
         </app-toolbar>
       </app-header>
@@ -116,6 +123,10 @@ Example:
           reflectToAttribute: true,
           value: false
         }
+      },
+
+      _shouldHideTitle(xTitle) {
+        return !xTitle;
       },
 
       get _defaultScrollTarget() {

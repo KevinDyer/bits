@@ -106,7 +106,6 @@ limitations under the License.
         },
         noSidenavToggle: {
           type: Boolean,
-          computed: '_computeNoSideNavToggle(currentElement)',
           value: false
         },
         currentElement: {
@@ -126,12 +125,11 @@ limitations under the License.
         }
       },
 
-      _computeNoSideNavToggle: function(currentElement) {
-        return null === currentElement || 'function' !== typeof(currentElement.toggleSidenav);
-      },
-
       _currentElementChanged: function() {
         this.$.galleryDrawer.close();
+        this.async(() => {
+          this.set('noSidenavToggle', !(this.currentElement.nodeType || 'function' === typeof this.currentElement.toggleSidenav));
+        });
       },
 
       observers: [

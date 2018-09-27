@@ -42,7 +42,9 @@ limitations under the License.
           type: Object,
           notify: true,
           readOnly: true,
-          value: null
+          value: () => {
+            return {};
+          }
         },
         page: {
           type: Object,
@@ -101,7 +103,7 @@ limitations under the License.
         return Promise.resolve()
         .then(() => {
           const content = Polymer.dom(this.root);
-          if (null !== this.currentElement) {
+          if (this.currentElement.nodeType) {
             content.removeChild(this.currentElement);
           }
           this.fire('base-lazy-content-before', {element: element});

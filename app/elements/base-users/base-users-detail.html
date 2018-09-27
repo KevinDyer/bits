@@ -83,6 +83,7 @@ limitations under the License.
         @apply(--layout-horizontal);
         @apply(--layout-center);
         height: 36px;
+        margin: 15px 0px;
       }
       .line .label {
         @apply(--label);
@@ -103,14 +104,6 @@ limitations under the License.
       }
       app-toolbar paper-button, paper-dialog .actions {
         color: var(--primary-color);
-      }
-      paper-button.invert {
-        background-color: var(--primary-color);
-        color: #fff;
-      }
-      paper-button[disabled].invert {
-        background-color: var(--paper-grey-200);
-        color: var(--disabled-text-color);
       }
 
       .space {
@@ -134,7 +127,9 @@ limitations under the License.
 
           <div class="line">
             <div class="label">Password</div>
-            <paper-button on-tap="toggleEditPassword" disabled="[[editPassword]]">Edit</paper-button>
+            <paper-button class="primary-btn-light" on-tap="toggleEditPassword" raised hidden$="[[editPassword]]">Edit</paper-button>
+            <paper-button class="primary-btn-light" on-tap="toggleEditPassword" raised hidden$="[[!editPassword]]">Cancel</paper-button>
+            <paper-button class="primary-button" on-tap="savePassword" raised hidden$="[[!editPassword]]" disabled$="[[invalidPassword]]">Save</paper-button>
           </div>
 
           <iron-collapse opened="[[editPassword]]">
@@ -143,33 +138,21 @@ limitations under the License.
                 password="{{password}}"
                 invalid="{{invalidPassword}}">
             </base-users-password-input>
-
-            <div class="line actions">
-              <div class="space"></div>
-              <paper-button on-tap="toggleEditPassword">Cancel</paper-button>
-              <paper-button class="invert" on-tap="savePassword" raised disabled="[[invalidPassword]]">Save</paper-button>
-            </div>
           </iron-collapse>
 
           <div class="line">
             <div class="label">Scopes</div>
-            <paper-button on-tap="toggleEditScopes" disabled="[[editScopes]]">Edit</paper-button>
+            <paper-button class="primary-btn-light" on-tap="toggleEditScopes" raised hidden$="[[editScopes]]">Edit</paper-button>
+            <paper-button class="primary-btn-light" on-tap="toggleEditScopes" raised hidden$="[[!editScopes]]">Cancel</paper-button>
+            <paper-button class="primary-btn" on-tap="saveScopes" raised hidden$="[[!editScopes]]" disabled$="[[invalidScopes]]">Save</paper-button>
           </div>
 
           <base-users-scopes-input
             scopes="[[scopes]]"
             selected-scopes="{{selectedScopes}}"
             invalid="{{invalidScopes}}"
-            disabled="[[!editScopes]]">
+            disabled$="[[!editScopes]]">
           </base-users-scopes-input>
-
-          <iron-collapse opened="[[editScopes]]">
-            <div class="line actions">
-              <div class="space"></div>
-              <paper-button on-tap="toggleEditScopes">Cancel</paper-button>
-              <paper-button class="invert" on-tap="saveScopes" raised disabled="[[invalidScopes]]">Save</paper-button>
-            </div>
-          </iron-collapse>
 
           <div class="line">
             <div class="label">Created</div>
@@ -184,7 +167,7 @@ limitations under the License.
       <div class="message">Are you sure you want to delete User "[[_computeUsername(user)]]"?</div>
       <div class="actions">
         <paper-button dialog-dismiss>Cancel</paper-button>
-        <paper-button dialog-confirm>delete</paper-button>
+        <paper-button dialog-confirm>Delete</paper-button>
       </div>
     </paper-dialog>
 

@@ -14,15 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../base-system/base-system.html">
 <script type="text/javascript" src="../../bower_components/moment/min/moment.min.js"></script>
 
 <dom-module id="base-moment">
   <template>
+    <base-system id="system"></base-system>
     [[timeAgo]]
   </template>
   <script>
     ((global) => {
       'use strict';
+
+      const OFFSET_UPDATE_INTERVAL = 10 * 1000;
 
       function isValidNumber(num) {
         return !isNaN(parseFloat(num)) && isFinite(num);
@@ -39,6 +43,19 @@ limitations under the License.
           __timestamp: {
             type: Number,
             computed: '_computeTime(timestamp, isEpoch)'
+          },
+          __offsetTimer: {
+            type: Number,
+            value: Date.now()
+          },
+          offset: {
+            type: Number,
+            value: 0,
+            readOnly: true
+          },
+          useOffset: {
+            type: Boolean,
+            value: false,
           },
           timeAgo: {
             type: String,
@@ -74,6 +91,7 @@ limitations under the License.
 
         _computeTimeAgo(timestamp) {
           let str = this.unknown;
+          timestamp -= this.offset;
 
           if (!isValidNumber(timestamp)) return str;
 
@@ -86,12 +104,29 @@ limitations under the License.
           return str;
         },
 
+        observers: [
+          '_observeOffsetParameters(useOffset, __offsetTimer)'
+        ],
+
+        _observeOffsetParameters: function(useOffset) {
+          if (this.$.system && useOffset) {
+            this.$.system.getTime()
+            .then((time) => {
+              const timestamp = isNaN(time) ? Date.parse(time) : time;
+              this._setOffset(timestamp - Date.now());
+            });
+          }
+        },
+
         _epochToMilliseconds: function(epoch) {
           return epoch * 1000;
         },
 
         _toggleTimer: function() {
           this.set('__timer', !this.__timer);
+          if ((Date.now() - this.__offsetTimer) > OFFSET_UPDATE_INTERVAL) {
+            this.__offsetTimer = Date.now();
+          }
           this._requestAnimationFrame();
         },
 

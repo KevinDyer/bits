@@ -16,13 +16,17 @@ limitations under the License.
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <!-- bplint-disable no-unused-import -->
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <!-- bplint-enable no-unused-import -->
 <link rel="import" href="../../bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner-lite.html">
 <link rel="import" href="../../bower_components/paper-styles/color.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../base-activities/base-activities.html">
 <link rel="import" href="../base-notification/base-notification.html">
 <link rel="import" href="../base-shared-styles/base-shared-styles.html">
@@ -221,10 +225,33 @@ limitations under the License.
       </div>
     </paper-menu-button>
 
+    <paper-dialog id="dialog" modal>
+      <h2>[[dialogTitle]]</h2>
+      <div>[[dialogMessage]]</div>
+      <div class="buttons">
+        <paper-button dialog-dismiss on-tap="_tapCloseDialog">Okay</paper-button>
+      </div>
+    </paper-dialog>
+
+    <paper-toast id="toast">
+      <div class="line">
+        <span class="flex max-width wrap">[[dialogTitle]] - [[dialogMessage]]</span>
+        <paper-button class="primary-btn-light" on-tap="_tapCloseToast">Dismiss</paper-button>
+      </div>
+    </paper-toast>
+
   </template>
   <script>
   (() => {
     'use strict';
+
+    const DEFCON = {
+      COCKED_PISTOL: 1,
+      FAST_PACE: 2,
+      ROUND_HOUSE: 3,
+      DOUBLE_TAKE: 4,
+      FADE_OUT: 5
+    };
 
     Polymer({
       is: 'base-toolbar-notifications',
@@ -274,6 +301,17 @@ limitations under the License.
         }
       },
 
+      _tapCloseDialog: function() {
+        if (this.cockedPistol) this.$.activities.update(this.cockedPistol.id, {dismissed: true});
+        if (this.__pendingOp) this.__pendingOp();
+      },
+
+      _tapCloseToast: function() {
+        if (this.fastPace) this.$.activities.update(this.fastPace.id, {dismissed: true});
+        if (this.__pendingOp) this.__pendingOp();
+        this.$.toast.close();
+      },
+
       listeners: {
         'base-crud-item-created': '_newActivity',
         'base-crud-item-updated': '_newActivity',
@@ -291,25 +329,86 @@ limitations under the License.
       _newActivity: function(e, detail) {
         const tag = detail.tag;
         const items = detail.items;
-        const isActivity = (this.$.activities.tag === tag);
         items.forEach((item) => {
-          if (isActivity && !item.dismissed) {
-            this.newNotifications++;
-          }
-          this.notification({
-            tag: detail.tag,
-            item: detail.item
-          });
+          this.__assessDefconLevel(tag, item);
+
           this._getItems();
         });
+      },
+
+      __assessDefconLevel(tag, item) {
+        if (item.dismissed) return;
+        switch (item.defconLevel) {
+          case DEFCON.COCKED_PISTOL:
+            this.__defconChain = this.__defconChain.then(() => {
+              return new Promise((resolve, reject) => {
+                this.__pendingOp = resolve;
+                this.set('dialogTitle', item.projectName);
+                this.set('dialogMessage', item.title);
+                this.set('cockedPistol', item);
+                this.$.dialog.open();
+              });
+            });
+            break;
+          case DEFCON.FAST_PACE:
+            this.__defconChain = this.__defconChain.then(() => {
+              return new Promise((resolve, reject) => {
+                this._pendingOp = resolve;
+                this.set('dialogTitle', item.projectName);
+                this.set('dialogMessage', item.title);
+                this.set('fastPace', item);
+                this.$.toast.show({duration: 0});
+              });
+            });
+            break;
+          case DEFCON.ROUND_HOUSE:
+            this.__defconChain = this.__defconChain.then(() => {
+              return new Promise((resolve, reject) => {
+                this.set('dialogTitle', item.projectName);
+                this.set('dialogMessage', item.title);
+                this.$.toast.show({duration: 5000});
+                setTimeout(resolve, 5000);
+              });
+            });
+            break;
+          case DEFCON.DOUBLE_TAKE:
+            if (this.$.activity.tag === tag) {
+              this.newNotifications++;
+            }
+            this.notification({
+              tag: detail.tag,
+              item: detail.item
+            });
+            break;
+          case DEFCON.FADE_OUT:
+            // intentional fall-through
+          default:
+            break;
+        }
       },
 
       ready: function() {
         if (window.matchMedia('(max-width: 375px)').matches) {
           this.set('menuOffset', -80);
         }
+        this.__defconChain = Promise.resolve();
         this.$.notification.requestPermission();
         this._getItems();
+
+        this.async(() => {
+          this.__getLastByDefconLevel(DEFCON.COCKED_PISTOL)
+          .then((item) => item ? this.__assessDefconLevel(this.$.activities.tag, item) : Promise.resolve());
+          this.__getLastByDefconLevel(DEFCON.FAST_PACE)
+          .then((item) => item ? this.__assessDefconLevel(this.$.activities.tag, item) : Promise.resolve());
+        });
+      },
+
+      __getLastByDefconLevel: function(defcon) {
+        return this.$.activities.list({
+          defconLevel: defcon,
+          dismissed: false
+        }, {sort: [{createdAt: 'desc'}], limit: 1})
+        .then(([item]) => item);
       },
 
       _getItems: function() {
@@ -370,8 +469,15 @@ limitations under the License.
 
       _onBaseToolbarNotificationsClose: function(event, detail) {
         this.set('opened', false);
-      }
+      },
 
+      attached: function() {
+        document.body.appendChild(this.$.dialog);
+      },
+
+      detached: function() {
+        document.body.removeChild(this.$.dialog);
+      }
     });
   })();
   </script>

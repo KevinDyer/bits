@@ -382,21 +382,21 @@ limitations under the License.
 
       _onKeyDownInput: function(event) {
         switch (Polymer.dom(event).event.keyCode) {
-        case 13:
-          this.setCommand();
-          break;
-        case 38:
-          this.set('historyIndex', (this.historyIndex + 1));
-          break;
-        // case 9:
-        case 39:
-          this._autocomplete();
-          break;
-        case 40:
-          this.set('historyIndex', (this.historyIndex - 1));
-          break;
-        default:
-          break;
+          case 13:
+            this.setCommand();
+            break;
+          case 38:
+            this.set('historyIndex', (this.historyIndex + 1));
+            break;
+            // case 9:
+          case 39:
+            this._autocomplete();
+            break;
+          case 40:
+            this.set('historyIndex', (this.historyIndex - 1));
+            break;
+          default:
+            break;
         }
       },
 

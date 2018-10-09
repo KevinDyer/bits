@@ -176,12 +176,12 @@ limitations under the License.
       // anything else: 'TITLE(page)' -- for debugging
       _computeHeaderTitle: function(page) {
         switch (page) {
-        case 'list':
-          return 'OMGs';
-        case 'detail':
-          return this.omg.data.name;
-        case 'errors':
-          return 'Upgrade Errors';
+          case 'list':
+            return 'OMGs';
+          case 'detail':
+            return this.omg.data.name;
+          case 'errors':
+            return 'Upgrade Errors';
         }
         return 'TITLE(' + page + ')';
       },

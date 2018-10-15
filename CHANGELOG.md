@@ -1,3 +1,21 @@
+<a name="3.2.0"></a>
+# 3.2.0 (2018-10-15)
+
+
+### Bug Fixes
+
+* Firefox sidenav toggle   (cf6ed8b), closes BITS-170
+* Fix the undefined variable error in Pages Manager when a resource is removed   (3cb3948), closes BITS-171
+* more customizeable base-header-layout   (41df7a6), closes PSCAN-303
+
+
+### Features
+
+* Moment system time offset   (3f4a410)
+* **priority-notifications:** allow notifications to pop up a modal or toast   (bc4dba7)
+
+---
+
 <a name="3.1.0"></a>
 # 3.1.0 (2018-09-20)
 

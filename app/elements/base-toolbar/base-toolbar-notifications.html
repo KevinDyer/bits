@@ -337,6 +337,10 @@ limitations under the License.
       },
 
       __assessDefconLevel(tag, item) {
+        this.notification({
+          tag: tag,
+          item: item
+        });
         if (item.dismissed) return;
         switch (item.defconLevel) {
           case DEFCON.COCKED_PISTOL:
@@ -372,13 +376,7 @@ limitations under the License.
             });
             break;
           case DEFCON.DOUBLE_TAKE:
-            if (this.$.activity.tag === tag) {
-              this.newNotifications++;
-            }
-            this.notification({
-              tag: detail.tag,
-              item: detail.item
-            });
+            this.newNotifications++;
             break;
           case DEFCON.FADE_OUT:
             // intentional fall-through
@@ -448,7 +446,9 @@ limitations under the License.
 
         if (!item.dismissed && item.notify) {
           this.$.notification.set('tag', tag);
-
+          if (!item.notifyOptions) {
+            item.notifyOptions = {};
+          }
           if (!item.notifyOptions.body) {
             item.notifyOptions.body = item.title;
           }

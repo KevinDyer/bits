@@ -51,7 +51,7 @@ limitations under the License.
     </style>
 
     <div class="scopes">
-      <template is="dom-repeat" items="[[scopes]]" as="scope">
+      <template is="dom-repeat" items="[[scopes]]" as="scope" sort="_sortAlphabetically">
         <paper-checkbox
             checked="[[_computeChecked(scope.name, selectedScopes.*)]]"
             on-change="selectScope"
@@ -146,6 +146,14 @@ limitations under the License.
         } else if (!checked && -1 < index) {
           this.splice('selectedScopes', index, 1);
         }
+      },
+
+      _sortAlphabetically(a, b) {
+        const displayNameA = String(a.displayName).toLowerCase();
+        const displayNameB = String(b.displayName).toLowerCase();
+
+        if (displayNameA === displayNameB) return 0;
+        return displayNameA > displayNameB ? 1 : -1;
       }
     });
   })();

@@ -1,3 +1,23 @@
+<a name="3.3.0"></a>
+# 3.3.0 (2018-11-07)
+
+
+### Bug Fixes
+
+* **crud-routes:** fix query param retrieval on CRUD routes   (0d3f235), closes BITS-177
+* **modules-scope:** hide the modules page based on scopes   (e50f8f7), closes BITS-175
+* **router-params:** fix router params for list query/options   (6bcb214), closes BITS-177
+* chrome notifications appear correctly   (8b747ab)
+* throttled log dumps, catch error on attempting to encrypt deleted file   (c26f7fc), closes PSCAN-341 BITS-185
+
+
+### Features
+
+* Sort the scopes list alphabetically   (7f79827), closes BITS-172
+* **scoped-notifications:** add filtering for listing activity logs based on user scopes   (62fe159), closes BITS-176
+
+---
+
 <a name="3.2.0"></a>
 # 3.2.0 (2018-10-15)
 

@@ -18,7 +18,7 @@ limitations under the License.
 
   const winston = require('winston');
 
-  const logger = new winston.Logger({
+  const logger = winston.createLogger({
     level: 'info', // error=0, warn=1, info=2, verbose=3, debug=4, silly=5
     transports: [
       new winston.transports.Console({

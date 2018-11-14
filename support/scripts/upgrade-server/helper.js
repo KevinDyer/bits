@@ -116,7 +116,7 @@ limitations under the License.
         function addDump(obj, name) {
           if (!('dump' in obj)) {
             obj['dump'] = function() {
-              for (let key in this) {
+              for (const key in this) {
                 if (key === 'env') continue;
                 const value = this[key];
                 if (typeof(value) === 'function') continue;

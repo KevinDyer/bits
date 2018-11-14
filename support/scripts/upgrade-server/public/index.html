@@ -165,7 +165,7 @@ limitations under the License.
           location.reload(true);
         }, 12000);
       } else {
-        let timer = window.setInterval(() => {
+        const timer = window.setInterval(() => {
           try {
             request.open('GET', '/', false);
             request.send(); // blocks until the response arrives

@@ -47,6 +47,10 @@ limitations under the License.
   }
 
   class BaseServer {
+    on() {
+
+    }
+
     use() {
       return Promise.resolve();
     }

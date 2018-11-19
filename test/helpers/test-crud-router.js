@@ -5,6 +5,7 @@
   const BodyParser = require('body-parser');
   const chai = require('chai');
   const CrudManager = require('../../lib/helpers/crud-manager');
+  const EventEmitter = require('events');
   const express = require('express');
   const MessageCenter = require('../../lib/message-center');
   const passport = require('passport');
@@ -18,6 +19,33 @@
     }
   };
 
+  class BaseServer extends EventEmitter {
+    constructor() {
+      super();
+      this._express = express();
+
+      this._express.use(BodyParser.json());
+      this._express.use(BodyParser.urlencoded({extended: false}));
+      this._express.use(passport.initialize());
+      passport.use(new BearerStrategy((token, done) => {
+        if ('1234' === token) {
+          done(null, TOKEN.user);
+        } else {
+          done(new Error('user not found'));
+        }
+      }));
+    }
+
+    use(path, middleware) {
+      if (middleware.auth) middleware = middleware.func;
+      return Promise.resolve(this._express.use(path, middleware));
+    }
+
+    get express() {
+      return this._express;
+    }
+  };
+
   describe('CrudRouter', () => {
     let messageCenter = null;
     let baseServer = null;
@@ -26,30 +54,10 @@
 
     beforeEach('Create message center', () => {
       messageCenter = new MessageCenter(require('cluster'), process);
-      messageCenter.addRequestListener('base#Auth validateAccessToken', {scopes: null}, (metadata, token) => {
-        return Promise.resolve()
-        .then(() => {
-          if (token.token === '1234') {
-            return TOKEN;
-          } else {
-            return Promise.reject(new Error('auth/invalid-user'));
-          }
-        });
-      });
     });
 
     beforeEach('Create base server', () => {
-      baseServer = express();
-      baseServer.use(BodyParser.json());
-      baseServer.use(BodyParser.urlencoded({extended: false}));
-      baseServer.use(passport.initialize());
-      passport.use(new BearerStrategy((token, done) => {
-        if (user) {
-          done(null, user);
-        } else {
-          done(new Error('user not found'));
-        }
-      }));
+      baseServer = new BaseServer();
     });
 
     beforeEach('Create manager', () => {
@@ -76,12 +84,16 @@
      * Auth tests
      */
     it('should FAIL / op without token', (done) => {
+      const EventEmitter = require('events');
+      const emitter = new EventEmitter();
       const req = {
-        items: item
+        items: item,
+        emit: (event, data) => emitter.emit(event, data)
       };
+      req.emit('data', JSON.stringify(TOKEN.user));
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .post('/api/test/helpers/create')
         .send(req)
         .set('Accept', 'application/json')
@@ -101,7 +113,7 @@
       };
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .post('/api/test/helpers/create')
         .send(req)
         .set('Accept', 'application/json')
@@ -126,7 +138,7 @@
       };
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .post('/api/test/helpers/create')
         .send(req)
         .set('Accept', 'application/json')
@@ -157,7 +169,7 @@
       };
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .post('/api/test/helpers/update')
         .send(req)
         .set('Accept', 'application/json')
@@ -183,7 +195,7 @@
       };
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .post('/api/test/helpers/update')
         .send(req)
         .set('Accept', 'application/json')
@@ -213,7 +225,7 @@
       };
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .post('/api/test/helpers/delete')
         .send(req)
         .set('Accept', 'application/json')
@@ -238,7 +250,7 @@
       };
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .post('/api/test/helpers/delete')
         .send(req)
         .set('Accept', 'application/json')
@@ -265,7 +277,7 @@
     it('should GET / get an entry from single id', (done) => {
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .get(`/api/test/helpers/${item.id}`)
         .set('Accept', 'application/json')
         .set('Authorization', 'Bearer 1234')
@@ -299,7 +311,7 @@
     it('should GET / list all entries', (done) => {
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .get('/api/test/helpers/')
         .set('Accept', 'application/json')
         .set('Authorization', 'Bearer 1234')
@@ -325,7 +337,7 @@
     it('should GET / count all entries', (done) => {
       Promise.resolve()
       .then(() => {
-        request(baseServer)
+        request(baseServer.express)
         .get('/api/test/helpers/count')
         .set('Accept', 'application/json')
         .set('Authorization', 'Bearer 1234')

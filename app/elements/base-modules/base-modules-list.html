@@ -227,20 +227,25 @@ limitations under the License.
       <h2>Module Info</h2>
       <div class="dialog-content">
         <div class="layout vertical">
+          <div class="info" hidden$="[[!moduleInfo.isInstalled]]">
+            <div class="label">Display Name</div>
+            <div class="space"></div>
+            <div class="value">[[moduleInfo.displayName]]</div>
+          </div>
           <div class="info">
             <div class="label">Name</div>
             <div class="space"></div>
             <div class="value">[[moduleInfo.name]]</div>
           </div>
           <div class="info">
+            <div class="label">Version</div>
+            <div class="space"></div>
+            <div class="value">[[moduleInfo.version]]</div>
+          </div>
+          <div class="info">
             <div class="label">Installed</div>
             <div class="space"></div>
             <div class="value">[[moduleInfo.isInstalled]]</div>
-          </div>
-          <div class="info" hidden$="[[!moduleInfo.isInstalled]]">
-            <div class="label">Display Name</div>
-            <div class="space"></div>
-            <div class="value">[[moduleInfo.displayName]]</div>
           </div>
           <div class="info" hidden$="[[!moduleInfo.isInstalled]]">
             <div class="label">Loaded</div>

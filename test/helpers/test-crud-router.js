@@ -13,6 +13,7 @@
 
   const {expect} = chai;
 
+  const DUMMY_ACCESS_TOKEN = '1234';
   const TOKEN = {
     user: {
       scopes: [{name: 'base'}, {name: 'test'}]
@@ -28,7 +29,7 @@
       this._express.use(BodyParser.urlencoded({extended: false}));
       this._express.use(passport.initialize());
       passport.use(new BearerStrategy((token, done) => {
-        if ('1234' === token) {
+        if (DUMMY_ACCESS_TOKEN === token) {
           done(null, TOKEN.user);
         } else {
           done(new Error('user not found'));
@@ -54,6 +55,13 @@
 
     beforeEach('Create message center', () => {
       messageCenter = new MessageCenter(require('cluster'), process);
+      messageCenter.addRequestListener('base#Auth validateAccessToken', {scopes: null}, (metadata, request) => {
+        return Promise.resolve()
+        .then(() => {
+          if (DUMMY_ACCESS_TOKEN === request.token) return TOKEN;
+          return Promise.reject(new Error('auth/invalid-user'));
+        });
+      });
     });
 
     beforeEach('Create base server', () => {
@@ -84,13 +92,9 @@
      * Auth tests
      */
     it('should FAIL / op without token', (done) => {
-      const EventEmitter = require('events');
-      const emitter = new EventEmitter();
       const req = {
-        items: item,
-        emit: (event, data) => emitter.emit(event, data)
+        items: item
       };
-      req.emit('data', JSON.stringify(TOKEN.user));
       Promise.resolve()
       .then(() => {
         request(baseServer.express)
@@ -117,7 +121,7 @@
         .post('/api/test/helpers/create')
         .send(req)
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -142,7 +146,7 @@
         .post('/api/test/helpers/create')
         .send(req)
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -173,7 +177,7 @@
         .post('/api/test/helpers/update')
         .send(req)
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -199,7 +203,7 @@
         .post('/api/test/helpers/update')
         .send(req)
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -229,7 +233,7 @@
         .post('/api/test/helpers/delete')
         .send(req)
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -254,7 +258,7 @@
         .post('/api/test/helpers/delete')
         .send(req)
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -280,7 +284,7 @@
         request(baseServer.express)
         .get(`/api/test/helpers/${item.id}`)
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -314,7 +318,7 @@
         request(baseServer.express)
         .get('/api/test/helpers/')
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -340,7 +344,7 @@
         request(baseServer.express)
         .get('/api/test/helpers/count')
         .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer 1234')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {

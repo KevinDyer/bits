@@ -47,10 +47,22 @@ build-master:
     paths:
       - "*.tgz"
 
+build-garbanzo-stream:
+  <<: *build_definition
+  only:
+    - garbanzo-stream
+  except:
+    - tags
+  artifacts:
+    paths:
+      - "*.tgz"
+    expire_in: 4 weeks
+
 build-branch:
   <<: *build_definition
   except:
     - master
+    - garbanzo-stream
     - tags
   artifacts:
     paths:

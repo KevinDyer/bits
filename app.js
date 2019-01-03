@@ -77,6 +77,8 @@ limitations under the License.
     const moduleInfo = JSON.parse(encodedModuleInfo);
     const moduleName = moduleInfo.name;
 
+    process.title += ` ${moduleName}`;
+
     process.on('uncaughtException', (err) => {
       if (err instanceof Error) {
         logger.error(`Uncaught exception in module '${moduleName}': ${err.message}\n ${err.stack}`);

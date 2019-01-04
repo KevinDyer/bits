@@ -192,14 +192,18 @@ limitations under the License.
 
         observers: [
           '_routeDataPageNameChanged(routeData.pageName)',
-          '_determinePageChanged(pages.*, pageName, defaultPageName)'
+          '_determinePageChanged(pages.*, pageName, defaultPageName, route.path)'
         ],
 
         _routeDataPageNameChanged: function(pageName) {
           this.pageName = pageName || null;
         },
 
-        _determinePageChanged: function(changes, pageName, defaultPageName) {
+        _determinePageChanged: function(changes, pageName, defaultPageName, routePath) {
+          if (routePath === `/${this.mName}`) {
+            this.set('route.path', `/${this.mName}/`);
+            return;
+          }
           if (!Array.isArray(this.pages) || !this.pages.length) {
             this.async(() => this._determinePageChanged(changes, pageName, defaultPageName), 1);
             return;
@@ -218,7 +222,7 @@ limitations under the License.
             } else {
               page = '';
             }
-            this.set('routeData.pageName', page);
+            this.set('routeData.pageName', Object.assign({}, this.routeData, {pageName: page}));
           }
         },
 

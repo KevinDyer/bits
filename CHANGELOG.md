@@ -1,3 +1,27 @@
+<a name="3.4.0"></a>
+# 3.4.0 (2019-01-21)
+
+
+### Bug Fixes
+
+* **auth:** retrieve a user object for any registered authentication strategy   (58e8042), closes BITS-246
+* **key-manager:** handle symlinks when reading keys from directory   (188f317), closes BITS-188
+* **lib:** module load fix and error handling. Daemon error handling.   (0cc9a05), closes BITS-194 BITS-191
+* **module_load:** make dependency errors useful   (e6f215a), closes BITS-244
+* **navigation:** listen for route changes and handle loading of default page   (2d52d5b), closes NMON-432
+* **page-validation:** validate default pages fully to add priority when missing   (58135b2), closes BITS-238
+* assign value to the correct property   (33f2959), closes NMON-432
+* gallery category sort "Home" to top of list   (42396b3), closes BITS-189
+* pages priority override   (2f46020), closes BITS-190
+
+
+### Features
+
+* **auth-strategies:** allow additional authentication strategies to be registered and used   (04f3d7c), closes BITS-192
+* add icon to header layout   (c8f4bae), closes BITS-250
+
+---
+
 <a name="3.3.0"></a>
 # 3.3.0 (2018-11-07)
 
@@ -8,7 +32,7 @@
 * **modules-scope:** hide the modules page based on scopes   (e50f8f7), closes BITS-175
 * **router-params:** fix router params for list query/options   (6bcb214), closes BITS-177
 * chrome notifications appear correctly   (8b747ab)
-* throttled log dumps, catch error on attempting to encrypt deleted file   (c26f7fc), closes PSCAN-341 BITS-185
+* throttled log dumps, catch error on attempting to encrypt deleted file   (c26f7fc), closes BITS-185
 
 
 ### Features
@@ -26,7 +50,7 @@
 
 * Firefox sidenav toggle   (cf6ed8b), closes BITS-170
 * Fix the undefined variable error in Pages Manager when a resource is removed   (3cb3948), closes BITS-171
-* more customizeable base-header-layout   (41df7a6), closes PSCAN-303
+* more customizeable base-header-layout   (41df7a6) 
 
 
 ### Features

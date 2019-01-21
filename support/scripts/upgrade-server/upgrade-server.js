@@ -68,16 +68,6 @@ limitations under the License.
         this._clientCommunication = new ClientCommunication();
         this._clientCommunication.load(this._httpsServer);
       })
-      .then(() => {
-        // this promise resolves when our HTTPS server connects
-        logger.debug('... waiting for Upgrade Server connection');
-        return new Promise((resolve) => {
-          this._httpsServer.on('connection', () => {
-            logger.debug('Upgrade Server connected');
-            resolve('connected');
-          });
-        });
-      })
       .catch((err) => {
         return ErrorLog.append('Srvr.listen: ' + err)
         .then(() => {

@@ -51,7 +51,7 @@ limitations under the License.
           .then((results) => {
             const index = results.findIndex((mod) => mod.name === mName);
             if (index > -1) this.set('displayName', results[index].displayName);
-          })
+          });
         }
         this.set('displayName', DEFAULT_DISPLAY_NAME);
       }

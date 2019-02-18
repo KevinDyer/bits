@@ -19,10 +19,12 @@ limitations under the License.
   const parseArgs = require('minimist');
   const path = require('path');
 
+  process.chdir(__dirname);
+
   // Parsing args
   const args = parseArgs(process.argv, {
-    default: {rootDataDir: path.join(__dirname, '/data')},
-    alias: {rootDataDir: ['d']},
+    default: {rootDataDir: path.join(__dirname, 'data')},
+    alias: {rootDataDir: ['d'], modulesDir: ['m']},
   });
 
   // Set initial Globals
@@ -30,6 +32,10 @@ limitations under the License.
     global.paths = {};
   }
   global.paths.data = args.rootDataDir;
+  if (!args.modulesDir) {
+    args.modulesDir = path.join(args.rootDataDir, 'base', 'modules', 'modules');
+  }
+  global.paths.modules = args.modulesDir;
 
   const os = require('os');
   const cluster = require('cluster');

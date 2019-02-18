@@ -21,7 +21,7 @@ limitations under the License.
   const chaiAsPromised = require('chai-as-promised');
 
   global.paths = global.paths || {};
-  global.paths = Object.assign(global.paths, {data: os.tmpdir()});
+  global.paths = Object.assign(global.paths, {data: os.tmpdir(), modules: os.tmpdir()});
 
   const ModuleManager = require('./../lib/modules/module-manager');
 

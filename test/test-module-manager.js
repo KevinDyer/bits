@@ -17,11 +17,17 @@ limitations under the License.
   'use strict';
 
   const os = require('os');
+  const path = require('path');
+  const fs = require('fs');
   const chai = require('chai');
   const chaiAsPromised = require('chai-as-promised');
 
+  const modulesDir = path.join(os.tmpdir(), `${Date.now()}`);
+
+  fs.mkdirSync(modulesDir);
+
   global.paths = global.paths || {};
-  global.paths = Object.assign(global.paths, {data: os.tmpdir(), modules: os.tmpdir()});
+  global.paths = Object.assign(global.paths, {data: os.tmpdir(), modules: modulesDir});
 
   const ModuleManager = require('./../lib/modules/module-manager');
 
@@ -58,6 +64,11 @@ limitations under the License.
       return Promise.resolve();
     }
   }
+
+  after((done) => {
+    fs.rmdirSync(modulesDir);
+    done();
+  });
 
   describe('Module Manager creation', () => {
     describe('construction', () => {

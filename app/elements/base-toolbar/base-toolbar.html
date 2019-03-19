@@ -130,8 +130,7 @@ limitations under the License.
         },
         dynamicItems: {
           type: Array,
-          value: [],
-          observer: '_dynamicItemsChanged'
+          value: () => []
         },
         splitItems: {
           type: Boolean,
@@ -143,6 +142,10 @@ limitations under the License.
           value: Object.assign({})
         }
       },
+
+      observers: [
+        '_dynamicItemsChanged(dynamicItems.*)'
+      ],
 
       toggleGallery: function() {
         this.fire('base-console-toggle-gallery');
@@ -173,22 +176,25 @@ limitations under the License.
       },
 
       _dynamicItemsChanged: function(changes) {
-        let toolbarElements = [];
-        if (Array.isArray(this.dynamicItems)) {
-          toolbarElements = this.dynamicItems;
-        }
-        const content = this.$.dynamicElementsContainer;
-        return Promise.all(toolbarElements.map((toolbarElement) => this._loadElement(toolbarElement)))
-        .then((elements) => {
-          while (0 < content.children.length) {
-            content.removeChild(content.firstChild);
+        this.cancelDebouncer('items-changed');
+        this.debounce('items-changed', () => {
+          let toolbarElements = [];
+          if (Array.isArray(this.dynamicItems)) {
+            toolbarElements = this.dynamicItems;
           }
-          return Promise.all(elements.map((element) => {
-            element.classList.toggle('action-btn', true);
-            content.appendChild(element);
-          }));
-        })
-        .catch((err) => console.warn(err));
+          const content = this.$.dynamicElementsContainer;
+          return Promise.all(toolbarElements.map((toolbarElement) => this._loadElement(toolbarElement)))
+          .then((elements) => {
+            while (0 < content.children.length) {
+              content.removeChild(content.firstChild);
+            }
+            return Promise.all(elements.map((element) => {
+              element.classList.toggle('action-btn', true);
+              content.appendChild(element);
+            }));
+          })
+          .catch((err) => console.warn(err));
+        }, 200);
       },
 
       _loadElement: function(toolbarElement) {

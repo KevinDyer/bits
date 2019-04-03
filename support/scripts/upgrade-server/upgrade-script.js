@@ -22,6 +22,7 @@ limitations under the License.
   const Helper = require('./helper');
   const logger = require('./simple-logger');
   const path = require('path');
+  const mkdirp = require('mkdirp');
 
   class ScriptError extends Error {
     constructor(...args) {
@@ -1266,7 +1267,7 @@ limitations under the License.
       }, () => {
         // dir does not exist: create it
         return new Promise((resolve, reject) => {
-          fs.mkdir(path, mode, (err) => {
+          mkdirp(path, mode, (err) => {
             if (err && (err.code != 'EEXIST')) {
               logger.verbose('mkdir(' + path + '): no');
               reject(err);

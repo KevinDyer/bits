@@ -34,6 +34,7 @@ limitations under the License.
       help: false,
       logLevel: 'info', // error=0, warn=1, info=2, verbose=3, debug=4, silly=5
       outputFile: '/tmp/upgrade-output-file.log',
+      noserver: false,
     },
     alias: {
       rootBaseDir: ['P', '-base'],
@@ -42,6 +43,7 @@ limitations under the License.
       help: ['h', '-help'],
       logLevel: ['l', '-level'],
       outputFile: ['o', '-output'],
+      noserver: ['n', '-noserver'],
     },
   });
 
@@ -92,6 +94,12 @@ limitations under the License.
   Environment.setIfNotExist('BACKUP_DIR', path.join(Environment.get('BASE_DIR'), 'upgrade-' + logFileDate));
   Environment.setIfNotExist('TARGET_EXTRACT', path.join(Environment.get('BACKUP_DIR'), 'extract'));
 
+  // default upgrade script status handlers
+  this._nameHandler = function() {}; // _nameHandlerFunction;
+  this._progressHandler = function() {}; // _progressHandlerFunction;
+  this._statusHandler = function() {}; // _statusHandlerFunction;
+  this._upgradeServer = null;
+
   // here is the core process
   this._upgradeScript = new UpgradeScript();
   Promise.resolve()
@@ -102,23 +110,24 @@ limitations under the License.
   .then(() => UpgradeScript.stopBitsServer())
   .then(() => logger.debug('BITS Server Stopped'))
   .then(() => {
-    // Create server instance
-    return Helper.appendToLog('* Launching UpgradeServer(' + args.rootBaseDir + ', ' + args.rootDataDir + ')')
-    .then(() => this._upgradeServer = new UpgradeServer(args.rootBaseDir, args.rootDataDir))
-    .then(() => this._upgradeServer.load());
+    if (!args.noserver) {
+      // Create server instance
+      return Helper.appendToLog('* Launching UpgradeServer(' + args.rootBaseDir + ', ' + args.rootDataDir + ')')
+      .then(() => this._upgradeServer = new UpgradeServer(args.rootBaseDir, args.rootDataDir))
+      .then(() => this._upgradeServer.load())
+      .then(() => {
+        this._nameHandler = this._upgradeServer.sendActionName.bind(this._upgradeServer);
+        this._progressHandler = this._upgradeServer.sendActionProgress.bind(this._upgradeServer);
+        this._statusHandler = this._upgradeServer.sendActionStatus.bind(this._upgradeServer);
+      });
+    }
   })
-  .then((result) => {
-    return Helper.appendToLog('* Starting UpgradeScript(' + result + ')')
+  .then(() => {
+    return Helper.appendToLog('* Starting UpgradeScript()')
     .then(() => this._upgradeScript.performUpgrade(
-      (name) => {
-        this._upgradeServer.sendActionName(name);
-      },
-      (current, total) => {
-        this._upgradeServer.sendActionProgress(current, total);
-      },
-      (text) => {
-        this._upgradeServer.sendActionStatus(text);
-      }
+      this._nameHandler,
+      this._progressHandler,
+      this._statusHandler
     ));
   })
   .catch((err) => {
@@ -155,14 +164,16 @@ limitations under the License.
 
   function printUsage() {
     console.log('BITS Upgrade Script - usage:');
-    console.log('  node app.js -b BASE -d DATA -t TARGET [-h] [-l LEVEL]');
+    console.log('  node upgrade-app.js -P BASE -d DATA -t TARGET [-h] [-l LEVEL] [-n] [-o FILE]');
     console.log('where:');
-    console.log('  -b BASE: use BASE as the BITS base directory');
-    console.log('  -d DATA: use DATA as the BITS data directory');
-    console.log('  -t TARGET: use TARGET as the target OMG file');
-    console.log('  -h: show this usage text');
-    console.log('  -l LEVEL: set log level to LEVEL, where LEVEL is one of:');
+    console.log('  -P,--base BASE: use BASE as the BITS base directory');
+    console.log('  -d,--data DATA: use DATA as the BITS data directory');
+    console.log('  -t,--target TARGET: use TARGET as the target ROMG file');
+    console.log('  -o,--output FILE: use FILE as the log file for the upgrade');
+    console.log('  -h,--help: show this usage text');
+    console.log('  -l,--level LEVEL: set log level to LEVEL, where LEVEL is one of:');
     console.log('     error, warn, info, verbose, debug (default is info)');
+    console.log('  -n,--noserver: Do not start the BITS Upgrade web server');
     process.exit(1);
   }
 })();

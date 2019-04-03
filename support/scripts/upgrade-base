@@ -46,6 +46,8 @@ const ENV_DATE = '' + d.getFullYear()
 
 const LOG_FILE_NAME = `/tmp/bits-upgrade-log-${ENV_DATE}`;
 
+const FOLDER_CREATION_MODE = 0o700;
+
 const args = parseArgs(process.argv, {
   default: {
     rootBaseDir: '/opt/bits/',
@@ -53,6 +55,7 @@ const args = parseArgs(process.argv, {
     target: '',
     help: false,
     logLevel: 'info', // error=0, warn=1, info=2, verbose=3, debug=4, silly=5
+    noserver: false,
   },
   alias: {
     rootBaseDir: ['P', '-base'],
@@ -60,6 +63,7 @@ const args = parseArgs(process.argv, {
     target: ['t', '-target'],
     help: ['h', '-help'],
     logLevel: ['l', '-level'],
+    noserver: ['n', '-noserver'],
   },
 });
 
@@ -74,11 +78,12 @@ const scriptName = path.parse(process.argv[1]).base;
 log(`* Script: ${scriptName}`);
 
 const user = whoami();
-log('* Current user: ' + user);
+log(`* Current user: ${user}`);
 
 const tmpdir = fs.mkdtempSync('/tmp/bitsupdater.');
-log('* Working directory: ' + tmpdir);
-fs.chmodSync(tmpdir, 766);
+
+log(`* Working directory: ${tmpdir}`);
+fs.chmodSync(tmpdir, 0o766);
 
 let argumentError = false;
 
@@ -92,22 +97,40 @@ if (user !== 'root') {
 if (!args.rootBaseDir) {
   log('* ERROR: no base dir specified (-P <dirname>)');
   argumentError = true;
-} else if (fs.existsSync(args.rootBaseDir) && fs.statSync(args.rootBaseDir).isDirectory()) {
-  log('* Base dir: ' + args.rootBaseDir);
 } else {
-  log(`* ERROR: Specified base dir is not a directory (${args.rootBaseDir})`);
-  argumentError = true;
+  // if the argument was supplied, make sure the directory exists
+  try {
+    mkdirp(args.rootBaseDir, FOLDER_CREATION_MODE);
+    log(`* Base Dir: ${args.rootBaseDir}`);
+  }
+  catch (err) {
+    if (err.code === 'ENOTDIR') {
+      log(`* ERROR: Specified base directory '${args.rootBaseDir}' is not a directory`);
+    } else {
+      log(`* ERROR: Unknown error ensuring base directory '${args.rootBaseDir}' exists:`, err);
+    }
+    argumentError = true;
+  }
 }
 
 // validate data directory (-d)
 if (!args.rootDataDir) {
   log('* ERROR: no data dir specified (-d <dirname>)');
   argumentError = true;
-} else if (fs.existsSync(args.rootDataDir) && fs.statSync(args.rootDataDir).isDirectory()) {
-  log('* Data dir: ' + args.rootDataDir);
 } else {
-  log(`* ERROR: Specified data dir is not a directory (${args.rootDataDir})`);
-  argumentError = true;
+  // if the argument was supplied, make sure the directory exists
+  try {
+    mkdirp(args.rootDataDir, FOLDER_CREATION_MODE);
+    log(`* Data Dir: ${args.rootDataDir}`);
+  }
+  catch (err) {
+    if (err.code === 'ENOTDIR') {
+      log(`* ERROR: Specified data directory '${args.rootDataDir}' is not a directory`);
+    } else {
+      log(`* ERROR: Unknown error ensuring data directory '${args.rootDataDir}' exists:`, err);
+    }
+    argumentError = true;
+  }
 }
 
 // validate target filename
@@ -115,7 +138,7 @@ if (!args.target) {
   log('* ERROR: need to supply new base ROMG (-t <filename>)');
   argumentError = true;
 } else if (fs.existsSync(args.target) && fs.statSync(args.target).isFile()) {
-  log('* Target: ' + args.target);
+  log(`* Target: ${args.target}`);
 } else {
   log(`* ERROR: Specified target is not a file (${args.target})`);
   argumentError = true;
@@ -124,7 +147,7 @@ if (!args.target) {
 // validate log level
 const validLevels = ['error', 'warn', 'info', 'verbose', 'debug', 'silly'];
 if (!validLevels.includes(args.logLevel)) {
-  log('* ERROR: invalid log level provided (' + args.logLevel + ')');
+  log(`* ERROR: invalid log level provided (${args.logLevel})`);
   argumentError = true;
 } else {
   log(`* Log level is (${args.logLevel})`);
@@ -144,41 +167,45 @@ if (untarResults.output.join('').length > 0) {
 
 // Now launch the upgrade app
 log(`* Launching upgrade-app in ${tmpdir}`);
-const execResults = spawnSync('node',
-  ['./upgrade-app.js',
-    '-t', args.target,
-    '-P', args.rootBaseDir,
-    '-d', args.rootDataDir,
-    '-o', LOG_FILE_NAME,
-    '-l', args.logLevel],
-  {cwd: path.join(tmpdir, 'upgrade-server')});
-if (execResults.output.join('').length > 0) {
-  log('* Upgrade App Results:\n' + execResults.output.join('\n').trim());
+const execArgs = ['./upgrade-app.js',
+  '-t', path.resolve(args.target),
+  '-P', args.rootBaseDir,
+  '-d', args.rootDataDir,
+  '-o', LOG_FILE_NAME,
+  '-l', args.logLevel
+];
+if (args.noserver) {
+  execArgs.push('--noserver');
 }
-// console.log('EXEC RESULTS:\n', execResults);
-const yarnInstallError = execResults.status;
-log(`* Back from Upgrade App (${yarnInstallError})`);
+const {error, output, status} = spawnSync('node',
+  execArgs,
+  {cwd: path.join(tmpdir, 'upgrade-server')});
+if (error) {
+  log('* Upgrade App Error Results:\n' + error);
+}
+if (output) {
+  log('* Upgrade App Output:\n' + output);
+}
 
-if (yarnInstallError > 0) {
+log(`* Back from Upgrade App (${status})`);
+
+if (status > 0) {
   log('* Cleaning up working files');
-  let results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'node_modules')], {});
-  log('* rm (' + path.join(tmpdir, 'upgrade-server', 'node_modules') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'public')], {});
-  log('* rm (' + path.join(tmpdir, 'upgrade-server', 'public') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.js')], {});
-  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.js') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.json')], {});
-  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.json') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.lock')], {});
-  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.lock') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.txt')], {});
-  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.txt') + ') results: ' + results.output.join('\n').trim());
-  results = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.MD')], {});
-  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.MD') + ') results: ' + results.output.join('\n').trim());
-  // if (results.output.join('').length > 0) {
-  //   log('* rm Results: ' + results.output.join('\n').trim());
-  // }
-  finish(yarnInstallError);
+  let {output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'node_modules')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', 'node_modules') + ') results: ' + output.join('\n').trim());
+  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'public')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', 'public') + ') results: ' + output.join('\n').trim());
+  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.js')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.js') + ') results: ' + output.join('\n').trim());
+  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.json')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.json') + ') results: ' + output.join('\n').trim());
+  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.lock')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.lock') + ') results: ' + output.join('\n').trim());
+  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.txt')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.txt') + ') results: ' + output.join('\n').trim());
+  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.MD')], {});
+  log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.MD') + ') results: ' + output.join('\n').trim());
+  finish(status);
 } else {
   // completely remove TMPDIR, but only on success
   log('* Clean exit');
@@ -198,13 +225,21 @@ function finish(exitCode) {
     const upgradeDir = path.join(args.rootDataDir, 'upgrade');
     const baseLogName = path.basename(LOG_FILE_NAME);
     log(`* INFO Moving Upgrade Log to data directory as ${baseLogName})`);
-    mkdir(upgradeDir);
-    spawnSync('mv', ['-v', LOG_FILE_NAME, upgradeDir], {});
-    const latestLinkName = path.join(upgradeDir, 'latest');
-    if (fs.statSync(latestLinkName).isFile()) {
-      fs.unlinkSync(latestLinkName);
+    try {
+      mkdirp(upgradeDir, FOLDER_CREATION_MODE);
+      spawnSync('mv', ['-v', LOG_FILE_NAME, upgradeDir], {});
+      const latestLinkName = path.join(upgradeDir, 'latest');
+      if (fs.statSync(latestLinkName).isFile()) {
+        fs.unlinkSync(latestLinkName);
+      }
+      fs.symlinkSync(path.join(upgradeDir, baseLogName), latestLinkName);
+    } catch (err) {
+      if (err.code === 'ENOTDIR') {
+        log(`* ERROR: Unable to save log file; '${upgradeDir}' exists but is not a directory`);
+      } else {
+        log(`* ERROR: Unknown error creating log file copy in '${upgradeDir}':`, err);
+      }
     }
-    fs.symlinkSync(path.join(upgradeDir, baseLogName), latestLinkName);
   }
   process.exit(exitCode);
 }
@@ -221,11 +256,30 @@ function log(...args) {
   fs.appendFileSync(LOG_FILE_NAME, logTime + ' ' + args.join('\n') + '\n');
 }
 
-function mkdir(path) {
-  if (fs.statSync(path).isDirectory()) {
-    log(`* mkdir(${path}): already exists`);
-  } else {
-    fs.mkdirSync(path);
+function mkdirp(dirpath, mode) {
+  try {
+    ensureDirectoryExists(dirpath, mode)
+  } catch(err) {
+    if ('ENOENT' === err.code) {
+      mkdirp(path.dirname(dirpath, mode));
+      fs.mkdirSync(dirpath, mode);
+    } else {
+      throw(err);
+    }
+  };
+}
+
+function ensureDirectoryExists(dirpath, mode) {
+  try {
+    fs.mkdirSync(dirpath, mode);
+  }
+  catch(err) {
+    if (err.code !== 'EEXIST') {
+      throw(err);
+    }
+  };
+  if (!fs.statSync(dirpath).isDirectory()) {
+    throw Object.assign(new Error('Dirpath is not directory'), {code: 'ENOTDIR'});
   }
 }
 
@@ -285,14 +339,15 @@ function parseArgs(argArray, options) {
 function printUsage() {
   console.log(`
 BITS Upgrade Script - usage:
-  node app.js -P BASE -d DATA -t TARGET [-h] [-l LEVEL]
+  node upgrade-base -P BASE -d DATA -t TARGET [-h] [-l LEVEL] [-ns]
 where:
   -h: show this usage text
-  -t TARGET: use TARGET as the target OMG file
+  -t TARGET: use TARGET as the target ROMG file
   -P BASE: use BASE as the BITS base directory
   -d DATA: use DATA as the BITS data directory
   -l LEVEL: set log level to LEVEL, where LEVEL is one of:
      error, warn, info, verbose, debug, silly (default is info)
+  -n: Do not start the BITS Upgrade web server
 CAVEAT: this script must be run as root user`);
   process.exit(1);
 }

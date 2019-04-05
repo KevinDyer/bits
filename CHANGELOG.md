@@ -1,3 +1,33 @@
+<a name="3.5.0"></a>
+# [3.5.0] (2019-04-05)
+
+
+### Bug Fixes
+
+* allow bits to run from any directory (44f9a0f)
+* allow upgrade scripts to run without progress server (c1e3e9f), closes BITS-157
+* assign value to the correct property (ba8c3f9), closes NMON-432
+* **OmgApi:** resolve add() once complete (fa7a243), closes EDG-68
+* **routers:** fix body parsing for all CRUD routers (4c1da42), closes PNP-113
+* **upgrade-server:** Upgrade server should not wait for server connection (cd08d3e), closes PNP-587
+* check error against "not found" regex (aacf8f8), closes GARB-605
+* create a module dir in tmp for unit tests (36f9595), closes PNP-822
+* ensure childProcess object exists before calling kill on it (5c03c83)
+* PouchDB _id initialize (ee03444), closes PNP-903
+* toolbar items observer listens on length changes (85bbcaa), closes PNP-885
+
+
+### Features
+
+* **display-name:** add behavior to pull display name from module.json (6eea18a), closes PNP-580
+* **OmgsApi:** expose delete (9561384), closes EDG-67
+* Add a field to the child process utility to pass stdin to the process (cd2be64), closes PNP-1116
+* Add a symlink wrapper to the UtilFs utility (ba8285f), closes PNP-1116
+* expose BaseOmgsApi (6faad49), closes EDG-64
+* make modules dir a configurable option on the command line (56082d6), closes BITS-163
+
+---
+
 <a name="3.4.0"></a>
 # 3.4.0 (2019-01-21)
 

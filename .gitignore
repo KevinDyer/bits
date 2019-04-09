@@ -7,9 +7,6 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-# Bower
-app/bower_components/
-
 # polymer-cli
 build/
 support/scripts/upgrade-server/public/socket.io.js

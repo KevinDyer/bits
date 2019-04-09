@@ -3,50 +3,40 @@ BITS
 
 <!-- MarkdownTOC autolink="true" bracket="round" depth="2" indent="    " -->
 
-- [What is BITS?](#what-is-bits)
-- [Quickstart](#quickstart)
-- [Modules](#modules)
-    - [package.json](#packagejson)
-    - [module.json](#modulejson)
-    - [index.js](#indexjs)
-- [Optimized Module Groupings](#optimized-module-groupings)
-- [Scopes](#scopes)
-- [MessageCenter](#messagecenter)
-    - [Server Side](#server-side)
-- [Base APIs](#base-apis)
-    - [Activity](#activity)
-    - [System](#system)
-    - [Authentication](#authentication)
-    - [Helper](#helper)
-    - [Others](#others)
-- [Module APIs](#module-apis)
-- [Base Server](#base-server)
-- [Authentication](#authentication-1)
-    - [API](#api)
-- [Helper Classes](#helper-classes)
-    - [Base Server](#base-server-1)
-    - [Child Process](#child-process)
-    - [CRUD API](#crud-api)
-    - [CRUD Manager](#crud-manager)
-    - [CRUD Messenger](#crud-messenger)
-    - [Daemon](#daemon)
-    - [FS](#fs)
-    - [Lazy Load](#lazy-load)
-    - [Messenger](#messenger)
-    - [Others](#others-1)
-- [Development](#development)
-- [Running BITS](#running-bits)
-- [Running Modules](#running-modules)
-- [Support](#support)
-- [Troubleshooting](#Troubleshooting)
-- [Tutorials](#tutorials)
+* [package.json](#packagejson)
+* [module.json](#modulejson)
+* [index.js](#indexjs)
+    * [Request Listeners](#request-listeners)
+    * [Event Listeners](#event-listeners)
+* [Server Side](#server-side)
+  * [Metadata](#metadata)
+  * [Example](#example)
+  * [Recommended Pattern](#recommended-pattern)
+* [Activity](#activity)
+* [System](#system)
+* [Authentication](#authentication)
+* [Helper](#helper)
+* [Others](#others)
+* [API](#api)
+* [Base Server](#base-server)
+* [Child Process](#child-process)
+* [CRUD API](#crud-api)
+* [CRUD Manager](#crud-manager)
+* [CRUD Messenger](#crud-messenger)
+* [Daemon](#daemon)
+* [FS](#fs)
+* [Lazy Load](#lazy-load)
+* [Messenger](#messenger)
+* [Others](#others-1)
+  * [Deployment](#deployment)
+  * [Development](#development)
 
 <!-- /MarkdownTOC -->
 
 
 # What is BITS?
 
-BITS (BITS Integrated Technology System) is designed to allow for the rapid development of modules that share base software. It is based on Google's polymer project and node.js. The goal is to reuse common components in multiple projects and harden these components through extensive use.
+BITS (BITS Integrated Technology System) is designed to allow for the rapid development of modules that share base software. The goal is to reuse common components in multiple projects and harden these components through extensive use.
 
 BITS can run on enterprise or embedded applications and can help jumpstart a project with initial functionality. A basic BITS implementation provides the following initial capabilities:
 
@@ -242,12 +232,12 @@ For the rules, the requester is the actor calling sendRequest and the handler is
 
 1. Scopes
     1. If handler scopes is `null`, then filter all requests.
-    1. If requester scopes is `null`, then do not filter any requests.
-    1. If both handler and requester have scopes, then filter if none of the scopes in the requester are in the handler.
-1. User
+    2. If requester scopes is `null`, then do not filter any requests.
+    3. If both handler and requester have scopes, then filter if none of the scopes in the requester are in the handler.
+2. User
     1. If handler user is specified, then only that user can see the data.
-    1. If handler user is not defined, but request user is, then default back to scopes rules.
-    1. If handler user is specified and requester user is not, then default back to scopes rules.
+    2. If handler user is not defined, but request user is, then default back to scopes rules.
+    3. If handler user is specified and requester user is not, then default back to scopes rules.
 
 ### Example
 
@@ -508,9 +498,10 @@ This prevents modules from being deleted by unloading  modules. Any module that 
 
 ---
 
-Support
-===
+# Support
+
 To make changes to BITS please submit pull requests via github. For feature requests/bug reporting send an email to artisanalbits@gmail.com
+
 ---
 
 # Troubleshooting

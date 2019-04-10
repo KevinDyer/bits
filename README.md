@@ -109,6 +109,54 @@ The package.json file specifies all the scripts and npm configurations for the b
 
 BITS requires every module to have a module.json file. The module.json specifies information specific to that module including its name, version, scopes, and widgets.
 
+### Load Policy
+
+BITS will, by default, attempt to load modules exactly once. If they succeed, the process will continue running until told otherwise. A failure will result in the module not being loaded. Modules may, however, override this behavior by specifying a load policy in the `module.json`.
+
+The load policy is configured by adding a JSON object to the file with the key `load`. This object may contain the following key/value pairs:
+
+* restartPolicy
+  * never (DEFAULT)
+    * BITS will never re-attempt loading the module
+  * oneshot
+    * BITS will load the module, but the process will be stopped when it runs to completion
+    * If the module load fails, BITS will retry, as specified by the `retries` value
+  * on-failure
+    * BITS will load the module as usual
+    * If the module load fails, BITS will retry, as specified by the `retries` value
+* retries
+  * The number of times to retry loading
+    * Negative numbers will retry indefinitely
+    * Default is 1
+
+#### Oneshot index.js Organization
+
+When using oneshot as the `restartPolicy`, the `load`/`unload` functions should be `static`, and the `index.js` itself should be stateless. A `messageCenter` object will be passed to the `unload` function.
+
+```javascript
+(() => {
+  'use strict';
+
+  class Api {
+    static load(messageCenter) {
+      return Promise.resolve()
+      .then(() => {
+        // stateless activities
+      });
+    }
+
+    static unload(messageCenter) {
+      return Promise.resolve()
+      .then(() => {
+        // undo everything, as needed.
+      });
+    }
+  }
+
+  module.exports = Api;
+})();
+```
+
 ## index.js
 
 An index.js needs to be specified to run module code. The index.js should export two functions, load and unload. These methods pass the messageCenter for communication to other modules. There are additional details in following sections. The index.js should look like:

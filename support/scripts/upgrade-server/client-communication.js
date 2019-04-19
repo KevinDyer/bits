@@ -99,8 +99,8 @@ limitations under the License.
       this._emitSocketEvent({
         event: 'action',
         data: {
-          text: name
-        }
+          text: name,
+        },
       });
     }
 
@@ -116,8 +116,8 @@ limitations under the License.
         event: 'progress',
         data: {
           completedItems: current,
-          totalItems: total
-        }
+          totalItems: total,
+        },
       });
     }
 
@@ -129,15 +129,15 @@ limitations under the License.
       this._emitSocketEvent({
         event: 'status',
         data: {
-          text: status
-        }
+          text: status,
+        },
       });
     }
 
     sendReloadCommand() {
       this._emitSocketEvent({
         event: 'reload',
-        data: {}
+        data: {},
       });
     }
   }

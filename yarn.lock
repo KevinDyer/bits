@@ -16,6 +16,19 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@lgslabs/bits-eslint@^1.0.2":
+  version "1.0.2"
+  resolved "@lgslabs/bits-eslint/-/bits-eslint-1.0.2.tgz#3f37399534e75f6316a80ac04a9efe2808c201e8"
+  dependencies:
+    "@lgslabs/eslint-config-bits" "^1.0.1"
+    eslint "^5.15.3"
+    eslint-config-google "^0.12.0"
+    eslint-plugin-html "^5.0.3"
+
+"@lgslabs/eslint-config-bits@^1.0.1":
+  version "1.0.1"
+  resolved "@lgslabs/eslint-config-bits/-/eslint-config-bits-1.0.1.tgz#b1f66d7dc61d886eb6d08e1e6f9e1cbdef62ad6f"
+
 "@skidder/bits-auto-discovery@^1.0.2":
   version "1.0.2"
   resolved "@skidder/bits-auto-discovery/-/bits-auto-discovery-1.0.2.tgz#d9191b2926e76a192c43c1ce74889364005a08b2"
@@ -735,9 +748,9 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-google@^0.11.0:
-  version "0.11.0"
-  resolved "eslint-config-google/-/eslint-config-google-0.11.0.tgz#fd0fc70be2e9114df097cac93a9b5b0d4e1c6830"
+eslint-config-google@^0.12.0:
+  version "0.12.0"
+  resolved "eslint-config-google/-/eslint-config-google-0.12.0.tgz#b9bcc52d0f24cf946e862fe8b09c773ad21e511b"
 
 eslint-plugin-html@^5.0.3:
   version "5.0.3"
@@ -760,7 +773,7 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^5.8.0:
+eslint@^5.15.3:
   version "5.16.0"
   resolved "eslint/-/eslint-5.16.0.tgz#a1e3ac1aae4a3fbd8296fcf8f7ab7314cbb6abea"
   dependencies:

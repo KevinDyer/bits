@@ -26,7 +26,7 @@
             ],
             isAnonymous: true,
             createdAt: 1516378921603,
-            updatedAt: 1516378921603
+            updatedAt: 1516378921603,
           }];
         }
       };

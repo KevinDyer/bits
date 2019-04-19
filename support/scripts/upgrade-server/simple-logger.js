@@ -36,8 +36,8 @@ limitations under the License.
       }),
       new winston.transports.File({
         filename: 'upgrade-server.log',
-        json: false
-      })
+        json: false,
+      }),
     ],
     exitOnError: false,
   });

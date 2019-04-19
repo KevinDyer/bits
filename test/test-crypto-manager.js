@@ -75,7 +75,7 @@ limitations under the License.
         .then(() => keyManager.addKeyFromFilepath(TEST_SIGNATURE_KEY_FILEPATH))
         .then((testSignatureKey) => {
           const options = {
-            signatureKey: testSignatureKey
+            signatureKey: testSignatureKey,
           };
           return cryptoManager.decryptFile(MODULE_PACKAGE_TEST_SIGNED_FILEPATH, os.tmpdir(), options);
         })

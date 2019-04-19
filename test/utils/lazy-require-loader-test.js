@@ -37,7 +37,7 @@
       });
 
       it('should throw error if filepath is not a string', () => {
-        expect(createLoaderAdd('TestApi')).to.throw(TypeError, /Path must be a string/);
+        expect(createLoaderAdd('TestApi')).to.throw(TypeError, /must be of type string/);
       });
 
       it('should throw error if filepath is not an absolute path', () => {

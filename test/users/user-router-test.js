@@ -117,7 +117,7 @@
           const {success, result} = res.body;
           expect(success).to.be.true;
           expect(result.username).to.equal(createRequest.username);
-          expect(result.scopes).to.be.lengthOf(1);
+          expect(result.scopes).to.be.lengthOf(0);
           expect(result.isAnonymous).to.be.false;
           done();
         });
@@ -165,7 +165,7 @@
           const {success, result} = res.body;
           expect(success).to.be.true;
           expect(result.username).to.equal(user.username);
-          expect(result.scopes).to.be.lengthOf(2);
+          expect(result.scopes).to.be.lengthOf(1);
           done();
         });
       })
@@ -190,7 +190,7 @@
           const {success, result} = res.body;
           expect(success).to.be.true;
           expect(result.username).to.equal(user.username);
-          expect(result.scopes).to.be.lengthOf(2);
+          expect(result.scopes).to.be.lengthOf(1);
           done();
         });
       })

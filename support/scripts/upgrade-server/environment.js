@@ -30,7 +30,7 @@ limitations under the License.
     // dump all environment values
     static dump(title) {
       logger.info('Environment | ' + title + ': ' + Object.keys(_environment).length + ' items');
-      for (let key in _environment) {
+      for (const key in _environment) {
         if (_environment.hasOwnProperty(key)) {
           logger.info('  env[' + key + ']: "' + _environment[key] + '"');
         }

@@ -257,7 +257,7 @@ limitations under the License.
           return Promise.resolve()
           .then(() => Helper.spawnAsPromise('grep', ['-q', '"bits:install" *:', 'package.json'], options));
         }
-        return Promise.reject();
+        return Promise.reject(new Error(`${path.join(installDir, 'package.json')} does not exist`));
       })
       .then((results) => {
         grepSucceded = (results.code === 0);
@@ -822,7 +822,7 @@ limitations under the License.
                 [
                   '-a',
                   path.join(baseDataDir, moduleDataDir),
-                  Environment.get('DATA_DIR') + '/'
+                  Environment.get('DATA_DIR') + '/',
                 ]))
               .then((results) => Helper.appendIndentedResultsToLog(results, 'cp results:'),
                 (err) => {

@@ -173,6 +173,7 @@ limitations under the License.
         return this._getMiddleware('/');
       }
       if (!(path in this._middlewares)) {
+        // eslint-disable-next-line prefer-promise-reject-errors
         return Promise.reject(function(req, res, next) {});
       }
 

@@ -27,10 +27,10 @@ limitations under the License.
     constructor() {
       this._list = [{
         id: 0,
-        scopes: [{name: 'account', displayName: 'account'}]
+        scopes: [{name: 'account', displayName: 'account'}],
       }, {
         id: 1,
-        scopes: []
+        scopes: [],
       }];
     }
 

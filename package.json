@@ -13,17 +13,15 @@
     "build:upgrade": "cd support/scripts/upgrade-server && npm run build",
     "autoclean": "yarn autoclean --force",
     "bits:install": "yarn --prod && npm run autoclean",
-    "lint": "eslint --ext js,html --fix ./",
+    "lint": "bits-eslint --ext js --fix ./",
     "test": "mocha --recursive",
     "clean": "rm -rf node_modules/ data/ npm-error.log yarn-error.log",
     "dev": "HTTP_PORT=9000 HTTPS_PORT=9001 node app.js -v"
   },
   "devDependencies": {
+    "@lgslabs/bits-eslint": "^1.0.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^5.8.0",
-    "eslint-config-google": "^0.11.0",
-    "eslint-plugin-html": "^5.0.3",
     "mocha": "^5.2.0",
     "supertest": "^3.3.0"
   },

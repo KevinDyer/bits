@@ -16,8 +16,8 @@
   const DUMMY_ACCESS_TOKEN = '1234';
   const TOKEN = {
     user: {
-      scopes: [{name: 'base'}, {name: 'test'}]
-    }
+      scopes: [{name: 'base'}, {name: 'test'}],
+    },
   };
 
   class BaseServer extends EventEmitter {
@@ -72,7 +72,7 @@
       manager = new CrudManager('crud#Test', {
         readScopes: ['test'],
         writeScopes: ['base', 'test'],
-        routePath: '/api/test/helpers'
+        routePath: '/api/test/helpers',
       });
       return manager.load(messageCenter, baseServer);
     });
@@ -81,7 +81,7 @@
       const req = {
         foo: 'bar',
         num: 42,
-        managers: ['@nbroeking', '@JaMaconMeCray']
+        managers: ['@nbroeking', '@JaMaconMeCray'],
       };
       return Promise.resolve()
       .then(() => manager.create(req))
@@ -93,7 +93,7 @@
      */
     it('should FAIL / op without token', (done) => {
       const req = {
-        items: item
+        items: item,
       };
       Promise.resolve()
       .then(() => {
@@ -113,7 +113,7 @@
      */
     it('should POST / create an entry from single item', (done) => {
       const req = {
-        items: item
+        items: item,
       };
       Promise.resolve()
       .then(() => {
@@ -138,7 +138,7 @@
 
     it('should POST / create entries from array', (done) => {
       const req = {
-        items: [item]
+        items: [item],
       };
       Promise.resolve()
       .then(() => {
@@ -169,7 +169,7 @@
     it('should POST / update an entry from single id', (done) => {
       const req = {
         ids: item.id,
-        update: {num: 43}
+        update: {num: 43},
       };
       Promise.resolve()
       .then(() => {
@@ -195,7 +195,7 @@
     it('should POST / update entries from array of ids', (done) => {
       const req = {
         ids: [item.id],
-        update: {num: 43}
+        update: {num: 43},
       };
       Promise.resolve()
       .then(() => {
@@ -225,7 +225,7 @@
      */
     it('should POST / delete an entry from single id', (done) => {
       const req = {
-        ids: item.id
+        ids: item.id,
       };
       Promise.resolve()
       .then(() => {
@@ -250,7 +250,7 @@
 
     it('should POST / delete entries from array of ids', (done) => {
       const req = {
-        ids: [item.id]
+        ids: [item.id],
       };
       Promise.resolve()
       .then(() => {

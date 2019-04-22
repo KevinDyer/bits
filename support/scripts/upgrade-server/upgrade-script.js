@@ -302,9 +302,7 @@ limitations under the License.
         } else {
           return Promise.resolve()
           .then(() => Helper.appendToLog('No package.json or no bits:install script command in ' + path.basename(installDir)))
-          .then(() => {
-            code: 0;
-          });
+          .then(() => Promise.resolve({code: 0}));
         }
       });
     }

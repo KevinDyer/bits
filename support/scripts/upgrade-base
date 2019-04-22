@@ -193,17 +193,17 @@ if (status > 0) {
   log('* Cleaning up working files');
   let {output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'node_modules')], {});
   log('* rm (' + path.join(tmpdir, 'upgrade-server', 'node_modules') + ') results: ' + output.join('\n').trim());
-  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'public')], {});
+  ({output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', 'public')], {}));
   log('* rm (' + path.join(tmpdir, 'upgrade-server', 'public') + ') results: ' + output.join('\n').trim());
-  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.js')], {});
+  ({output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.js')], {}));
   log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.js') + ') results: ' + output.join('\n').trim());
-  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.json')], {});
+  ({output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.json')], {}));
   log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.json') + ') results: ' + output.join('\n').trim());
-  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.lock')], {});
+  ({output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.lock')], {}));
   log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.lock') + ') results: ' + output.join('\n').trim());
-  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.txt')], {});
+  ({output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.txt')], {}));
   log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.txt') + ') results: ' + output.join('\n').trim());
-  output = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.MD')], {});
+  ({output} = spawnSync('rm', ['-rf', path.join(tmpdir, 'upgrade-server', '*.MD')], {}));
   log('* rm (' + path.join(tmpdir, 'upgrade-server', '*.MD') + ') results: ' + output.join('\n').trim());
   finish(status);
 } else {

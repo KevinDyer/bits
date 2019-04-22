@@ -164,22 +164,6 @@ limitations under the License.
           }
           results.code = code;
           results.signal = signal;
-          if (code != 0) {
-            // output error info for 'npm' calls
-            if (command === 'npm') {
-              logger.error('\n'
-                + 'v'.repeat(80) + '\n'
-                + 'spawnAsPromise: ERROR ('
-                + fullCommand
-                + '): Result code is non-zero ('
-                + code
-                + ')');
-              options.dump();
-              results.dump();
-              logger.error('\n' + Helper.objectToString(options.env));
-              logger.error('\n' + '^'.repeat(80));
-            }
-          }
           if (_debug) {
             logger.debug('spawnAsPromise: closing for ' + fullCommand);
           }

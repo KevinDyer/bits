@@ -283,7 +283,14 @@ limitations under the License.
             options))
           .then((results) => {
             return Promise.resolve()
-            .then(() => Helper.appendToLog('Install status = ' + results.code + ' in ' + path.basename(installDir)))
+            .then(() => {
+              const message = `Install status = ${results.code} in ${path.basename(installDir)}`;
+              if (results.code === 0) {
+                return Helper.appendToLog(message);
+              } else {
+                return Helper.appendIndentedResultsToLog(results, message);
+              }
+            })
             .then(() => results);
           }, (err) => {
             return Helper.appendToLog('Error in bits:install: ' + err)

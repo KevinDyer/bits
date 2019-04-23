@@ -255,22 +255,21 @@ limitations under the License.
       .then(() => {
         if (packageJsonExists) {
           return Promise.resolve()
-          .then(() => Helper.spawnAsPromise('grep', ['-q', '"bits:install" *:', 'package.json'], options));
-        }
-        return Promise.reject(new Error(`${path.join(installDir, 'package.json')} does not exist`));
-      })
-      .then((results) => {
-        grepSucceded = (results.code === 0);
-        if (grepSucceded) {
-          logger.debug('grep passed (found bits:install)');
-        } else {
-          logger.debug('grep ran but failed (no bits:install)');
-        }
-      }, (err) => {
-        if (err) {
-          logger.debug('grep failed to run: ' + err);
-          grepSucceded = false;
-          return ErrorLog.append('Upgrade.runInstall: grep failed to run: ' + err);
+          .then(() => Helper.spawnAsPromise('grep', ['-q', '"bits:install" *:', 'package.json'], options))
+          .then((results) => {
+            grepSucceded = (results.code === 0);
+            if (grepSucceded) {
+              logger.debug('grep passed (found bits:install)');
+            } else {
+              logger.debug('grep ran but failed (no bits:install)');
+            }
+          }, (err) => {
+            if (err) {
+              logger.debug('grep failed to run: ' + err);
+              grepSucceded = false;
+              return ErrorLog.append('Upgrade.runInstall: grep failed to run: ' + err);
+            }
+          });
         }
       })
       .then(() => {

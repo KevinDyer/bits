@@ -1,6 +1,7 @@
 (() => {
   'use strict';
 
+  const assert = require('assert');
   const BearerStrategy = require('passport-http-bearer');
   const BodyParser = require('body-parser');
   const chai = require('chai');
@@ -279,6 +280,35 @@
      * GET tests
      */
     it('should GET / get an entry from single id', (done) => {
+      Promise.resolve()
+      .then(() => {
+        request(baseServer.express)
+        .get(`/api/test/helpers/get/${item.id}`)
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${DUMMY_ACCESS_TOKEN}`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((err, res) => {
+          const {result} = res.body;
+          if (err) {
+            return done(err);
+          }
+
+          let equal = true;
+          try {
+            assert.deepStrictEqual(result, item);
+          } catch (err) {
+            equal = false;
+          }
+          expect(equal).to.be.true;
+
+          done();
+        });
+      })
+      .catch(done);
+    });
+
+    it(`should GET / get an entry from single id (without 'get' route, deprecated)`, (done) => {
       Promise.resolve()
       .then(() => {
         request(baseServer.express)

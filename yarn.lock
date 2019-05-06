@@ -16,30 +16,30 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@lgslabs/bits-eslint@^1.0.2":
-  version "1.0.2"
-  resolved "@lgslabs/bits-eslint/-/bits-eslint-1.0.2.tgz#3f37399534e75f6316a80ac04a9efe2808c201e8"
+"@lgslabs/bits-auto-discovery@^1.0.0":
+  version "1.0.0"
+  resolved "@lgslabs/bits-auto-discovery/-/bits-auto-discovery-1.0.0.tgz#eb33adfc3752872213822746502692e3831e095c"
   dependencies:
-    "@lgslabs/eslint-config-bits" "^1.0.1"
+    uuid "^3.1.0"
+
+"@lgslabs/bits-crypto@^1.0.1":
+  version "1.0.1"
+  resolved "@lgslabs/bits-crypto/-/bits-crypto-1.0.1.tgz#506540ba322a29569458e437285fd3b57344999d"
+  dependencies:
+    commander "^2.12.2"
+
+"@lgslabs/bits-eslint@^1.0.2":
+  version "1.0.3"
+  resolved "@lgslabs/bits-eslint/-/bits-eslint-1.0.3.tgz#8ca3c1c507b6504352fbad2de440e1389fed0b6b"
+  dependencies:
+    "@lgslabs/eslint-config-bits" "^1.1.0"
     eslint "^5.15.3"
     eslint-config-google "^0.12.0"
     eslint-plugin-html "^5.0.3"
 
-"@lgslabs/eslint-config-bits@^1.0.1":
-  version "1.0.1"
-  resolved "@lgslabs/eslint-config-bits/-/eslint-config-bits-1.0.1.tgz#b1f66d7dc61d886eb6d08e1e6f9e1cbdef62ad6f"
-
-"@skidder/bits-auto-discovery@^1.0.2":
-  version "1.0.2"
-  resolved "@skidder/bits-auto-discovery/-/bits-auto-discovery-1.0.2.tgz#d9191b2926e76a192c43c1ce74889364005a08b2"
-  dependencies:
-    uuid "^3.1.0"
-
-"@skidder/bits-crypto@^1.0.0":
-  version "1.0.0"
-  resolved "@skidder/bits-crypto/-/bits-crypto-1.0.0.tgz#dfd36b42d24fff6cf2f8593f6b88f2908b7b484e"
-  dependencies:
-    commander "^2.12.2"
+"@lgslabs/eslint-config-bits@^1.1.0":
+  version "1.1.0"
+  resolved "@lgslabs/eslint-config-bits/-/eslint-config-bits-1.1.0.tgz#a7066d6ce0982143a56cbc752ce3e287d15d3684"
 
 abstract-leveldown@^4.0.0, abstract-leveldown@~4.0.0:
   version "4.0.3"
@@ -54,11 +54,11 @@ abstract-leveldown@^5.0.0, abstract-leveldown@~5.0.0:
     xtend "~4.0.0"
 
 accepts@~1.3.4, accepts@~1.3.5:
-  version "1.3.5"
-  resolved "accepts/-/accepts-1.3.5.tgz#eb777df6011723a3b14e8a72c0805c8e86746bd2"
+  version "1.3.7"
+  resolved "accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
   dependencies:
-    mime-types "~2.1.18"
-    negotiator "0.6.1"
+    mime-types "~2.1.24"
+    negotiator "0.6.2"
 
 acorn-jsx@^5.0.0:
   version "5.0.1"
@@ -201,7 +201,7 @@ blob@0.0.5:
   version "0.0.5"
   resolved "blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
 
-body-parser@1.18.3, body-parser@^1.18.3:
+body-parser@1.18.3:
   version "1.18.3"
   resolved "body-parser/-/body-parser-1.18.3.tgz#5b292198ffdd553b3a0f20ded0592b956955c8b4"
   dependencies:
@@ -215,6 +215,21 @@ body-parser@1.18.3, body-parser@^1.18.3:
     qs "6.5.2"
     raw-body "2.3.3"
     type-is "~1.6.16"
+
+body-parser@^1.18.3:
+  version "1.19.0"
+  resolved "body-parser/-/body-parser-1.19.0.tgz#96b2709e57c9c4e09a6fd66a8fd979844f69f08a"
+  dependencies:
+    bytes "3.1.0"
+    content-type "~1.0.4"
+    debug "2.6.9"
+    depd "~1.1.2"
+    http-errors "1.7.2"
+    iconv-lite "0.4.24"
+    on-finished "~2.3.0"
+    qs "6.7.0"
+    raw-body "2.4.0"
+    type-is "~1.6.17"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -260,6 +275,10 @@ busboy@^0.2.11:
 bytes@3.0.0:
   version "3.0.0"
   resolved "bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
+
+bytes@3.1.0:
+  version "3.1.0"
+  resolved "bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
 
 callsite@1.0.0:
   version "1.0.0"
@@ -369,8 +388,8 @@ colors@^1.2.1:
   resolved "colors/-/colors-1.3.3.tgz#39e005d546afe01e01f9c4ca8fa50f686a01205d"
 
 colorspace@1.1.x:
-  version "1.1.1"
-  resolved "colorspace/-/colorspace-1.1.1.tgz#9ac2491e1bc6f8fb690e2176814f8d091636d972"
+  version "1.1.2"
+  resolved "colorspace/-/colorspace-1.1.2.tgz#e0128950d082b86a2168580796a0aa5d6c68d8c5"
   dependencies:
     color "3.0.x"
     text-hex "1.0.x"
@@ -406,10 +425,10 @@ component-inherit@0.0.3:
   resolved "component-inherit/-/component-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
 
 compressible@~2.0.16:
-  version "2.0.16"
-  resolved "compressible/-/compressible-2.0.16.tgz#a49bf9858f3821b64ce1be0296afc7380466a77f"
+  version "2.0.17"
+  resolved "compressible/-/compressible-2.0.17.tgz#6e8c108a16ad58384a977f3a482ca20bff2f38c1"
   dependencies:
-    mime-db ">= 1.38.0 < 2"
+    mime-db ">= 1.40.0 < 2"
 
 compression@^1.7.3:
   version "1.7.4"
@@ -851,8 +870,8 @@ etag@~1.8.1:
   resolved "etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
 eventemitter3@^3.0.0:
-  version "3.1.0"
-  resolved "eventemitter3/-/eventemitter3-3.1.0.tgz#090b4d6cdbd645ed10bf750d4b5407942d7ba163"
+  version "3.1.2"
+  resolved "eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
 
 expand-template@^1.0.2:
   version "1.1.1"
@@ -862,9 +881,9 @@ expand-template@^2.0.3:
   version "2.0.3"
   resolved "expand-template/-/expand-template-2.0.3.tgz#6e14b3fcee0f3a6340ecb57d2e8918692052a47c"
 
-expect-ct@0.1.1:
-  version "0.1.1"
-  resolved "expect-ct/-/expect-ct-0.1.1.tgz#de84476a2dbcb85000d5903737e9bc8a5ba7b897"
+expect-ct@0.2.0:
+  version "0.2.0"
+  resolved "expect-ct/-/expect-ct-0.2.0.tgz#3a54741b6ed34cc7a93305c605f63cd268a54a62"
 
 express@^4.16.4:
   version "4.16.4"
@@ -933,9 +952,9 @@ fast-safe-stringify@^2.0.4:
   version "2.0.6"
   resolved "fast-safe-stringify/-/fast-safe-stringify-2.0.6.tgz#04b26106cc56681f51a044cfc0d76cf0008ac2c2"
 
-feature-policy@0.2.0:
-  version "0.2.0"
-  resolved "feature-policy/-/feature-policy-0.2.0.tgz#22096de49ab240176878ffe2bde2f6ff04d48c43"
+feature-policy@0.3.0:
+  version "0.3.0"
+  resolved "feature-policy/-/feature-policy-0.3.0.tgz#7430e8e54a40da01156ca30aaec1a381ce536069"
 
 fecha@^2.3.3:
   version "2.3.3"
@@ -1006,9 +1025,9 @@ forwarded@~0.1.2:
   version "0.1.2"
   resolved "forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
 
-frameguard@3.0.0:
-  version "3.0.0"
-  resolved "frameguard/-/frameguard-3.0.0.tgz#7bcad469ee7b96e91d12ceb3959c78235a9272e9"
+frameguard@3.1.0:
+  version "3.1.0"
+  resolved "frameguard/-/frameguard-3.1.0.tgz#bd1442cca1d67dc346a6751559b6d04502103a22"
 
 fresh@0.5.2:
   version "0.5.2"
@@ -1070,8 +1089,8 @@ glob@^7.1.2, glob@^7.1.3:
     path-is-absolute "^1.0.0"
 
 globals@^11.7.0:
-  version "11.11.0"
-  resolved "globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
+  version "11.12.0"
+  resolved "globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
 
 graph-js@^0.1.11:
   version "0.1.11"
@@ -1117,23 +1136,23 @@ helmet-csp@2.7.1:
     platform "1.3.5"
 
 helmet@^3.14.0:
-  version "3.16.0"
-  resolved "helmet/-/helmet-3.16.0.tgz#7df41a4bfe4c83d90147c1e30d70893f92a9d97c"
+  version "3.18.0"
+  resolved "helmet/-/helmet-3.18.0.tgz#37666f7c861bd1ff3015e0cdb903a43501e3da3e"
   dependencies:
     depd "2.0.0"
     dns-prefetch-control "0.1.0"
     dont-sniff-mimetype "1.0.0"
-    expect-ct "0.1.1"
-    feature-policy "0.2.0"
-    frameguard "3.0.0"
+    expect-ct "0.2.0"
+    feature-policy "0.3.0"
+    frameguard "3.1.0"
     helmet-crossdomain "0.3.0"
     helmet-csp "2.7.1"
     hide-powered-by "1.0.0"
     hpkp "2.0.0"
     hsts "2.2.0"
     ienoopen "1.1.0"
-    nocache "2.0.0"
-    referrer-policy "1.1.0"
+    nocache "2.1.0"
+    referrer-policy "1.2.0"
     x-xss-protection "1.1.0"
 
 hide-powered-by@1.0.0:
@@ -1170,6 +1189,16 @@ http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
     setprototypeof "1.1.0"
     statuses ">= 1.4.0 < 2"
 
+http-errors@1.7.2:
+  version "1.7.2"
+  resolved "http-errors/-/http-errors-1.7.2.tgz#4f5029cf13239f31036e5b2e55292bcfbcc85c8f"
+  dependencies:
+    depd "~1.1.2"
+    inherits "2.0.3"
+    setprototypeof "1.1.1"
+    statuses ">= 1.5.0 < 2"
+    toidentifier "1.0.0"
+
 http-proxy@^1.17.0:
   version "1.17.0"
   resolved "http-proxy/-/http-proxy-1.17.0.tgz#7ad38494658f84605e2f6db4436df410f4e5be9a"
@@ -1184,7 +1213,7 @@ iconv-lite@0.4.23:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
-iconv-lite@^0.4.24:
+iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   dependencies:
@@ -1499,15 +1528,15 @@ methods@^1.1.1, methods@^1.1.2, methods@~1.1.2:
   version "1.1.2"
   resolved "methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-"mime-db@>= 1.38.0 < 2", mime-db@~1.39.0:
-  version "1.39.0"
-  resolved "mime-db/-/mime-db-1.39.0.tgz#f95a20275742f7d2ad0429acfe40f4233543780e"
+mime-db@1.40.0, "mime-db@>= 1.40.0 < 2":
+  version "1.40.0"
+  resolved "mime-db/-/mime-db-1.40.0.tgz#a65057e998db090f732a68f6c276d387d4126c32"
 
-mime-types@^2.1.12, mime-types@~2.1.18:
-  version "2.1.23"
-  resolved "mime-types/-/mime-types-2.1.23.tgz#d4eacd87de99348a6858fe1e479aad877388d977"
+mime-types@^2.1.12, mime-types@~2.1.24:
+  version "2.1.24"
+  resolved "mime-types/-/mime-types-2.1.24.tgz#b6f8d0b3e951efb77dedeca194cff6d16f676f81"
   dependencies:
-    mime-db "~1.39.0"
+    mime-db "1.40.0"
 
 mime@1.4.1:
   version "1.4.1"
@@ -1616,27 +1645,27 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
-negotiator@0.6.1:
-  version "0.6.1"
-  resolved "negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+negotiator@0.6.2:
+  version "0.6.2"
+  resolved "negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
 
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
 
-nocache@2.0.0:
-  version "2.0.0"
-  resolved "nocache/-/nocache-2.0.0.tgz#202b48021a0c4cbde2df80de15a17443c8b43980"
+nocache@2.1.0:
+  version "2.1.0"
+  resolved "nocache/-/nocache-2.1.0.tgz#120c9ffec43b5729b1d5de88cd71aa75a0ba491f"
 
 node-abi@^2.2.0, node-abi@^2.7.0:
-  version "2.7.1"
-  resolved "node-abi/-/node-abi-2.7.1.tgz#a8997ae91176a5fbaa455b194976e32683cda643"
+  version "2.8.0"
+  resolved "node-abi/-/node-abi-2.8.0.tgz#bd2e88dbe6a6871e6dd08553e0605779325737ec"
   dependencies:
     semver "^5.4.1"
 
 node-fetch@^2.0.0:
-  version "2.3.0"
-  resolved "node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+  version "2.5.0"
+  resolved "node-fetch/-/node-fetch-2.5.0.tgz#8028c49fc1191bba56a07adc6e2a954644a48501"
 
 noop-logger@^0.1.1:
   version "0.1.1"
@@ -2010,7 +2039,7 @@ qs@6.5.2:
   version "6.5.2"
   resolved "qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
-qs@^6.5.1:
+qs@6.7.0, qs@^6.5.1:
   version "6.7.0"
   resolved "qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
 
@@ -2025,6 +2054,15 @@ raw-body@2.3.3:
     bytes "3.0.0"
     http-errors "1.6.3"
     iconv-lite "0.4.23"
+    unpipe "1.0.0"
+
+raw-body@2.4.0:
+  version "2.4.0"
+  resolved "raw-body/-/raw-body-2.4.0.tgz#a1ce6fb9c9bc356ca52e89256ab59059e13d0332"
+  dependencies:
+    bytes "3.1.0"
+    http-errors "1.7.2"
+    iconv-lite "0.4.24"
     unpipe "1.0.0"
 
 rc@^1.1.6, rc@^1.2.7:
@@ -2078,9 +2116,9 @@ readable-stream@~0.0.2:
   version "0.0.4"
   resolved "readable-stream/-/readable-stream-0.0.4.tgz#f32d76e3fb863344a548d79923007173665b3b8d"
 
-referrer-policy@1.1.0:
-  version "1.1.0"
-  resolved "referrer-policy/-/referrer-policy-1.1.0.tgz#35774eb735bf50fb6c078e83334b472350207d79"
+referrer-policy@1.2.0:
+  version "1.2.0"
+  resolved "referrer-policy/-/referrer-policy-1.2.0.tgz#b99cfb8b57090dc454895ef897a4cc35ef67a98e"
 
 regexpp@^2.0.1:
   version "2.0.1"
@@ -2114,8 +2152,8 @@ run-async@^2.2.0:
     is-promise "^2.1.0"
 
 rxjs@^6.4.0:
-  version "6.4.0"
-  resolved "rxjs/-/rxjs-6.4.0.tgz#f3bb0fe7bda7fb69deac0c16f17b50b0b8790504"
+  version "6.5.1"
+  resolved "rxjs/-/rxjs-6.5.1.tgz#f7a005a9386361921b8524f38f54cbf80e5d08f4"
   dependencies:
     tslib "^1.9.0"
 
@@ -2165,6 +2203,10 @@ set-blocking@~2.0.0:
 setprototypeof@1.1.0:
   version "1.1.0"
   resolved "setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
+
+setprototypeof@1.1.1:
+  version "1.1.1"
+  resolved "setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
 
 shebang-command@^1.2.0:
   version "1.2.0"
@@ -2260,7 +2302,7 @@ stack-trace@0.0.x:
   version "0.0.10"
   resolved "stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
 
-"statuses@>= 1.4.0 < 2":
+"statuses@>= 1.4.0 < 2", "statuses@>= 1.5.0 < 2":
   version "1.5.0"
   resolved "statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
 
@@ -2430,6 +2472,10 @@ to-buffer@^1.1.1:
   version "1.1.1"
   resolved "to-buffer/-/to-buffer-1.1.1.tgz#493bd48f62d7c43fcded313a03dcadb2e1213a80"
 
+toidentifier@1.0.0:
+  version "1.0.0"
+  resolved "toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
+
 tough-cookie@^2.3.1:
   version "2.5.0"
   resolved "tough-cookie/-/tough-cookie-2.5.0.tgz#cd9fb2a0aa1d5a12b473bd9fb96fa3dcff65ade2"
@@ -2461,12 +2507,12 @@ type-detect@^4.0.0, type-detect@^4.0.5:
   version "4.0.8"
   resolved "type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
 
-type-is@^1.6.4, type-is@~1.6.16:
-  version "1.6.16"
-  resolved "type-is/-/type-is-1.6.16.tgz#f89ce341541c672b25ee7ae3c73dee3b2be50194"
+type-is@^1.6.4, type-is@~1.6.16, type-is@~1.6.17:
+  version "1.6.18"
+  resolved "type-is/-/type-is-1.6.18.tgz#4e552cd05df09467dcbc4ef739de89f2cf37c131"
   dependencies:
     media-typer "0.3.0"
-    mime-types "~2.1.18"
+    mime-types "~2.1.24"
 
 typedarray@^0.0.6:
   version "0.0.6"

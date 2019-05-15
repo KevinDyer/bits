@@ -54,7 +54,7 @@ limitations under the License.
     // Set up the normal bits stack
     process.on('uncaughtException', (err) => {
       if (err instanceof Error) {
-        logger.error(`Uncaught exception occurred in BITS Master cluster: ${err.message}\n ${err.stack}`);
+        logger.error(`Uncaught exception occurred in BITS Master cluster: ${err.message}`, err);
       } else {
         logger.error('Uncaught exception occurred without error:', err);
       }
@@ -87,7 +87,7 @@ limitations under the License.
 
     process.on('uncaughtException', (err) => {
       if (err instanceof Error) {
-        logger.error(`Uncaught exception in module '${moduleName}': ${err.message}\n ${err.stack}`);
+        logger.error(`Uncaught exception in module '${moduleName}': ${err.message}`, err);
       } else {
         logger.error(`Uncaught exception in module '${moduleName}' without error:`, err);
       }
@@ -95,12 +95,15 @@ limitations under the License.
 
     process.on('unhandledRejection', (err) => {
       if (err instanceof Error) {
-        logger.error(`Unhandled rejection in module '${moduleName}': ${err.message}\n ${err.stack}`);
+        logger.error(`Unhandled rejection in module '${moduleName}': ${err.message}`, err);
       } else {
         logger.error(`Unhandled Rejection in module '${ moduleName }' without error:`, err);
       }
     });
 
-    base.dispatchModule(moduleInfo);
+    base.dispatchModule(moduleInfo)
+    .catch((err) => {
+      process.exit(1);
+    });
   }
 })();

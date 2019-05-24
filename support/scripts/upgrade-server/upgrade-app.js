@@ -163,6 +163,7 @@ limitations under the License.
   });
 
   function printUsage() {
+    /* eslint-disable no-console */
     console.log('BITS Upgrade Script - usage:');
     console.log('  node upgrade-app.js -P BASE -d DATA -t TARGET [-h] [-l LEVEL] [-n] [-o FILE]');
     console.log('where:');
@@ -174,6 +175,7 @@ limitations under the License.
     console.log('  -l,--level LEVEL: set log level to LEVEL, where LEVEL is one of:');
     console.log('     error, warn, info, verbose, debug (default is info)');
     console.log('  -n,--noserver: Do not start the BITS Upgrade web server');
+    /* eslint-enable no-console */
     process.exit(1);
   }
 })();

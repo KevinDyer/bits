@@ -17,9 +17,11 @@ limitations under the License.
   'use strict';
 
   process.on('unhandledRejection', (reason, p) => {
+    // eslint-disable-next-line no-console
     console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
     // application specific logging, throwing an error, or other logic here
     p.catch((err) => {
+      // eslint-disable-next-line no-console
       console.log(err.stack);
     });
   });

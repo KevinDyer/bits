@@ -1,3 +1,56 @@
+<a name="4.0.0"></a>
+# 4.0.0 (2019-05-24)
+
+
+### Bug Fixes
+
+* Allow routes to be added when classes extend base crud router   (4f3f1a8), closes BITS-255
+* bind to module to prevent deletion race condition   (f9d93b3), closes PNP-1573
+* changes to readstream API   (40e48ba)
+* correctly compare scopes with development scope   (85ce91f), closes PNP-1389
+* default undefined arguments in crud-api to be empty objects   (c914a6b), closes PNP-118
+* delete the correct module on exit   (a488c90), closes PNP-1322 PNP-1407
+* do not overwrite load error if one exists   (332cfce), closes PNP-1587
+* fix upgrade-base for node10   (e278ef7)
+* log messages fail to be properly parsed   (3721926), closes PNP-1605
+* remove additional endpoints for delete   (eda498f), closes PNP-1356
+* send signal to process.kill() to determine how process was killed   (31f3ceb), closes PNP-1429
+* **logger:** format the logger output to the file for human-readability   (07674e3), closes PNP-1532
+* winston splat handler   (3cf9438)
+* winston work-around for logging with 2 args   (dd4d100)
+
+
+### Features
+
+* add API to retrieve display name for a module   (1d5b631), closes PNP-1388
+* adds root router resource listener to base server   (f3336c5), closes PNP-1485
+* event listeners on workers   (db3fd5f), closes PNP-1573 PNP-1562
+* remove endpoint in helper API   (8db0cbd), closes PNP-1293
+* **certificate:** add trusted ca and api to get trusted ca   (097f61c), closes GARB-483
+* **certificate/key:** add cert & key classes to utils   (99ff86a), closes BITS-248 GARB-534
+* **load-policy:** add load policy to allow modules to specify how the process should be maintained/   (96e8c36), closes PNP-1322
+* remove public scope   (c8a0f17)
+* removes web based user interface   (aff7617), closes PNP-1268
+* update node dependencies   (688472e), closes BITS-197
+* winston 3.x.x upgrade   (4479de2), closes BITS-198
+
+
+### BREAKING CHANGES
+
+* remove "public" scope; the motivation being that everyone gets
+	the public scope, so why bother?
+
+	Before:
+	scopes: ['public']
+
+	After:
+	scopes: []
+* newer NPM dependencies will no longer work in node 6
+* removes all Polymer elements and API's for pages, gallery,
+toolbar, and widgets
+
+---
+
 <a name="3.5.0"></a>
 # 3.5.0 (2019-04-10)
 

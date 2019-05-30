@@ -22,6 +22,16 @@
   dependencies:
     uuid "^3.1.0"
 
+"@lgslabs/bits-core@^1.0.0":
+  version "1.1.2"
+  resolved "@lgslabs/bits-core/-/bits-core-1.1.2.tgz#545e91095c1953dc9fb1254293c56127458fb0da"
+  dependencies:
+    "@lgslabs/bits-auto-discovery" "^1.0.0"
+    "@lgslabs/bits-logger" "^1.0.0"
+    "@lgslabs/bits-scopes-util" "^1.0.0"
+    body-parser "^1.19.0"
+    express "^4.17.1"
+
 "@lgslabs/bits-crypto@^1.0.1":
   version "1.0.1"
   resolved "@lgslabs/bits-crypto/-/bits-crypto-1.0.1.tgz#506540ba322a29569458e437285fd3b57344999d"
@@ -37,9 +47,20 @@
     eslint-config-google "^0.12.0"
     eslint-plugin-html "^5.0.3"
 
+"@lgslabs/bits-logger@^1.0.0":
+  version "1.0.0"
+  resolved "@lgslabs/bits-logger/-/bits-logger-1.0.0.tgz#99d66fd0af282f30564b5d15704b074e81c9cc27"
+  dependencies:
+    minimist "^1.2.0"
+    winston "^3.2.1"
+
+"@lgslabs/bits-scopes-util@^1.0.0":
+  version "1.0.0"
+  resolved "@lgslabs/bits-scopes-util/-/bits-scopes-util-1.0.0.tgz#22f67b3f35d8035210e479b9ee6ea0f22fec8dd5"
+
 "@lgslabs/eslint-config-bits@^1.3.0":
-  version "1.3.0"
-  resolved "@lgslabs/eslint-config-bits/-/eslint-config-bits-1.3.0.tgz#27707cb832864ec74af296a7a0c9f60499a715b4"
+  version "1.4.0"
+  resolved "@lgslabs/eslint-config-bits/-/eslint-config-bits-1.4.0.tgz#f8b1283e29a74091802c05c4af233d0c1d69f62a"
 
 abstract-leveldown@^5.0.0, abstract-leveldown@~5.0.0:
   version "5.0.0"
@@ -47,9 +68,24 @@ abstract-leveldown@^5.0.0, abstract-leveldown@~5.0.0:
   dependencies:
     xtend "~4.0.0"
 
-abstract-leveldown@^6.0.0, abstract-leveldown@~6.0.0, abstract-leveldown@~6.0.1, abstract-leveldown@~6.0.3:
+abstract-leveldown@^6.1.1:
+  version "6.2.1"
+  resolved "abstract-leveldown/-/abstract-leveldown-6.2.1.tgz#37b655151e13c3d9b20fa3a04ce63ccaa345fce4"
+  dependencies:
+    level-concat-iterator "~2.0.0"
+    level-supports "~1.0.0"
+    xtend "~4.0.0"
+
+abstract-leveldown@~6.0.0, abstract-leveldown@~6.0.1:
   version "6.0.3"
   resolved "abstract-leveldown/-/abstract-leveldown-6.0.3.tgz#b4b6159343c74b0c5197b2817854782d8f748c4a"
+  dependencies:
+    level-concat-iterator "~2.0.0"
+    xtend "~4.0.0"
+
+abstract-leveldown@~6.1.0, abstract-leveldown@~6.1.1:
+  version "6.1.1"
+  resolved "abstract-leveldown/-/abstract-leveldown-6.1.1.tgz#f44bad5862d71c7b418110d7698ac25bedf24396"
   dependencies:
     level-concat-iterator "~2.0.0"
     xtend "~4.0.0"
@@ -62,12 +98,12 @@ accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.7:
     negotiator "0.6.2"
 
 acorn-jsx@^5.0.0:
-  version "5.0.1"
-  resolved "acorn-jsx/-/acorn-jsx-5.0.1.tgz#32a064fd925429216a09b141102bfdd185fae40e"
+  version "5.0.2"
+  resolved "acorn-jsx/-/acorn-jsx-5.0.2.tgz#84b68ea44b373c4f8686023a551f61a21b7c4a4f"
 
 acorn@^6.0.7:
-  version "6.2.1"
-  resolved "acorn/-/acorn-6.2.1.tgz#3ed8422d6dec09e6121cc7a843ca86a330a86b51"
+  version "6.3.0"
+  resolved "acorn/-/acorn-6.3.0.tgz#0087509119ffa4fc0a0041d1e93a417e68cb856e"
 
 after@0.8.2:
   version "0.8.2"
@@ -145,9 +181,9 @@ astral-regex@^1.0.0:
   version "1.0.0"
   resolved "astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
 
-async-limiter@~1.0.0:
-  version "1.0.0"
-  resolved "async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
+async-limiter@^1.0.0, async-limiter@~1.0.0:
+  version "1.0.1"
+  resolved "async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
 
 async@^2.6.1:
   version "2.6.3"
@@ -171,9 +207,9 @@ base64-arraybuffer@0.1.5:
   version "0.1.5"
   resolved "base64-arraybuffer/-/base64-arraybuffer-0.1.5.tgz#73926771923b5a19747ad666aa5cd4bf9c6e9ce8"
 
-base64id@1.0.0:
-  version "1.0.0"
-  resolved "base64id/-/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
+base64id@2.0.0:
+  version "2.0.0"
+  resolved "base64id/-/base64id-2.0.0.tgz#2770ac6bc47d312af97a8bf9a634342e0cd25cb6"
 
 basic-auth@~2.0.0:
   version "2.0.1"
@@ -202,7 +238,7 @@ blob@0.0.5:
   version "0.0.5"
   resolved "blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
 
-body-parser@1.19.0, body-parser@^1.18.3:
+body-parser@1.19.0, body-parser@^1.18.3, body-parser@^1.19.0:
   version "1.19.0"
   resolved "body-parser/-/body-parser-1.19.0.tgz#96b2709e57c9c4e09a6fd66a8fd979844f69f08a"
   dependencies:
@@ -216,6 +252,10 @@ body-parser@1.19.0, body-parser@^1.18.3:
     qs "6.7.0"
     raw-body "2.4.0"
     type-is "~1.6.17"
+
+bowser@^2.6.1:
+  version "2.7.0"
+  resolved "bowser/-/bowser-2.7.0.tgz#96eab1fa07fab08c1ec4c75977a7c8ddf8e0fe1f"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -316,8 +356,8 @@ check-error@^1.0.2:
   resolved "check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
 
 chownr@^1.0.1:
-  version "1.1.2"
-  resolved "chownr/-/chownr-1.1.2.tgz#a18f1e0b269c8a6a5d3c86eb298beb14c3dd7bf6"
+  version "1.1.3"
+  resolved "chownr/-/chownr-1.1.3.tgz#42d837d5239688d55f303003a508230fa6727142"
 
 cli-cursor@^2.1.0:
   version "2.1.0"
@@ -370,8 +410,8 @@ colornames@^1.1.1:
   resolved "colornames/-/colornames-1.1.1.tgz#f8889030685c7c4ff9e2a559f5077eb76a816f96"
 
 colors@^1.2.1:
-  version "1.3.3"
-  resolved "colors/-/colors-1.3.3.tgz#39e005d546afe01e01f9c4ca8fa50f686a01205d"
+  version "1.4.0"
+  resolved "colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
 
 colorspace@1.1.x:
   version "1.1.2"
@@ -391,8 +431,8 @@ commander@2.15.1:
   resolved "commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
 
 commander@^2.12.2:
-  version "2.20.0"
-  resolved "commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
+  version "2.20.1"
+  resolved "commander/-/commander-2.20.1.tgz#3863ce3ca92d0831dcf2a102f5fb4b5926afd0f9"
 
 component-bind@1.0.0:
   version "1.0.0"
@@ -509,7 +549,7 @@ debug@3.1.0, debug@~3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@^3.1.0, debug@^3.2.6:
+debug@^3.0.0, debug@^3.1.0:
   version "3.2.6"
   resolved "debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   dependencies:
@@ -555,11 +595,11 @@ deferred-leveldown@~5.0.0:
     abstract-leveldown "~6.0.0"
     inherits "^2.0.3"
 
-deferred-leveldown@~5.1.0:
-  version "5.1.0"
-  resolved "deferred-leveldown/-/deferred-leveldown-5.1.0.tgz#c21e40641a8e48530255a4ad31371cc7fe76b332"
+deferred-leveldown@~5.2.1:
+  version "5.2.1"
+  resolved "deferred-leveldown/-/deferred-leveldown-5.2.1.tgz#8da87909cd3269c2d6aff67b1e607f93e4d96c15"
   dependencies:
-    abstract-leveldown "~6.0.0"
+    abstract-leveldown "~6.1.0"
     inherits "^2.0.3"
 
 delayed-stream@~1.0.0:
@@ -605,10 +645,6 @@ diff@3.5.0:
   version "3.5.0"
   resolved "diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
 
-digraph@^1.5.0:
-  version "1.6.0"
-  resolved "digraph/-/digraph-1.6.0.tgz#d4e095ba97ba65993fb103266dea3591049da5a9"
-
 dns-prefetch-control@0.2.0:
   version "0.2.0"
   resolved "dns-prefetch-control/-/dns-prefetch-control-0.2.0.tgz#73988161841f3dcc81f47686d539a2c702c88624"
@@ -620,15 +656,19 @@ doctrine@^3.0.0:
     esutils "^2.0.2"
 
 dom-serializer@0:
-  version "0.1.1"
-  resolved "dom-serializer/-/dom-serializer-0.1.1.tgz#1ec4059e284babed36eec2941d4a970a189ce7c0"
+  version "0.2.1"
+  resolved "dom-serializer/-/dom-serializer-0.2.1.tgz#13650c850daffea35d8b626a4cfc4d3a17643fdb"
   dependencies:
-    domelementtype "^1.3.0"
-    entities "^1.1.1"
+    domelementtype "^2.0.1"
+    entities "^2.0.0"
 
-domelementtype@1, domelementtype@^1.3.0, domelementtype@^1.3.1:
+domelementtype@1, domelementtype@^1.3.1:
   version "1.3.1"
   resolved "domelementtype/-/domelementtype-1.3.1.tgz#d048c44b37b0d10a7f2a3d5fee3f4333d790481f"
+
+domelementtype@^2.0.1:
+  version "2.0.1"
+  resolved "domelementtype/-/domelementtype-2.0.1.tgz#1f8bdfe91f5a78063274e803b4bdcedf6e94f94d"
 
 domhandler@^2.3.0:
   version "2.4.2"
@@ -669,11 +709,11 @@ encodeurl@~1.0.2:
   version "1.0.2"
   resolved "encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
 
-encoding-down@^6.0.0:
-  version "6.1.0"
-  resolved "encoding-down/-/encoding-down-6.1.0.tgz#7c0dceb10cc12e7db30abf84db62ce48079672fc"
+encoding-down@^6.2.0:
+  version "6.2.0"
+  resolved "encoding-down/-/encoding-down-6.2.0.tgz#7ca52446dac6e0fd09ad3584a7359809ea1a4844"
   dependencies:
-    abstract-leveldown "^6.0.0"
+    abstract-leveldown "^6.1.1"
     inherits "^2.0.3"
     level-codec "^9.0.0"
     level-errors "^2.0.0"
@@ -689,8 +729,8 @@ encoding-down@~5.0.0:
     xtend "^4.0.1"
 
 end-of-stream@^1.0.0, end-of-stream@^1.1.0:
-  version "1.4.1"
-  resolved "end-of-stream/-/end-of-stream-1.4.1.tgz#ed29634d19baba463b6ce6b80a37213eab71ec43"
+  version "1.4.4"
+  resolved "end-of-stream/-/end-of-stream-1.4.4.tgz#5ae64a5f45057baf3626ec14da0ca5e4b2431eb0"
   dependencies:
     once "^1.4.0"
 
@@ -700,14 +740,14 @@ end-stream@~0.1.0:
   dependencies:
     write-stream "~0.4.3"
 
-engine.io-client@~3.3.1:
-  version "3.3.2"
-  resolved "engine.io-client/-/engine.io-client-3.3.2.tgz#04e068798d75beda14375a264bb3d742d7bc33aa"
+engine.io-client@~3.4.0:
+  version "3.4.0"
+  resolved "engine.io-client/-/engine.io-client-3.4.0.tgz#82a642b42862a9b3f7a188f41776b2deab643700"
   dependencies:
     component-emitter "1.2.1"
     component-inherit "0.0.3"
-    debug "~3.1.0"
-    engine.io-parser "~2.1.1"
+    debug "~4.1.0"
+    engine.io-parser "~2.2.0"
     has-cors "1.1.0"
     indexof "0.0.1"
     parseqs "0.0.5"
@@ -716,9 +756,9 @@ engine.io-client@~3.3.1:
     xmlhttprequest-ssl "~1.5.4"
     yeast "0.1.2"
 
-engine.io-parser@~2.1.0, engine.io-parser@~2.1.1:
-  version "2.1.3"
-  resolved "engine.io-parser/-/engine.io-parser-2.1.3.tgz#757ab970fbf2dfb32c7b74b033216d5739ef79a6"
+engine.io-parser@~2.2.0:
+  version "2.2.0"
+  resolved "engine.io-parser/-/engine.io-parser-2.2.0.tgz#312c4894f57d52a02b420868da7b5c1c84af80ed"
   dependencies:
     after "0.8.2"
     arraybuffer.slice "~0.0.7"
@@ -726,20 +766,24 @@ engine.io-parser@~2.1.0, engine.io-parser@~2.1.1:
     blob "0.0.5"
     has-binary2 "~1.0.2"
 
-engine.io@~3.3.1:
-  version "3.3.2"
-  resolved "engine.io/-/engine.io-3.3.2.tgz#18cbc8b6f36e9461c5c0f81df2b830de16058a59"
+engine.io@~3.4.0:
+  version "3.4.0"
+  resolved "engine.io/-/engine.io-3.4.0.tgz#3a962cc4535928c252759a00f98519cb46c53ff3"
   dependencies:
     accepts "~1.3.4"
-    base64id "1.0.0"
+    base64id "2.0.0"
     cookie "0.3.1"
-    debug "~3.1.0"
-    engine.io-parser "~2.1.0"
-    ws "~6.1.0"
+    debug "~4.1.0"
+    engine.io-parser "~2.2.0"
+    ws "^7.1.2"
 
 entities@^1.1.1:
   version "1.1.2"
   resolved "entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
+
+entities@^2.0.0:
+  version "2.0.0"
+  resolved "entities/-/entities-2.0.0.tgz#68d6084cab1b079767540d80e56a39b423e4abf4"
 
 env-variable@0.0.x:
   version "0.0.5"
@@ -756,8 +800,8 @@ es6-denodeify@^0.1.1:
   resolved "es6-denodeify/-/es6-denodeify-0.1.5.tgz#31d4d5fe9c5503e125460439310e16a2a3f39c1f"
 
 es6-promisify@^6.0.0:
-  version "6.0.1"
-  resolved "es6-promisify/-/es6-promisify-6.0.1.tgz#6edaa45f3bd570ffe08febce66f7116be4b1cdb6"
+  version "6.0.2"
+  resolved "es6-promisify/-/es6-promisify-6.0.2.tgz#525c23725b8510f5f1f2feb5a1fbad93a93e29b4"
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -785,14 +829,14 @@ eslint-scope@^4.0.3:
     estraverse "^4.1.1"
 
 eslint-utils@^1.3.1:
-  version "1.4.0"
-  resolved "eslint-utils/-/eslint-utils-1.4.0.tgz#e2c3c8dba768425f897cf0f9e51fe2e241485d4c"
+  version "1.4.2"
+  resolved "eslint-utils/-/eslint-utils-1.4.2.tgz#166a5180ef6ab7eb462f162fd0e6f2463d7309ab"
   dependencies:
     eslint-visitor-keys "^1.0.0"
 
 eslint-visitor-keys@^1.0.0:
-  version "1.0.0"
-  resolved "eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
+  version "1.1.0"
+  resolved "eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
 
 eslint@^5.15.3:
   version "5.16.0"
@@ -860,8 +904,8 @@ esrecurse@^4.1.0:
     estraverse "^4.1.0"
 
 estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1:
-  version "4.2.0"
-  resolved "estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
+  version "4.3.0"
+  resolved "estraverse/-/estraverse-4.3.0.tgz#398ad3f3c5a24948be7725e83d11a7de28cdbd1d"
 
 esutils@^2.0.2:
   version "2.0.3"
@@ -871,9 +915,9 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
-eventemitter3@^3.0.0:
-  version "3.1.2"
-  resolved "eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
+eventemitter3@^4.0.0:
+  version "4.0.0"
+  resolved "eventemitter3/-/eventemitter3-4.0.0.tgz#d65176163887ee59f386d64c82610b696a4a74eb"
 
 expand-template@^2.0.3:
   version "2.0.3"
@@ -883,7 +927,7 @@ expect-ct@0.2.0:
   version "0.2.0"
   resolved "expect-ct/-/expect-ct-0.2.0.tgz#3a54741b6ed34cc7a93305c605f63cd268a54a62"
 
-express@^4.16.4:
+express@^4.16.4, express@^4.17.1:
   version "4.17.1"
   resolved "express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
   dependencies:
@@ -947,8 +991,8 @@ fast-levenshtein@~2.0.4:
   resolved "fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
 fast-safe-stringify@^2.0.4:
-  version "2.0.6"
-  resolved "fast-safe-stringify/-/fast-safe-stringify-2.0.6.tgz#04b26106cc56681f51a044cfc0d76cf0008ac2c2"
+  version "2.0.7"
+  resolved "fast-safe-stringify/-/fast-safe-stringify-2.0.7.tgz#124aa885899261f68aedb42a7c080de9da608743"
 
 feature-policy@0.3.0:
   version "0.3.0"
@@ -1002,14 +1046,14 @@ flatted@^2.0.0:
   resolved "flatted/-/flatted-2.0.1.tgz#69e57caa8f0eacbc281d2e2cb458d46fdb449e08"
 
 follow-redirects@^1.0.0:
-  version "1.7.0"
-  resolved "follow-redirects/-/follow-redirects-1.7.0.tgz#489ebc198dc0e7f64167bd23b03c4c19b5784c76"
+  version "1.9.0"
+  resolved "follow-redirects/-/follow-redirects-1.9.0.tgz#8d5bcdc65b7108fe1508649c79c12d732dcedb4f"
   dependencies:
-    debug "^3.2.6"
+    debug "^3.0.0"
 
 form-data@^2.3.1:
-  version "2.5.0"
-  resolved "form-data/-/form-data-2.5.0.tgz#094ec359dc4b55e7d62e0db4acd76e89fe874d37"
+  version "2.5.1"
+  resolved "form-data/-/form-data-2.5.1.tgz#f2cbec57b5e59e23716e128fe44d4e5dd23895f4"
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
@@ -1124,18 +1168,18 @@ helmet-crossdomain@0.4.0:
   version "0.4.0"
   resolved "helmet-crossdomain/-/helmet-crossdomain-0.4.0.tgz#5f1fe5a836d0325f1da0a78eaa5fd8429078894e"
 
-helmet-csp@2.8.0:
-  version "2.8.0"
-  resolved "helmet-csp/-/helmet-csp-2.8.0.tgz#746d329e24ef39c4ebc00278a48abd3c209e0378"
+helmet-csp@2.9.2:
+  version "2.9.2"
+  resolved "helmet-csp/-/helmet-csp-2.9.2.tgz#bec0adaf370b0f2e77267c9d8b6e33b34159c1e5"
   dependencies:
+    bowser "^2.6.1"
     camelize "1.0.0"
     content-security-policy-builder "2.1.0"
     dasherize "2.0.0"
-    platform "1.3.5"
 
 helmet@^3.14.0:
-  version "3.20.0"
-  resolved "helmet/-/helmet-3.20.0.tgz#8a9383bf8230a461cafe8bc763423fbde110d2fc"
+  version "3.21.1"
+  resolved "helmet/-/helmet-3.21.1.tgz#b0ab7c63fc30df2434be27e7e292a9523b3147e9"
   dependencies:
     depd "2.0.0"
     dns-prefetch-control "0.2.0"
@@ -1144,14 +1188,14 @@ helmet@^3.14.0:
     feature-policy "0.3.0"
     frameguard "3.1.0"
     helmet-crossdomain "0.4.0"
-    helmet-csp "2.8.0"
+    helmet-csp "2.9.2"
     hide-powered-by "1.1.0"
     hpkp "2.0.0"
     hsts "2.2.0"
     ienoopen "1.1.0"
     nocache "2.1.0"
     referrer-policy "1.2.0"
-    x-xss-protection "1.2.0"
+    x-xss-protection "1.3.0"
 
 hide-powered-by@1.1.0:
   version "1.1.0"
@@ -1199,10 +1243,10 @@ http-errors@~1.7.2:
     toidentifier "1.0.0"
 
 http-proxy@^1.17.0:
-  version "1.17.0"
-  resolved "http-proxy/-/http-proxy-1.17.0.tgz#7ad38494658f84605e2f6db4436df410f4e5be9a"
+  version "1.18.0"
+  resolved "http-proxy/-/http-proxy-1.18.0.tgz#dbe55f63e75a347db7f3d99974f2692a314a6a3a"
   dependencies:
-    eventemitter3 "^3.0.0"
+    eventemitter3 "^4.0.0"
     follow-redirects "^1.0.0"
     requires-port "^1.0.0"
 
@@ -1263,8 +1307,8 @@ ini@~1.3.0:
   resolved "ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
 
 inquirer@^6.2.2:
-  version "6.5.0"
-  resolved "inquirer/-/inquirer-6.5.0.tgz#2303317efc9a4ea7ec2e2df6f86569b734accf42"
+  version "6.5.2"
+  resolved "inquirer/-/inquirer-6.5.2.tgz#ad50942375d036d327ff528c08bd5fab089928ca"
   dependencies:
     ansi-escapes "^3.2.0"
     chalk "^2.4.2"
@@ -1403,11 +1447,17 @@ level-packager@^3.0.0:
     levelup "^3.0.0"
 
 level-packager@^5.0.0:
-  version "5.0.2"
-  resolved "level-packager/-/level-packager-5.0.2.tgz#7cc7cf384c6c1c722b9712f53d257f2fb4180dc9"
+  version "5.0.3"
+  resolved "level-packager/-/level-packager-5.0.3.tgz#e22bc9887663d0808ab092453d691bc319b7e5a2"
   dependencies:
-    encoding-down "^6.0.0"
-    levelup "^4.0.0"
+    encoding-down "^6.2.0"
+    levelup "^4.2.0"
+
+level-supports@~1.0.0:
+  version "1.0.0"
+  resolved "level-supports/-/level-supports-1.0.0.tgz#376f3f2339c23be0ba2fe62b0fa0e3ac7d6d9988"
+  dependencies:
+    xtend "^4.0.2"
 
 level-write-stream@1.0.0:
   version "1.0.0"
@@ -1452,11 +1502,11 @@ leveldown@^4.0.0:
     prebuild-install "~5.2.4"
 
 leveldown@^5.0.0:
-  version "5.1.1"
-  resolved "leveldown/-/leveldown-5.1.1.tgz#5d3a043f0ec76e91e189117ec3627bef0436c0dc"
+  version "5.2.1"
+  resolved "leveldown/-/leveldown-5.2.1.tgz#eadc2184ab4c83fe0d74853384fe99dc0a0de6be"
   dependencies:
-    abstract-leveldown "~6.0.3"
-    napi-macros "~1.8.1"
+    abstract-leveldown "~6.1.1"
+    napi-macros "~2.0.0"
     node-gyp-build "~4.1.0"
 
 levelup@4.0.2:
@@ -1477,13 +1527,14 @@ levelup@^3.0.0:
     level-iterator-stream "~3.0.0"
     xtend "~4.0.0"
 
-levelup@^4.0.0:
-  version "4.1.0"
-  resolved "levelup/-/levelup-4.1.0.tgz#49ab5d3a341731cd102f91c6bc17a1acb1969a17"
+levelup@^4.2.0:
+  version "4.3.0"
+  resolved "levelup/-/levelup-4.3.0.tgz#b6934483787e7558a340d54b4364ea3361150b73"
   dependencies:
-    deferred-leveldown "~5.1.0"
+    deferred-leveldown "~5.2.1"
     level-errors "~2.0.0"
     level-iterator-stream "~4.0.0"
+    level-supports "~1.0.0"
     xtend "~4.0.0"
 
 levn@^0.3.0, levn@~0.3.0:
@@ -1531,9 +1582,13 @@ methods@^1.1.1, methods@^1.1.2, methods@~1.1.2:
   version "1.1.2"
   resolved "methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-mime-db@1.40.0, "mime-db@>= 1.40.0 < 2":
+mime-db@1.40.0:
   version "1.40.0"
   resolved "mime-db/-/mime-db-1.40.0.tgz#a65057e998db090f732a68f6c276d387d4126c32"
+
+"mime-db@>= 1.40.0 < 2":
+  version "1.42.0"
+  resolved "mime-db/-/mime-db-1.42.0.tgz#3e252907b4c7adb906597b4b65636272cf9e7bac"
 
 mime-types@^2.1.12, mime-types@~2.1.24:
   version "2.1.24"
@@ -1640,6 +1695,10 @@ napi-macros@~1.8.1:
   version "1.8.2"
   resolved "napi-macros/-/napi-macros-1.8.2.tgz#299265c1d8aa401351ad0675107d751228c03eda"
 
+napi-macros@~2.0.0:
+  version "2.0.0"
+  resolved "napi-macros/-/napi-macros-2.0.0.tgz#2b6bae421e7b96eb687aa6c77a7858640670001b"
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -1657,8 +1716,8 @@ nocache@2.1.0:
   resolved "nocache/-/nocache-2.1.0.tgz#120c9ffec43b5729b1d5de88cd71aa75a0ba491f"
 
 node-abi@^2.7.0:
-  version "2.10.0"
-  resolved "node-abi/-/node-abi-2.10.0.tgz#894bc6625ee042627ed9b5e9270d80bb63ef5045"
+  version "2.11.0"
+  resolved "node-abi/-/node-abi-2.11.0.tgz#b7dce18815057544a049be5ae75cd1fdc2e9ea59"
   dependencies:
     semver "^5.4.1"
 
@@ -1671,8 +1730,8 @@ node-gyp-build@~3.8.0:
   resolved "node-gyp-build/-/node-gyp-build-3.8.0.tgz#0f57efeb1971f404dfcbfab975c284de7c70f14a"
 
 node-gyp-build@~4.1.0:
-  version "4.1.0"
-  resolved "node-gyp-build/-/node-gyp-build-4.1.0.tgz#3bc3dd7dd4aafecaf64a2e3729e785bc3cdea565"
+  version "4.1.1"
+  resolved "node-gyp-build/-/node-gyp-build-4.1.1.tgz#d7270b5d86717068d114cc57fff352f96d745feb"
 
 noop-logger@^0.1.1:
   version "0.1.1"
@@ -1812,17 +1871,13 @@ pause@0.0.1:
   resolved "pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
 
 pem@^1.13.2:
-  version "1.14.2"
-  resolved "pem/-/pem-1.14.2.tgz#ab29350416bc3a532c30beeee0d541af897fb9ac"
+  version "1.14.3"
+  resolved "pem/-/pem-1.14.3.tgz#347e5a5c194a5f7612b88083e45042fcc4fb4901"
   dependencies:
     es6-promisify "^6.0.0"
     md5 "^2.2.1"
     os-tmpdir "^1.0.1"
     which "^1.3.1"
-
-platform@1.3.5:
-  version "1.3.5"
-  resolved "platform/-/platform-1.3.5.tgz#fb6958c696e07e2918d2eeda0f0bc9448d733444"
 
 pouchdb-abstract-mapreduce@7.1.1:
   version "7.1.1"
@@ -1981,8 +2036,8 @@ prr@~1.0.1:
   resolved "prr/-/prr-1.0.1.tgz#d3fc114ba06995a45ec6893f484ceb1d78f5f476"
 
 psl@^1.1.28:
-  version "1.2.0"
-  resolved "psl/-/psl-1.2.0.tgz#df12b5b1b3a30f51c329eacbdef98f3a6e136dc6"
+  version "1.4.0"
+  resolved "psl/-/psl-1.4.0.tgz#5dd26156cdb69fa1fdb8ab1991667d3f80ced7c2"
 
 pump@^1.0.0:
   version "1.0.3"
@@ -2002,9 +2057,13 @@ punycode@^2.1.0, punycode@^2.1.1:
   version "2.1.1"
   resolved "punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
 
-qs@6.7.0, qs@^6.5.1:
+qs@6.7.0:
   version "6.7.0"
   resolved "qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
+
+qs@^6.5.1:
+  version "6.9.0"
+  resolved "qs/-/qs-6.9.0.tgz#d1297e2a049c53119cb49cca366adbbacc80b409"
 
 range-parser@~1.2.1:
   version "1.2.1"
@@ -2106,8 +2165,8 @@ run-async@^2.2.0:
     is-promise "^2.1.0"
 
 rxjs@^6.4.0:
-  version "6.5.2"
-  resolved "rxjs/-/rxjs-6.5.2.tgz#2e35ce815cd46d84d02a209fb4e5921e051dbec7"
+  version "6.5.3"
+  resolved "rxjs/-/rxjs-6.5.3.tgz#510e26317f4db91a7eb1de77d9dd9ba0a4899a3a"
   dependencies:
     tslib "^1.9.0"
 
@@ -2115,7 +2174,7 @@ safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
-safe-buffer@^5.0.1, safe-buffer@^5.1.1:
+safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.2.0:
   version "5.2.0"
   resolved "safe-buffer/-/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"
 
@@ -2124,8 +2183,8 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.1:
   resolved "safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
 semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
-  version "5.7.0"
-  resolved "semver/-/semver-5.7.0.tgz#790a7cf6fea5459bac96110b29b60412dc8ff96b"
+  version "5.7.1"
+  resolved "semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
 
 send@0.17.1:
   version "0.17.1"
@@ -2206,16 +2265,16 @@ socket.io-adapter@~1.1.0:
   version "1.1.1"
   resolved "socket.io-adapter/-/socket.io-adapter-1.1.1.tgz#2a805e8a14d6372124dd9159ad4502f8cb07f06b"
 
-socket.io-client@2.2.0:
-  version "2.2.0"
-  resolved "socket.io-client/-/socket.io-client-2.2.0.tgz#84e73ee3c43d5020ccc1a258faeeb9aec2723af7"
+socket.io-client@2.3.0:
+  version "2.3.0"
+  resolved "socket.io-client/-/socket.io-client-2.3.0.tgz#14d5ba2e00b9bcd145ae443ab96b3f86cbcc1bb4"
   dependencies:
     backo2 "1.0.2"
     base64-arraybuffer "0.1.5"
     component-bind "1.0.0"
     component-emitter "1.2.1"
-    debug "~3.1.0"
-    engine.io-client "~3.3.1"
+    debug "~4.1.0"
+    engine.io-client "~3.4.0"
     has-binary2 "~1.0.2"
     has-cors "1.1.0"
     indexof "0.0.1"
@@ -2233,16 +2292,24 @@ socket.io-parser@~3.3.0:
     debug "~3.1.0"
     isarray "2.0.1"
 
+socket.io-parser@~3.4.0:
+  version "3.4.0"
+  resolved "socket.io-parser/-/socket.io-parser-3.4.0.tgz#370bb4a151df2f77ce3345ff55a7072cc6e9565a"
+  dependencies:
+    component-emitter "1.2.1"
+    debug "~4.1.0"
+    isarray "2.0.1"
+
 socket.io@^2.1.1:
-  version "2.2.0"
-  resolved "socket.io/-/socket.io-2.2.0.tgz#f0f633161ef6712c972b307598ecd08c9b1b4d5b"
+  version "2.3.0"
+  resolved "socket.io/-/socket.io-2.3.0.tgz#cd762ed6a4faeca59bc1f3e243c0969311eb73fb"
   dependencies:
     debug "~4.1.0"
-    engine.io "~3.3.1"
+    engine.io "~3.4.0"
     has-binary2 "~1.0.2"
     socket.io-adapter "~1.1.0"
-    socket.io-client "2.2.0"
-    socket.io-parser "~3.3.0"
+    socket.io-client "2.3.0"
+    socket.io-parser "~3.4.0"
 
 spark-md5@3.0.0:
   version "3.0.0"
@@ -2288,10 +2355,10 @@ string-width@^3.0.0:
     strip-ansi "^5.1.0"
 
 string_decoder@^1.1.1:
-  version "1.2.0"
-  resolved "string_decoder/-/string_decoder-1.2.0.tgz#fe86e738b19544afe70469243b2a1ee9240eae8d"
+  version "1.3.0"
+  resolved "string_decoder/-/string_decoder-1.3.0.tgz#42f114594a46cf1a8e30b0a84f56c78c3edac21e"
   dependencies:
-    safe-buffer "~5.1.0"
+    safe-buffer "~5.2.0"
 
 string_decoder@~0.10.x:
   version "0.10.31"
@@ -2360,8 +2427,8 @@ supports-color@^5.3.0:
     has-flag "^3.0.0"
 
 table@^5.2.3:
-  version "5.4.5"
-  resolved "table/-/table-5.4.5.tgz#c8f4ea2d8fee08c0027fac27b0ec0a4fe01dfa42"
+  version "5.4.6"
+  resolved "table/-/table-5.4.6.tgz#1292d19500ce3f86053b05f0e8e7e4a3bb21079e"
   dependencies:
     ajv "^6.10.2"
     lodash "^4.17.14"
@@ -2496,8 +2563,8 @@ uuid@3.2.1:
   resolved "uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 
 uuid@^3.1.0:
-  version "3.3.2"
-  resolved "uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+  version "3.3.3"
+  resolved "uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
 
 vary@~1.1.2:
   version "1.1.2"
@@ -2530,7 +2597,7 @@ winston-transport@^4.3.0:
     readable-stream "^2.3.6"
     triple-beam "^1.2.0"
 
-winston@^3.1.0:
+winston@^3.1.0, winston@^3.2.1:
   version "3.2.1"
   resolved "winston/-/winston-3.2.1.tgz#63061377976c73584028be2490a1846055f77f07"
   dependencies:
@@ -2564,21 +2631,27 @@ write@1.0.3:
   dependencies:
     mkdirp "^0.5.1"
 
+ws@^7.1.2:
+  version "7.1.2"
+  resolved "ws/-/ws-7.1.2.tgz#c672d1629de8bb27a9699eb599be47aeeedd8f73"
+  dependencies:
+    async-limiter "^1.0.0"
+
 ws@~6.1.0:
   version "6.1.4"
   resolved "ws/-/ws-6.1.4.tgz#5b5c8800afab925e94ccb29d153c8d02c1776ef9"
   dependencies:
     async-limiter "~1.0.0"
 
-x-xss-protection@1.2.0:
-  version "1.2.0"
-  resolved "x-xss-protection/-/x-xss-protection-1.2.0.tgz#3170498ff8e7e8159f4896b27fa4d4810c2ff486"
+x-xss-protection@1.3.0:
+  version "1.3.0"
+  resolved "x-xss-protection/-/x-xss-protection-1.3.0.tgz#3e3a8dd638da80421b0e9fff11a2dbe168f6d52c"
 
 xmlhttprequest-ssl@~1.5.4:
   version "1.5.5"
   resolved "xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.5.tgz#c2876b06168aadc40e57d97e81191ac8f4398b3e"
 
-xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.0:
+xtend@^4.0.0, xtend@^4.0.1, xtend@^4.0.2, xtend@~4.0.0:
   version "4.0.2"
   resolved "xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
 

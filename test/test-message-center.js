@@ -50,7 +50,7 @@ limitations under the License.
         expect(messageCenter.sendEvent('test', {scopes: null})).to.be.instanceof(Promise);
       });
       it('should trigger event listener', (done) => {
-        messageCenter.addEventListener('test', {scopes: null}, (metadata, data) => done(data));
+        messageCenter.addEventListener('test', {scopes: null}, () => done());
         messageCenter.sendEvent('test', {scopes: null});
       });
       it('should trigger event listener with data', (done) => {
@@ -406,7 +406,7 @@ limitations under the License.
       await messageCenter1.addEventListener('test', {scopes: null}, noop);
       expect(called).to.be.true;
     });
-    it('should send event un-subscribe to worker', async() => {
+    it('should send event unsubscribe to worker', async() => {
       let called = false;
       await messageCenter.addEventListener('test', {scopes: null}, noop);
       await messageCenter1.addEventSubscriberListener('test', (metadata) => {
@@ -418,7 +418,7 @@ limitations under the License.
       await messageCenter.removeEventListener('test', noop);
       expect(called).to.be.true;
     });
-    it('should send event un-subscribe to master', async() => {
+    it('should send event unsubscribe to master', async() => {
       let called = false;
       await messageCenter1.addEventListener('test', {scopes: null}, noop);
       await messageCenter.addEventSubscriberListener('test', (metadata) => {
@@ -430,7 +430,7 @@ limitations under the License.
       await messageCenter1.removeEventListener('test', noop);
       expect(called).to.be.true;
     });
-    it('should send event un-subscribe to other worker', async() => {
+    it('should send event unsubscribe to other worker', async() => {
       let called = false;
       await messageCenter1.addEventListener('test', {scopes: null}, noop);
       await messageCenter2.addEventSubscriberListener('test', (metadata) => {

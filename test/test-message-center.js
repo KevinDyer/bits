@@ -42,15 +42,15 @@ limitations under the License.
     beforeEach(() => {
       const cluster = new EventEmitter();
       cluster.isMaster = true;
-      const process = new EventEmitter();
-      messageCenter = new MessageCenter(cluster, process);
+      messageCenter = new MessageCenter(cluster, null);
     });
+
     describe('sendEvent', () => {
       it('should return a Promise', () => {
         expect(messageCenter.sendEvent('test', {scopes: null})).to.be.instanceof(Promise);
       });
       it('should trigger event listener', (done) => {
-        messageCenter.addEventListener('test', {scopes: null}, (metadata, data) => done(data));
+        messageCenter.addEventListener('test', {scopes: null}, () => done());
         messageCenter.sendEvent('test', {scopes: null});
       });
       it('should trigger event listener with data', (done) => {
@@ -274,6 +274,173 @@ limitations under the License.
         });
         messageCenter.addEventListener('testA', ['hi'], () => noop);
       });
+    });
+  });
+
+  describe('MessageCenter(master/worker(s))', () => {
+    let messageCenter;
+    let messageCenter1;
+    let messageCenter2;
+
+    function createWorkerMessageCenter(masterCluster, workerId, mod) {
+      const worker = new EventEmitter();
+      worker.id = workerId;
+
+      const proc = new EventEmitter();
+      proc.env = {mod: JSON.stringify(mod)};
+
+      worker.send = (msg) => proc.emit('message', msg);
+      proc.send = (msg) => worker.emit('message', msg);
+
+      const workerCluster = new EventEmitter();
+      workerCluster.isMaster = false;
+      workerCluster.isWorker = true;
+      workerCluster.worker = worker;
+
+      const messageCenter = new MessageCenter(workerCluster, proc);
+
+      masterCluster.workers[worker.id] = worker;
+      masterCluster.emit('fork', worker);
+
+      return messageCenter;
+    }
+
+    beforeEach(() => {
+      const cluster = new EventEmitter();
+      cluster.isMaster = true;
+      cluster.isWorker = false;
+      cluster.workers = {};
+
+      messageCenter = new MessageCenter(cluster, null);
+      messageCenter1 = createWorkerMessageCenter(cluster, 1, {name: 'foo'});
+      messageCenter2 = createWorkerMessageCenter(cluster, 2, {name: 'bar'});
+    });
+
+    it('should send events to worker', async() => {
+      let called = false;
+      await messageCenter1.addEventListener('test', {scopes: null}, (data) => {
+        expect(data).to.equal(42);
+        called = true;
+      });
+      await messageCenter.sendEvent('test', {scopes: null}, 42);
+      expect(called).to.be.true;
+    });
+    it('should send events to master', async() => {
+      let called = false;
+      await messageCenter.addEventListener('test', {scopes: null}, (data) => {
+        expect(data).to.equal(42);
+        called = true;
+      });
+      await messageCenter1.sendEvent('test', {scopes: null}, 42);
+      expect(called).to.be.true;
+    });
+    it('should send events to other worker', async() => {
+      let called = false;
+      await messageCenter2.addEventListener('test', {scopes: null}, (data) => {
+        expect(data).to.equal(42);
+        called = true;
+      });
+      await messageCenter1.sendEvent('test', {scopes: null}, 42);
+      expect(called).to.be.true;
+    });
+    it('should send request to worker', async() => {
+      let called = false;
+      await messageCenter1.addRequestListener('test', {scopes: null}, (metadata, req) => {
+        expect(metadata.origin).to.equal('base');
+        expect(req).to.equal(42);
+        called = true;
+      });
+      await messageCenter.sendRequest('test', {scopes: null}, 42);
+      expect(called).to.be.true;
+    });
+    it('should send request to master', async() => {
+      let called = false;
+      await messageCenter.addRequestListener('test', {scopes: null}, (metadata, req) => {
+        expect(metadata.origin).to.equal('foo');
+        expect(req).to.equal(42);
+        called = true;
+      });
+      await messageCenter1.sendRequest('test', {scopes: null}, 42);
+      expect(called).to.be.true;
+    });
+    it('should send request to other worker', async() => {
+      let called = false;
+      await messageCenter2.addRequestListener('test', {scopes: null}, (metadata, req) => {
+        expect(metadata.origin).to.equal('foo');
+        expect(req).to.equal(42);
+        called = true;
+      });
+      await messageCenter1.sendRequest('test', {scopes: null}, 42);
+      expect(called).to.be.true;
+    });
+    it('should send event subscribe to worker', async() => {
+      let called = false;
+      await messageCenter1.addEventSubscriberListener('test', (metadata) => {
+        expect(metadata.event).to.equal('test');
+        expect(metadata.what).to.equal('added');
+        expect(metadata.origin).to.equal('base');
+        called = true;
+      });
+      await messageCenter.addEventListener('test', {scopes: null}, noop);
+      expect(called).to.be.true;
+    });
+    it('should send event subscribe to master', async() => {
+      let called = false;
+      await messageCenter.addEventSubscriberListener('test', (metadata) => {
+        expect(metadata.event).to.equal('test');
+        expect(metadata.what).to.equal('added');
+        expect(metadata.origin).to.equal('base');
+        called = true;
+      });
+      await messageCenter1.addEventListener('test', {scopes: null}, noop);
+      expect(called).to.be.true;
+    });
+    it('should send event subscribe to other worker', async() => {
+      let called = false;
+      await messageCenter2.addEventSubscriberListener('test', (metadata) => {
+        expect(metadata.event).to.equal('test');
+        expect(metadata.what).to.equal('added');
+        expect(metadata.origin).to.equal('base');
+        called = true;
+      });
+      await messageCenter1.addEventListener('test', {scopes: null}, noop);
+      expect(called).to.be.true;
+    });
+    it('should send event unsubscribe to worker', async() => {
+      let called = false;
+      await messageCenter.addEventListener('test', {scopes: null}, noop);
+      await messageCenter1.addEventSubscriberListener('test', (metadata) => {
+        expect(metadata.event).to.equal('test');
+        expect(metadata.what).to.equal('removed');
+        expect(metadata.origin).to.equal('base');
+        called = true;
+      });
+      await messageCenter.removeEventListener('test', noop);
+      expect(called).to.be.true;
+    });
+    it('should send event unsubscribe to master', async() => {
+      let called = false;
+      await messageCenter1.addEventListener('test', {scopes: null}, noop);
+      await messageCenter.addEventSubscriberListener('test', (metadata) => {
+        expect(metadata.event).to.equal('test');
+        expect(metadata.what).to.equal('removed');
+        expect(metadata.origin).to.equal('base');
+        called = true;
+      });
+      await messageCenter1.removeEventListener('test', noop);
+      expect(called).to.be.true;
+    });
+    it('should send event unsubscribe to other worker', async() => {
+      let called = false;
+      await messageCenter1.addEventListener('test', {scopes: null}, noop);
+      await messageCenter2.addEventSubscriberListener('test', (metadata) => {
+        expect(metadata.event).to.equal('test');
+        expect(metadata.what).to.equal('removed');
+        expect(metadata.origin).to.equal('base');
+        called = true;
+      });
+      await messageCenter1.removeEventListener('test', noop);
+      expect(called).to.be.true;
     });
   });
 })();

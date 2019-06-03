@@ -147,6 +147,7 @@ limitations under the License.
       if (debug && debugData.length && debugEl) {
         debugEl.style.display = 'block';
         debugEl.innerHTML = text;
+        // eslint-disable-next-line no-console
         console.table(debugData);
       }
     }

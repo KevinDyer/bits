@@ -28,16 +28,16 @@
   dependencies:
     commander "^2.12.2"
 
-"@lgslabs/bits-eslint@^1.0.3":
-  version "1.0.3"
-  resolved "@lgslabs/bits-eslint/-/bits-eslint-1.0.3.tgz#8ca3c1c507b6504352fbad2de440e1389fed0b6b"
+"@lgslabs/bits-eslint@^1.0.4":
+  version "1.0.4"
+  resolved "@lgslabs/bits-eslint/-/bits-eslint-1.0.4.tgz#184d686cf22979756410e9ac4448a75357cf2ea4"
   dependencies:
-    "@lgslabs/eslint-config-bits" "^1.1.0"
+    "@lgslabs/eslint-config-bits" "^1.2.0"
     eslint "^5.15.3"
     eslint-config-google "^0.12.0"
     eslint-plugin-html "^5.0.3"
 
-"@lgslabs/eslint-config-bits@^1.1.0":
+"@lgslabs/eslint-config-bits@^1.2.0":
   version "1.2.0"
   resolved "@lgslabs/eslint-config-bits/-/eslint-config-bits-1.2.0.tgz#977691b0eafaa682b54c7767499341ab70754ddf"
 
@@ -877,8 +877,8 @@ expect-ct@0.2.0:
   resolved "expect-ct/-/expect-ct-0.2.0.tgz#3a54741b6ed34cc7a93305c605f63cd268a54a62"
 
 express@^4.16.4:
-  version "4.17.0"
-  resolved "express/-/express-4.17.0.tgz#288af62228a73f4c8ea2990ba3b791bb87cd4438"
+  version "4.17.1"
+  resolved "express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
   dependencies:
     accepts "~1.3.7"
     array-flatten "1.1.1"
@@ -1986,8 +1986,8 @@ prr@~1.0.1:
   resolved "prr/-/prr-1.0.1.tgz#d3fc114ba06995a45ec6893f484ceb1d78f5f476"
 
 psl@^1.1.28:
-  version "1.1.31"
-  resolved "psl/-/psl-1.1.31.tgz#e9aa86d0101b5b105cbe93ac6b784cd547276184"
+  version "1.1.32"
+  resolved "psl/-/psl-1.1.32.tgz#3f132717cf2f9c169724b2b6caf373cf694198db"
 
 pump@^1.0.0:
   version "1.0.3"
@@ -2064,8 +2064,8 @@ readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable
     util-deprecate "~1.0.1"
 
 readable-stream@^3.1.1:
-  version "3.3.0"
-  resolved "readable-stream/-/readable-stream-3.3.0.tgz#cb8011aad002eb717bf040291feba8569c986fb9"
+  version "3.4.0"
+  resolved "readable-stream/-/readable-stream-3.4.0.tgz#a51c26754658e0a3c21dbf59163bd45ba6f447fc"
   dependencies:
     inherits "^2.0.3"
     string_decoder "^1.1.1"

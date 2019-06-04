@@ -19,7 +19,7 @@
     "dev": "HTTP_PORT=9000 HTTPS_PORT=9001 node app.js -v"
   },
   "devDependencies": {
-    "@lgslabs/bits-eslint": "^1.0.3",
+    "@lgslabs/bits-eslint": "^1.0.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.2.0",

@@ -1,3 +1,18 @@
+<a name="4.1.0"></a>
+# 4.1.0 (2019-06-04)
+
+
+### Bug Fixes
+
+* **daemon:** emit the 'exit' event   (5574176), closes PNP-1745
+
+
+### Features
+
+* adds origin to message center metadata   (e06bd86), closes PNP-1705
+
+---
+
 <a name="4.0.0"></a>
 # 4.0.0 (2019-05-24)
 

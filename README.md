@@ -496,6 +496,32 @@ sudo apt-get install -y nodejs
 npm run build
 ```
 
+# Logging
+The log export will attempt to export node.log if an output directory is given to the system. If none is provided it will try to export from journalctl. 
+
+__WARNING__: the below tools require file extension *.journal for input/output files
+
+```bash
+# export from BITS machine (OR FROM UI)
+journalctl -o export > $HOSTNAME.export.journal
+```
+Copy export file to dev machine and convert to journal format (requires systemd-journal-remote on host dev system to view the logs):
+```bash
+# install package if not already installed
+apt-get install systemd-journal-remote
+# WARNING: the binary is installed at /lib/systemd/ which is not in PATH on many systems
+export PATH=/lib/systemd/:$PATH
+export REMOTE_HOSTNAME=<INSERT_HERE>
+# import the file from remote system into a new journal file
+systemd-journal-remote --output=$REMOTE_HOSTNAME.journal $REMOTE_HOSTNAME.export.journal
+
+# show bits logs
+journalctl --file=$REMOTE_HOSTNAME.journal -u bits.service
+
+# show kernel logs
+journalctl --file=$REMOTE_HOSTNAME.journal _TRANSPORT=kernel
+```
+
 **Add node package**
 
 ```bash

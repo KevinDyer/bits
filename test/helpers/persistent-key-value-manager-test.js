@@ -22,7 +22,7 @@ limitations under the License.
   const PersistentKeyValueManager = require('./../../lib/helpers/persistent-key-value-manager');
   const os = require('os');
   const path = require('path');
-  const UtilFs = require('./../../lib/helpers/fs');
+  const UtilFs = require('@lgslabs/bits-fs');
 
   const {expect} = chai;
 

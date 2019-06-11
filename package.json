@@ -26,8 +26,11 @@
   },
   "dependencies": {
     "@lgslabs/bits-auto-discovery": "^1.0.0",
-    "@lgslabs/bits-crypto": "^1.0.1",
     "@lgslabs/bits-core": "^1.0.0",
+    "@lgslabs/bits-crypto": "^1.0.1",
+    "@lgslabs/bits-fs": "^1.0.0",
+    "@lgslabs/bits-logger": "^1.0.0",
+    "@lgslabs/bits-message-center": "^1.0.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "express": "^4.16.4",

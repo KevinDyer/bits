@@ -25,7 +25,7 @@ limitations under the License.
   const KeyValueManager = require('./../../lib/helpers/key-value-manager');
   const KeyValueMessenger = require('./../../lib/helpers/key-value-messenger');
   const KeyValueApi = require('./../../lib/helpers/key-value-api');
-  const MessageCenter = require('./../../lib/message-center');
+  const MessageCenter = require('@lgslabs/bits-message-center');
 
   const expect = chai.expect;
   chai.use(chaiAsPromised);

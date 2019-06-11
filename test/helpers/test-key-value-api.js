@@ -23,7 +23,7 @@ limitations under the License.
   const chai = require('chai');
   const chaiAsPromised = require('chai-as-promised');
   const KeyValueApi = require('./../../lib/helpers/key-value-api');
-  const MessageCenter = require('./../../lib/message-center');
+  const MessageCenter = require('@lgslabs/bits-message-center');
 
   const expect = chai.expect;
   chai.use(chaiAsPromised);

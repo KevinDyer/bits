@@ -20,7 +20,7 @@ limitations under the License.
   const path = require('path');
   const chai = require('chai');
   const chaiAsPromised = require('chai-as-promised');
-  const UtilFs = require('./../lib/helpers/fs');
+  const UtilFs = require('@lgslabs/bits-fs');
   const KeyManager = require('./../lib/key/key-manager');
   const CryptoManager = require('./../lib/crypto/crypto-manager');
 

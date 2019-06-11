@@ -41,10 +41,7 @@ limitations under the License.
   const os = require('os');
   const cluster = require('cluster');
   const Base = require('./lib/bits-base');
-  const LoggerFactory = require('./lib/logging/logger-factory');
-
-  // Create instance managers
-  const logger = LoggerFactory.getLogger();
+  const logger = require('@lgslabs/bits-logger').getLogger();
 
   global.numberOfCpu = os.cpus();
 

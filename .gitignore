@@ -6,7 +6,7 @@ node*.log
 node_modules/
 npm-debug.log
 yarn-error.log
-package-json.lock
+package-lock.json
 
 # polymer-cli
 build/

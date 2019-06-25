@@ -59,12 +59,8 @@ limitations under the License.
 
       it('should decrypt file when bits key and private key are added to key manager', () => {
         return keyManager.addKeyFromFilepath(BITS_SIGNATURE_KEY_FILEPATH)
-        .then(() => {
-          return keyManager.addKeyFromFilepath(PRIVATE_KEY_FILEPATH);
-        })
-        .then(() => {
-          return cryptoManager.decryptFile(MODULE_PACKAGE_BITS_SIGNED_FILEPATH, os.tmpdir());
-        })
+        .then(() => keyManager.addKeyFromFilepath(PRIVATE_KEY_FILEPATH))
+        .then(() => cryptoManager.decryptFile(MODULE_PACKAGE_BITS_SIGNED_FILEPATH, os.tmpdir()))
         .then((filepath) => {
           return UtilFs.unlink(filepath);
         });

@@ -460,7 +460,7 @@ daemon.shutdown();
 The fs helper provides a list of functions that allows modules to be able to interact with the host file system. The normal use case is writing a file to the modules data directory.
 
 ```javascript
-this._modManApi.getDataDirectory('mod-name')
+this._modManApi.provideDataDirectory('mod-name')
 .then((dir) => {
   return UtilFs.readFile(path.resolve(dir, './contents.txt', {options}))
   .then((fileContents) => {

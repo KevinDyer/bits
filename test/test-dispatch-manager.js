@@ -23,7 +23,7 @@ limitations under the License.
   global.paths = global.paths || {};
   global.paths = Object.assign(global.paths, {data: os.tmpdir()});
 
-  const DispatchManager = require('./../lib/modules/module-manager');
+  const DispatchManager = require('./../lib/dispatcher/dispatch-manager');
   chai.use(chaiAsPromised);
 
   class MessageCenter {
@@ -60,7 +60,9 @@ limitations under the License.
 
   describe('DispatchManager creation', () => {
     it('Create DispatchManager', () => {
-      new DispatchManager({});
+      new DispatchManager({
+        name: 'test',
+      });
     });
   });
 
@@ -68,7 +70,10 @@ limitations under the License.
     let dispatchManager = null;
 
     beforeEach('Create DispatchManager', () => {
-      dispatchManager = new DispatchManager();
+      dispatchManager = new DispatchManager({
+        name: 'test',
+        installedDir: '',
+      });
     });
 
     it('should load', () => {

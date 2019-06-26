@@ -32,7 +32,7 @@
     "@lgslabs/bits-logger": "^1.0.0",
     "@lgslabs/bits-memory-crud": "^1.0.2",
     "@lgslabs/bits-message-center": "^1.0.0",
-    "@lgslabs/bits-memory-kv": "^1.0.0",
+    "@lgslabs/bits-memory-kv": "^1.0.1",
     "@lgslabs/bits-scopes-util": "^1.0.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",

@@ -29,7 +29,7 @@ limitations under the License.
   global.paths = global.paths || {};
   global.paths = Object.assign(global.paths, {data: os.tmpdir(), modules: modulesDir});
 
-  const ModuleManager = require('./../lib/modules/module-manager');
+  const ModuleManager = require('./../lib/modules/manager');
 
   chai.use(chaiAsPromised);
 
@@ -52,19 +52,6 @@ limitations under the License.
     removeRequestSubsciberListener() {}
   }
 
-  class BaseServer {
-    on() {
-
-    }
-
-    use() {
-      return Promise.resolve();
-    }
-    removeMiddleware() {
-      return Promise.resolve();
-    }
-  }
-
   after((done) => {
     fs.rmdirSync(modulesDir);
     done();
@@ -84,12 +71,13 @@ limitations under the License.
       });
 
       it('should load', () => {
-        return moduleManager.load(new MessageCenter(), new BaseServer());
+        return moduleManager.load({messageCenter: new MessageCenter()});
       });
 
       it('should unload', () => {
-        return moduleManager.load(new MessageCenter(), new BaseServer())
-        .then(() => moduleManager.unload());
+        const messageCenter = new MessageCenter();
+        return moduleManager.load({messageCenter})
+        .then(() => moduleManager.unload({messageCenter}));
       });
     });
 
@@ -97,7 +85,7 @@ limitations under the License.
       let moduleManager = null;
       beforeEach('Create ModuleManager', () => {
         moduleManager = new ModuleManager();
-        return moduleManager.load(new MessageCenter(), new BaseServer());
+        return moduleManager.load({messageCenter: new MessageCenter()});
       });
 
       it('should load modules', () => {

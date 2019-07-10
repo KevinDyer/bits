@@ -22,7 +22,7 @@
   dependencies:
     uuid "^3.1.0"
 
-"@lgslabs/bits-core@^1.0.2", "@lgslabs/bits-core@^1.1.1":
+"@lgslabs/bits-core@^1.0.2", "@lgslabs/bits-core@^1.1.1", "@lgslabs/bits-core@^1.1.2":
   version "1.1.2"
   resolved "@lgslabs/bits-core/-/bits-core-1.1.2.tgz#545e91095c1953dc9fb1254293c56127458fb0da"
   dependencies:
@@ -49,11 +49,20 @@
     eslint-config-google "^0.12.0"
     eslint-plugin-html "^5.0.3"
 
-"@lgslabs/bits-fs@^1.0.0", "@lgslabs/bits-fs@^1.1.0":
+"@lgslabs/bits-fs@^1.0.0", "@lgslabs/bits-fs@^1.1.0", "@lgslabs/bits-fs@^1.1.1":
   version "1.1.1"
   resolved "@lgslabs/bits-fs/-/bits-fs-1.1.1.tgz#fc88732c03ae013c01144a6aa7c93f7fdf358b0e"
   dependencies:
     which "^1.3.1"
+
+"@lgslabs/bits-level-kv@^1.0.0":
+  version "1.1.0"
+  resolved "@lgslabs/bits-level-kv/-/bits-level-kv-1.1.0.tgz#dd8e276aa7a5728ddbba5a3455973036fbd2b9f9"
+  dependencies:
+    "@lgslabs/bits-fs" "^1.1.1"
+    "@lgslabs/bits-logger" "^1.0.0"
+    "@lgslabs/bits-memory-kv" "^1.3.0"
+    level "^5.0.1"
 
 "@lgslabs/bits-logger@^1.0.0":
   version "1.0.0"
@@ -62,15 +71,14 @@
     minimist "^1.2.0"
     winston "^3.2.1"
 
-"@lgslabs/bits-memory-crud@^1.0.2":
-  version "1.0.2"
-  resolved "@lgslabs/bits-memory-crud/-/bits-memory-crud-1.0.2.tgz#c055dd5f79605b30323b189f40288871401acba1"
-  integrity sha512-0LR09hR6VK1OyJAU9u5Rj+HoqpG0G+4X/m2p+hNQWy24w607oHfFmQHwOM1GTVf8vEJeu8KvfJkEUT/CumMVuQ==
+"@lgslabs/bits-memory-crud@^1.0.2", "@lgslabs/bits-memory-crud@^1.0.7":
+  version "1.0.7"
+  resolved "@lgslabs/bits-memory-crud/-/bits-memory-crud-1.0.7.tgz#e30366b1a7aa7d7f3ab60ebe3a74cc996bc74d09"
   dependencies:
-    "@lgslabs/bits-core" "^1.0.2"
+    "@lgslabs/bits-core" "^1.1.2"
     "@lgslabs/bits-logger" "^1.0.0"
 
-"@lgslabs/bits-memory-kv@^1.0.0":
+"@lgslabs/bits-memory-kv@^1.0.1", "@lgslabs/bits-memory-kv@^1.3.0":
   version "1.3.0"
   resolved "@lgslabs/bits-memory-kv/-/bits-memory-kv-1.3.0.tgz#b137e314e48526dfb5c0168b64639469596e2e4c"
   dependencies:
@@ -82,6 +90,16 @@
   resolved "@lgslabs/bits-message-center/-/bits-message-center-1.0.3.tgz#b3cb452e703b739d4f40069a79f0388d17fbff7f"
   dependencies:
     "@lgslabs/bits-logger" "^1.0.0"
+
+"@lgslabs/bits-pouch-crud@^1.0.0":
+  version "1.0.7"
+  resolved "@lgslabs/bits-pouch-crud/-/bits-pouch-crud-1.0.7.tgz#f3554ecf2a7b58b3ed2c78a9838665461ae26b91"
+  dependencies:
+    "@lgslabs/bits-fs" "^1.1.1"
+    "@lgslabs/bits-logger" "^1.0.0"
+    "@lgslabs/bits-memory-crud" "^1.0.7"
+    pouchdb "^7.1.1"
+    pouchdb-find "^7.1.1"
 
 "@lgslabs/bits-scopes-util@^1.0.0":
   version "1.0.0"
@@ -1239,7 +1257,7 @@ level-write-stream@1.0.0:
   dependencies:
     end-stream "~0.1.0"
 
-level@5.0.1:
+level@5.0.1, level@^5.0.1:
   version "5.0.1"
   resolved "level/-/level-5.0.1.tgz#8528cc1ee37ac413270129a1eab938c610be3ccb"
   dependencies:
@@ -1644,7 +1662,7 @@ pouchdb-fetch@7.1.1:
     fetch-cookie "0.7.0"
     node-fetch "2.4.1"
 
-pouchdb-find@^7.0.0:
+pouchdb-find@^7.0.0, pouchdb-find@^7.1.1:
   version "7.1.1"
   resolved "pouchdb-find/-/pouchdb-find-7.1.1.tgz#390f05ba98467d52e16c4609f1623ea9aa6f9f11"
   dependencies:
@@ -1692,7 +1710,7 @@ pouchdb-utils@7.1.1:
     pouchdb-md5 "7.1.1"
     uuid "3.2.1"
 
-pouchdb@^7.0.0:
+pouchdb@^7.0.0, pouchdb@^7.1.1:
   version "7.1.1"
   resolved "pouchdb/-/pouchdb-7.1.1.tgz#f5f8dcd1fc440fb76651cb26f6fc5d97a39cd6ce"
   dependencies:

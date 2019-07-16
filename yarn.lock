@@ -49,7 +49,7 @@
     eslint-config-google "^0.12.0"
     eslint-plugin-html "^5.0.3"
 
-"@lgslabs/bits-fs@^1.0.0", "@lgslabs/bits-fs@^1.1.0", "@lgslabs/bits-fs@^1.1.1":
+"@lgslabs/bits-fs@^1.0.0", "@lgslabs/bits-fs@^1.1.1":
   version "1.1.1"
   resolved "@lgslabs/bits-fs/-/bits-fs-1.1.1.tgz#fc88732c03ae013c01144a6aa7c93f7fdf358b0e"
   dependencies:
@@ -91,7 +91,7 @@
   dependencies:
     "@lgslabs/bits-logger" "^1.0.0"
 
-"@lgslabs/bits-pouch-crud@^1.0.2":
+"@lgslabs/bits-pouch-crud@^1.0.3":
   version "1.0.7"
   resolved "@lgslabs/bits-pouch-crud/-/bits-pouch-crud-1.0.7.tgz#f3554ecf2a7b58b3ed2c78a9838665461ae26b91"
   dependencies:

@@ -23,7 +23,7 @@ limitations under the License.
   global.paths = global.paths || {};
   global.paths = Object.assign(global.paths, {data: os.tmpdir()});
 
-  const DispatchManager = require('./../lib/dispatcher/dispatch-manager');
+  const DispatchManager = require('./../lib/dispatcher/manager');
   chai.use(chaiAsPromised);
 
   class MessageCenter {
@@ -45,19 +45,6 @@ limitations under the License.
     removeRequestSubsciberListener() {}
   }
 
-  class BaseServer {
-    on() {
-
-    }
-
-    use() {
-      return Promise.resolve();
-    }
-    removeMiddleware() {
-      return Promise.resolve();
-    }
-  }
-
   describe('DispatchManager creation', () => {
     it('Create DispatchManager', () => {
       new DispatchManager({
@@ -68,20 +55,21 @@ limitations under the License.
 
   describe('DispatchManager', () => {
     let dispatchManager = null;
+    const mod = {
+      name: 'test',
+      installedDir: '',
+    };
 
     beforeEach('Create DispatchManager', () => {
-      dispatchManager = new DispatchManager({
-        name: 'test',
-        installedDir: '',
-      });
+      dispatchManager = new DispatchManager();
     });
 
     it('should load', () => {
-      return dispatchManager.load(new MessageCenter(), new BaseServer());
+      return dispatchManager.load({messageCenter: new MessageCenter(), mod});
     });
 
     it('should unload', () => {
-      return dispatchManager.load(new MessageCenter(), new BaseServer())
+      return dispatchManager.load({messageCenter: new MessageCenter(), mod})
       .then(() => dispatchManager.unload());
     });
   });

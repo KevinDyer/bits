@@ -1,3 +1,26 @@
+<a name="5.0.0"></a>
+# 5.0.0 (2019-08-14)
+
+
+### Bug Fixes
+
+* ensure <data-dir>/tmp exists   (110b6d5), closes PNP-1854
+* prevent fatal error on load if socket is not fully initialized   (20180e1), closes pnp-2194
+
+
+### Features
+
+* add in a global path for base so all modules can get running base dir   (dd0a06e)
+* add support to export from journalctl   (c1ccb69), closes PNP-1252
+* remove OMG subsystem   (805d2c1)
+
+
+### BREAKING CHANGES
+
+* removes OMG subsystem and ability to upgrade base. See the bits-omg module for continued support of system upgrade.
+
+---
+
 <a name="4.1.0"></a>
 # 4.1.0 (2019-06-04)
 

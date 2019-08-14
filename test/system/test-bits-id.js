@@ -1,5 +1,5 @@
 /**
-Copyright 2017 LGS Innovations
+Copyright 2019 LGS Innovations
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,31 +17,19 @@ limitations under the License.
   'use strict';
 
   const os = require('os');
-  const chai = require('chai');
-  const chaiAsPromised = require('chai-as-promised');
 
-  global.paths = global.paths || {};
-  global.paths = Object.assign(global.paths, {data: os.tmpdir()});
-
-  const BitsId = require('./../lib/system/bits-id');
-
-  const expect = chai.expect;
-
-  chai.use(chaiAsPromised);
+  const BitsId = require('../../lib/system/bits-id');
 
   describe('BitsId', () => {
     let bitsId = null;
 
-    beforeEach('Create BitsId', () => {
+    beforeEach(() => {
       bitsId = new BitsId();
     });
 
     describe('checkGenerateId', () => {
       it('should return the equivalent to os.hostname', () => {
-        return bitsId._generateId()
-        .then((bitsId) => {
-          expect(bitsId).to.equal(os.hostname());
-        });
+        expect(bitsId._generateId()).resolves.toBe(os.hostname());
       });
     });
   });

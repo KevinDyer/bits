@@ -2,6 +2,9 @@
 data/
 node*.log
 
+# jest
+coverage/
+
 # Nodejs and NPM
 node_modules/
 npm-debug.log

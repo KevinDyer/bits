@@ -1,6 +1,6 @@
 # test directories
 __tests__
-test
+!(@lgslabs)/**/test # need this to maintain mock MessageCenter
 tests
 powered-test
 
@@ -9,7 +9,7 @@ docs
 doc
 website
 images
-assets
+!(istanbul-reports)/**/assets # need this for Jest coverage tool
 
 # examples
 example

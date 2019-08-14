@@ -16,20 +16,18 @@ limitations under the License.
 (() => {
   'use strict';
 
-  const ScopesManager = require('../scopes/manager');
+  const BitsFs = require('@lgslabs/bits-fs');
+  const os = require('os');
+  const path = require('path');
 
-  const TAG = 'base#System';
+  require('@lgslabs/bits-logger').getLogger().level = 'silent';
 
-  module.exports = Object.freeze({
-    TAG,
-    REQUEST: Object.freeze({
-      TIME_GET: `${TAG} timeGet`,
-      RESTART: `${TAG} restart`,
-      SHUTDOWN: `${TAG} shutdown`,
-      BITS_ID: `${TAG} bitsId`,
-    }),
-    READ_SCOPES: Object.freeze([]),
-    WRITE_SCOPES: Object.freeze([ScopesManager.SCOPE_BASE.name]),
+
+  global.paths = global.paths || {};
+  global.paths = Object.assign(global.paths, {
+    data: os.tmpdir(),
+    modules: path.join(os.tmpdir(), `${Date.now()}`),
   });
-})();
 
+  Object.keys(global.paths).forEach((key) => BitsFs.ensureDirectoryExists(global.paths[key]));
+})();

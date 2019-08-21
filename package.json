@@ -52,7 +52,6 @@
     "@lgslabs/bits-pouch-crud": "^1.0.4",
     "@lgslabs/bits-scopes-util": "^1.0.0",
     "graph-js": "^0.1.11",
-    "pem": "^1.13.2",
     "semver": "^5.6.0"
   }
 }

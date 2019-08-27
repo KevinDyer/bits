@@ -18,7 +18,7 @@ limitations under the License.
 
   const os = require('os');
 
-  const BitsId = require('../../lib/system/bits-id');
+  const BitsId = require('../../lib/base/bits-id');
 
   describe('BitsId', () => {
     let bitsId = null;

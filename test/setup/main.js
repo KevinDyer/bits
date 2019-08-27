@@ -17,11 +17,13 @@ limitations under the License.
   'use strict';
 
   const BitsFs = require('@lgslabs/bits-fs');
+  const LazyRequireLoader = require('../../lib/utils/lazy-require-loader');
   const os = require('os');
   const path = require('path');
 
   require('@lgslabs/bits-logger').getLogger().level = 'silent';
 
+  global.helper = global.helper || new LazyRequireLoader();
 
   global.paths = global.paths || {};
   global.paths = Object.assign(global.paths, {

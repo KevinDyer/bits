@@ -36,8 +36,7 @@
   "devDependencies": {
     "@lgslabs/bits-eslint": "^1.0.4",
     "@lgslabs/bits-message-center": "^1.0.0",
-    "jest": "^24.8.0",
-    "supertest": "^3.3.0"
+    "jest": "^24.8.0"
   },
   "dependencies": {
     "@lgslabs/bits-auto-discovery": "^1.0.0",
@@ -47,10 +46,11 @@
     "@lgslabs/bits-level-kv": "^1.0.1",
     "@lgslabs/bits-logger": "^1.0.0",
     "@lgslabs/bits-memory-crud": "^1.0.3",
-    "@lgslabs/bits-message-center": "^1.0.0",
     "@lgslabs/bits-memory-kv": "^1.0.1",
+    "@lgslabs/bits-message-center": "^1.0.0",
     "@lgslabs/bits-pouch-crud": "^1.0.4",
     "@lgslabs/bits-scopes-util": "^1.0.0",
+    "@lgslabs/child-process-promise": "^1.0.0",
     "graph-js": "^0.1.11",
     "semver": "^5.6.0"
   }

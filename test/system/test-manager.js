@@ -17,18 +17,18 @@ limitations under the License.
   'use strict';
 
   const SystemManager = require('../../lib/system/manager');
-  const UtilChildProcess = require('../../lib/utils/child-process');
+  const ChildProcessSpawn = require('@lgslabs/child-process-promise');
 
   describe('SystemManager', () => {
     let manager = null;
 
-    beforeEach(() => {
+    beforeAll(() => {
       manager = new SystemManager();
     });
 
     describe('restart', () => {
-      it(`should call 'createSpawnPromise' with cmd='reboot'`, () => {
-        jest.spyOn(UtilChildProcess, 'createSpawnPromise').mockImplementationOnce((cmd) => {
+      it(`should call 'spawn' with cmd='reboot'`, () => {
+        jest.spyOn(ChildProcessSpawn, 'spawn').mockImplementationOnce((cmd) => {
           expect(cmd).toBe('reboot');
           return Promise.resolve();
         });
@@ -37,8 +37,8 @@ limitations under the License.
     });
 
     describe('shutdown', () => {
-      it(`should call 'createSpawnPromise' with cmd='shutdown'`, () => {
-        jest.spyOn(UtilChildProcess, 'createSpawnPromise').mockImplementationOnce((cmd, args) => {
+      it(`should call 'spawn' with cmd='shutdown'`, () => {
+        jest.spyOn(ChildProcessSpawn, 'spawn').mockImplementationOnce((cmd, args) => {
           expect(cmd).toBe('shutdown');
           expect(args).toEqual(expect.arrayContaining(['-h', 'now']));
           return Promise.resolve();

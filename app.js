@@ -20,7 +20,6 @@ limitations under the License.
   const BaseService = require('./lib/base/service');
   const cluster = require('cluster');
   const logger = require('@lgslabs/bits-logger').getLogger();
-  const os = require('os');
   const parseArgs = require('minimist');
   const path = require('path');
 
@@ -41,7 +40,6 @@ limitations under the License.
     args.modulesDir = path.join(args.rootDataDir, 'base', 'modules', 'modules');
   }
   global.paths.modules = args.modulesDir;
-  global.numberOfCpu = os.cpus();
 
   const baseService = new BaseService();
 

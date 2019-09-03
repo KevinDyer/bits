@@ -44,6 +44,8 @@ limitations under the License.
   const baseService = new BaseService();
 
   if (cluster.isMaster) {
+    global.paths.moduleDataDir = path.resolve(global.paths.data, 'base');
+
     process.on('uncaughtException', (err) => {
       if (err instanceof Error) {
         logger.error(`Uncaught exception occurred in BITS Master cluster: ${err.message}`, err);
@@ -62,6 +64,7 @@ limitations under the License.
   } else if (cluster.isWorker) {
     const {name} = JSON.parse(process.env.mod);
     process.title += ` ${name}`;
+    global.paths.moduleDataDir = path.resolve(global.paths.data, name);
 
     process.on('uncaughtException', (err) => {
       if (err instanceof Error) {

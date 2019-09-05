@@ -68,17 +68,17 @@ limitations under the License.
 
     process.on('uncaughtException', (err) => {
       if (err instanceof Error) {
-        logger.error(`Uncaught exception in module '${moduleName}': ${err.message}`, err);
+        logger.error(`Uncaught exception in module '${name}': ${err.message}`, err);
       } else {
-        logger.error(`Uncaught exception in module '${moduleName}' without error:`, err);
+        logger.error(`Uncaught exception in module '${name}' without error:`, err);
       }
     });
 
     process.on('unhandledRejection', (err) => {
       if (err instanceof Error) {
-        logger.error(`Unhandled rejection in module '${moduleName}': ${err.message}`, err);
+        logger.error(`Unhandled rejection in module '${name}': ${err.message}`, err);
       } else {
-        logger.error(`Unhandled Rejection in module '${ moduleName }' without error:`, err);
+        logger.error(`Unhandled Rejection in module '${name}' without error:`, err);
       }
     });
   }

@@ -25,17 +25,16 @@
     ]
   },
   "scripts": {
-    "build": "yarn --ignore-engines && npm run lint && npm run test && npm run autoclean",
-    "autoclean": "yarn autoclean --force",
-    "bits:install": "yarn --prod --ignore-engines && npm run autoclean",
+    "build": "npm install && npm run lint && npm run test",
+    "bits:install": "npm install --prod",
     "lint": "bits-eslint --ext js --fix ./",
     "test": "jest",
-    "clean": "rm -rf node_modules/ data/ npm-error.log yarn-error.log",
+    "clean": "rm -rf node_modules/ data/ npm-error.log",
     "dev": "HTTP_PORT=9000 HTTPS_PORT=9001 node app.js -v"
   },
   "devDependencies": {
-    "@lgslabs/bits-eslint": "^1.0.4",
-    "@lgslabs/bits-message-center": "^1.0.0",
+    "@lgslabs/bits-eslint": "^1.1.0",
+    "@lgslabs/bits-message-center": "^1.0.2",
     "jest": "^24.8.0"
   },
   "dependencies": {
@@ -43,11 +42,11 @@
     "@lgslabs/bits-core": "^1.0.2",
     "@lgslabs/bits-crypto": "^2.0.1",
     "@lgslabs/bits-fs": "^1.1.1",
-    "@lgslabs/bits-level-kv": "^1.0.1",
+    "@lgslabs/bits-level-kv": "^1.0.2",
     "@lgslabs/bits-logger": "^1.0.0",
-    "@lgslabs/bits-memory-crud": "^1.0.3",
-    "@lgslabs/bits-memory-kv": "^1.0.1",
-    "@lgslabs/bits-message-center": "^1.0.0",
+    "@lgslabs/bits-memory-crud": "^1.0.4",
+    "@lgslabs/bits-memory-kv": "^1.1.0",
+    "@lgslabs/bits-message-center": "^1.0.2",
     "@lgslabs/bits-pouch-crud": "^1.0.4",
     "@lgslabs/bits-scopes-util": "^1.0.0",
     "@lgslabs/child-process-promise": "^1.0.0",

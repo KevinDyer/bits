@@ -1,5 +1,5 @@
 {
-  "name": "bits",
+  "name": "@lgslabs/bits",
   "version": "5.0.1",
   "description": "Bits Integrated Technology System",
   "author": "LGS Innovations",
@@ -29,7 +29,6 @@
     "bits:install": "npm install --prod",
     "lint": "bits-eslint --ext js --fix ./",
     "test": "jest",
-    "clean": "rm -rf node_modules/ data/ npm-error.log",
     "dev": "HTTP_PORT=9000 HTTPS_PORT=9001 node app.js -v"
   },
   "devDependencies": {

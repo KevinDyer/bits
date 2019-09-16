@@ -33,8 +33,7 @@
   },
   "devDependencies": {
     "@lgslabs/bits-eslint": "^1.1.0",
-    "@lgslabs/bits-message-center": "^1.0.2",
-    "jest": "^24.8.0"
+    "jest": "^24.9.0"
   },
   "dependencies": {
     "@lgslabs/bits-auto-discovery": "^1.0.0",
@@ -50,6 +49,6 @@
     "@lgslabs/bits-scopes-util": "^1.0.0",
     "@lgslabs/child-process-promise": "^1.0.0",
     "graph-js": "^0.1.11",
-    "semver": "^5.6.0"
+    "semver": "^6.3.0"
   }
 }

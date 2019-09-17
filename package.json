@@ -36,13 +36,12 @@
     "jest": "^24.9.0"
   },
   "dependencies": {
-    "@lgslabs/bits-auto-discovery": "^1.0.0",
     "@lgslabs/bits-core": "^1.0.2",
     "@lgslabs/bits-crypto": "^2.0.1",
     "@lgslabs/bits-fs": "^1.1.1",
-    "@lgslabs/bits-level-kv": "^1.0.2",
+    "@lgslabs/bits-level-kv": "^1.0.3",
     "@lgslabs/bits-logger": "^1.0.0",
-    "@lgslabs/bits-memory-crud": "^1.0.4",
+    "@lgslabs/bits-memory-crud": "^1.0.5",
     "@lgslabs/bits-memory-kv": "^1.1.0",
     "@lgslabs/bits-message-center": "^1.0.3",
     "@lgslabs/bits-pouch-crud": "^1.0.4",

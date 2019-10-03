@@ -85,6 +85,7 @@ limitations under the License.
 
   baseService.load()
   .catch((err) => {
+    logger.error('Caught error loading base service', err);
     process.exit(1);
   });
 })();

@@ -17,32 +17,47 @@ limitations under the License.
   'use strict';
 
   const HelperManager = require('../../lib/helper/manager');
+  const HelperMessenger = require('../../lib/helper/messenger');
+  const {SCOPES: scopes, TAG: tag} = require('../../lib/helper/constants');
 
   describe('HelperManager (Worker)', () => {
     const messageCenter = require('@lgslabs/bits-message-center/test/mocks/message-center');
     let manager = null;
+    let masterManager = null;
+    let messenger = null;
 
-    beforeEach(() => {
+    beforeEach((done) => {
       manager = new HelperManager();
+      masterManager = new HelperManager();
+      messenger = new HelperMessenger();
+      return Promise.resolve()
+      .then(() => masterManager.load())
+      .then(() => messenger.load({messageCenter, manager: masterManager, tag, scopes}))
+      .then(done);
+    });
+
+    afterEach((done) => {
+      return Promise.resolve()
+      .then(() => messenger.unload())
+      .then(() => masterManager.unload())
+      .then(() => {
+        manager = null;
+        masterManager = null;
+        messenger = null;
+      })
+      .then(done);
     });
 
     describe('load', () => {
       it('should load', () => {
-        jest.spyOn(messageCenter, 'sendRequest').mockImplementationOnce(() => Promise.resolve([]));
-        const loadWorkerSpy = jest.spyOn(manager, '_loadWorker');
-        manager.load({messageCenter, isMaster: false})
-        .then(() => expect(loadWorkerSpy).toBeCalled());
+        return manager.loadWorker({messageCenter});
       });
     });
 
     describe('unload', () => {
       it('should load', () => {
-        const isMaster = false;
-        jest.spyOn(messageCenter, 'sendRequest').mockImplementationOnce(() => Promise.resolve([]));
-        const unloadWorkerSpy = jest.spyOn(manager, '_unloadWorker');
-        manager.load({messageCenter, isMaster})
-        .then(() => manager.unload({isMaster}))
-        .then(() => expect(unloadWorkerSpy).toBeCalled());
+        return manager.loadWorker({messageCenter})
+        .then(() => manager.unloadWorker());
       });
     });
   });

@@ -29,18 +29,14 @@ limitations under the License.
 
     describe('load', () => {
       it('should load', () => {
-        const loadMasterSpy = jest.spyOn(manager, '_loadMaster');
-        manager.load({messageCenter})
-        .then(() => expect(loadMasterSpy).toBeCalled());
+        return manager.load({messageCenter});
       });
     });
 
     describe('unload', () => {
       it('should unload', () => {
-        const unloadMasterSpy = jest.spyOn(manager, '_unloadMaster');
-        manager.load({messageCenter})
-        .then(() => manager.unload())
-        .then(() => expect(unloadMasterSpy).toBeCalled());
+        return manager.load({messageCenter})
+        .then(() => manager.unload());
       });
     });
 

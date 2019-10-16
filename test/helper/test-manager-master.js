@@ -17,7 +17,6 @@ limitations under the License.
   'use strict';
 
   const HelperManager = require('../../lib/helper/manager');
-  const path = require('path');
 
   describe('HelperManager (Master)', () => {
     const messageCenter = require('@lgslabs/bits-message-center/test/mocks/message-center');
@@ -41,7 +40,7 @@ limitations under the License.
     });
 
     describe('add', () => {
-      const lazyloadHelper = {name: 'test', filepath: path.join(__dirname, '../../lib/helpers/lazy-load')};
+      const testHelper = {name: 'test', filepath: __filename};
 
       beforeEach(() => {
         manager.load({messageCenter});
@@ -57,14 +56,14 @@ limitations under the License.
 
       it('should add the helper', () => {
         expect(manager._helpers.length).toBe(0);
-        manager.add(lazyloadHelper)
+        manager.add(testHelper)
         .then(() => expect(manager._helpers.length).toBe(1));
       });
 
       it('should replace an existing helper', () => {
-        manager._helpers.push(lazyloadHelper);
+        manager._helpers.push(testHelper);
         expect(manager._helpers.length).toBe(1);
-        manager.add(lazyloadHelper)
+        manager.add(testHelper)
         .then(() => expect(manager._helpers.length).toBe(1));
       });
 
@@ -74,12 +73,12 @@ limitations under the License.
           expect(result.length).toBe(1);
           done();
         });
-        manager.add(lazyloadHelper);
+        manager.add(testHelper);
       });
     });
 
     describe('remove', () => {
-      const lazyloadHelper = {name: 'test', filepath: path.join(__dirname, '../../lib/helpers/lazy-load')};
+      const testHelper = {name: 'test', filepath: __filename};
 
       beforeEach(() => {
         manager.load({messageCenter});
@@ -95,8 +94,8 @@ limitations under the License.
 
       it('should remove a known helper', () => {
         expect(manager._helpers.length).toBe(0);
-        manager.add(lazyloadHelper)
-        .then(() => expect(manager.remove(lazyloadHelper)).resolves);
+        manager.add(testHelper)
+        .then(() => expect(manager.remove(testHelper)).resolves);
       });
 
       it('should emit the removed event', (done) => {
@@ -105,8 +104,8 @@ limitations under the License.
           expect(result.length).toBe(1);
           done();
         });
-        manager.add(lazyloadHelper)
-        .then(() => manager.remove(lazyloadHelper));
+        manager.add(testHelper)
+        .then(() => manager.remove(testHelper));
       });
     });
 

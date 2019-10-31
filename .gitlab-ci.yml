@@ -1,58 +1,17 @@
-stages:
-    - build
-    - test
-    - omg
-
-cache:
-    paths:
-        - .build-ids/
-        - .test-branch
-
-.build-module: &build_definition
-    stage: build
-    tags:
-        - bits-node10
-        - docker
-    script:
-        - /opt/bits-tools/build-tools/package-module.py -a '/usr/bin/destiny -d ./' -m ./ --version "${CI_COMMIT_TAG}"
+# This .yml file uses our shared vue-component-template file to define anchors and stages
+include:
+  - project: "devops/shared_yaml"
+    ref: master
+    file: "bits-module-template.yml"
 
 build-rc:
-  <<: *build_definition
-  only:
-    - /^[0-9]*\.[0-9]*\.[0-9]*-rc\.[0-9]*$/
-  except:
-    - branches
-  artifacts:
-    paths:
-      - "*.tgz"
-    expire_in: 10d
+  extends: .build-rc-template
 
 build-release:
-  <<: *build_definition
-  only:
-    - /^[0-9]*\.[0-9]*\.[0-9]*$/
-  except:
-    - branches
-  artifacts:
-    paths:
-      - "*.tgz"
+  extends: .build-release-template
 
 build-master:
-  <<: *build_definition
-  only:
-    - master
-  except:
-    - tags
-  artifacts:
-    paths:
-      - "*.tgz"
+  extends: .build-master-template
 
 build-branch:
-  <<: *build_definition
-  except:
-    - master
-    - tags
-  artifacts:
-    paths:
-      - "*.tgz"
-    expire_in: 3d
+  extends: .build-branch-template

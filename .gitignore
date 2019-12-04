@@ -22,3 +22,6 @@ support/scripts/upgrade-server/public/socket.io.js
 
 # V8 cache
 v8-compile-cache-0/
+
+# Bazel
+bazel-*

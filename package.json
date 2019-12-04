@@ -29,11 +29,16 @@
     "bits:install": "npm install --prod",
     "lint": "bits-eslint --ext js --fix ./",
     "test": "jest",
-    "dev": "HTTP_PORT=9000 HTTPS_PORT=9001 node app.js -v"
+    "dev": "HTTP_PORT=9000 HTTPS_PORT=9001 node app.js -v",
+    "watch": "ibazel run :app"
   },
   "devDependencies": {
+    "@bazel/bazel": "^2.0.0",
+    "@bazel/ibazel": "^0.11.1",
+    "@bazel/typescript": "^1.0.1",
     "@lgslabs/bits-eslint": "^1.1.0",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "@lgslabs/bits-core": "^2.0.0",

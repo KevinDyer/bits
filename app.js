@@ -18,14 +18,16 @@ limitations under the License.
   'use strict';
 
   const BaseService = require('./lib/base/service');
-  const cluster = require('cluster');
   const logger = require('@lgslabs/bits-logger').getLogger();
   const parseArgs = require('minimist');
   const path = require('path');
+  const {isMaster, isWorker, type: execType} = require('./lib/module-execution/executor');
 
-  process.chdir(__dirname);
+  if ('thread' === execType && isMaster) {
+    process.chdir(__dirname);
+  }
 
-  const args = parseArgs(process.argv, {
+  const args = parseArgs((process.env.argv ? JSON.parse(process.env.argv) : process.argv), {
     default: {rootDataDir: path.join(__dirname, 'data')},
     alias: {rootDataDir: ['d'], modulesDir: ['m']},
   });
@@ -43,12 +45,12 @@ limitations under the License.
 
   const baseService = new BaseService();
 
-  if (cluster.isMaster) {
+  if (isMaster) {
     global.paths.moduleDataDir = path.resolve(global.paths.data, 'base');
 
     process.on('uncaughtException', (err) => {
       if (err instanceof Error) {
-        logger.error(`Uncaught exception occurred in BITS Master cluster: ${err.message}`, err);
+        logger.error(`Uncaught exception occurred in BITS Master: ${err.message}`, err);
       } else {
         logger.error('Uncaught exception occurred without error:', err);
       }
@@ -56,12 +58,12 @@ limitations under the License.
 
     process.on('unhandledRejection', (err) => {
       if (err instanceof Error) {
-        logger.error('Unhandled Rejection: %s', err.message, err);
+        logger.error(`Unhandled Rejection: ${err.message}`, err);
       } else {
         logger.error('Unhandled Rejection occurred without error:', err);
       }
     });
-  } else if (cluster.isWorker) {
+  } else if (isWorker) {
     const {name} = JSON.parse(process.env.mod);
     process.title += ` ${name}`;
     global.paths.moduleDataDir = path.resolve(global.paths.data, name);

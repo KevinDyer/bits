@@ -47,6 +47,7 @@ npm run dev
 Arg | Description | Default | Example
 --- | --- | --- | ---
 *d* | Specifiy a path to the data directory. | &lt;projectRoot&gt;/data | `node app.js -d /full/path/to/dir`
+*e* | Specifiy an executor type for module execution. Currently supports [cluster](https://nodejs.org/docs/latest-v12.x/api/cluster.html) and [thread](https://nodejs.org/docs/latest-v12.x/api/worker_threads.html) | cluster | `node app.js -e thread`
 *m* | Specifiy a path to the modules directory. | &lt;dataDir&gt;/base/modules/modules | `node app.js -m /full/path/to/modules`
 *o* | Specifiy a path to the log file. | *null* | `node app.js -o /full/path/to/logs`
 *v* | Set verbose logging. | *false* | `node app.js -v`

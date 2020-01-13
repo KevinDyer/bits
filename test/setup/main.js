@@ -21,14 +21,17 @@ limitations under the License.
   const os = require('os');
   const path = require('path');
 
+  const NOW = Date.now();
+
   require('@lgslabs/bits-logger').getLogger().level = 'silent';
 
   global.helper = global.helper || new LazyRequireLoader();
 
   global.paths = global.paths || {};
   global.paths = Object.assign(global.paths, {
+    base: path.join(os.tmpdir(), `./${NOW}/base`),
     data: os.tmpdir(),
-    modules: path.join(os.tmpdir(), `${Date.now()}`),
+    modules: path.join(os.tmpdir(), `./${NOW}/modules`),
   });
 
   Object.keys(global.paths).forEach((key) => BitsFs.ensureDirectoryExists(global.paths[key]));

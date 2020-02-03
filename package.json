@@ -33,18 +33,18 @@
   },
   "devDependencies": {
     "@lgslabs/bits-eslint": "^1.1.0",
-    "jest": "^24.9.0"
+    "jest": "^25.1.0"
   },
   "dependencies": {
-    "@lgslabs/bits-core": "^2.0.0",
+    "@lgslabs/bits-core": "^2.1.0",
     "@lgslabs/bits-crypto": "^2.0.2",
     "@lgslabs/bits-fs": "^1.1.1",
-    "@lgslabs/bits-level-kv": "^2.0.0",
+    "@lgslabs/bits-level-kv": "^2.1.0",
     "@lgslabs/bits-logger": "^2.0.0",
-    "@lgslabs/bits-memory-crud": "^2.0.0",
-    "@lgslabs/bits-memory-kv": "^2.0.0",
+    "@lgslabs/bits-memory-crud": "^3.0.1",
+    "@lgslabs/bits-memory-kv": "^2.1.0",
     "@lgslabs/bits-message-center": "^2.0.0",
-    "@lgslabs/bits-pouch-crud": "^2.0.0",
+    "@lgslabs/bits-pouch-crud": "^2.1.1",
     "@lgslabs/bits-scopes-util": "^1.0.0",
     "@lgslabs/child-process-promise": "^1.0.0",
     "graph-js": "^0.1.11",

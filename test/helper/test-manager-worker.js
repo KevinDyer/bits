@@ -55,7 +55,7 @@ limitations under the License.
     });
 
     describe('unload', () => {
-      it('should load', () => {
+      it('should unload', () => {
         return manager.loadWorker({messageCenter})
         .then(() => manager.unloadWorker());
       });

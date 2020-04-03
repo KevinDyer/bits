@@ -17,9 +17,9 @@ limitations under the License.
   'use strict';
 
   const ModuleManager = require('../../lib/modules/manager');
+  const messageCenter = require('@lgslabs/bits-message-center/test/mocks/message-center');
 
   describe('Module Manager', () => {
-    const messageCenter = require('@lgslabs/bits-message-center/test/mocks/message-center');
     let moduleManager = null;
 
     beforeEach(() => {

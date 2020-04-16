@@ -47,7 +47,8 @@ npm run dev
 Arg | Description | Default | Example
 --- | --- | --- | ---
 *d* | Specifiy a path to the data directory. | &lt;projectRoot&gt;/data | `node app.js -d /full/path/to/dir`
-*e* | Specifiy an executor type for module execution. Currently supports [cluster](https://nodejs.org/docs/latest-v12.x/api/cluster.html) and [thread](https://nodejs.org/docs/latest-v12.x/api/worker_threads.html) | cluster | `node app.js -e thread`
+*e* | Specifiy an executor type for module execution. Currently supports [cluster](https://nodejs.org/docs/latest-v12.x/api/cluster.html) and [thread](https://nodejs.org/docs/latest-v12.x/api/worker_threads.html) | thread | `node app.js -e process`
+*uniform* | Ignore module preferences and use a uniform executor type. | *false* | `node app.js -e process --uniform`
 *m* | Specifiy a path to the modules directory. | &lt;dataDir&gt;/base/modules/modules | `node app.js -m /full/path/to/modules`
 *o* | Specifiy a path to the log file. | *null* | `node app.js -o /full/path/to/logs`
 *v* | Set verbose logging. | *false* | `node app.js -v`
@@ -121,6 +122,7 @@ Key | Type | Description
 *version* | *String* | Semantic Version of your module. Our build process automatically fills in the version based off the specified tag in the repository. You will commonly see this blank, but it should have a value in a production system.
 *scopes* | *Array* | Array of scope definitions.
 *load* | *Object* | Load Policy.
+*executor* | *Object* | Specify the executor type for your module.
 *dependencies* | *Object* | A list of dependencies and their versions. Note, use the name of the module from its module.json.
 
 ```javascript
@@ -152,6 +154,26 @@ Key | Type | Description
   "load": {
     "restartPolicy": "oneshot",
     "retries": 2
+  },
+  "dependencies": {
+    "bits-base": "^6.0.0",
+    "dependency-module": "^1.0.0",
+    ...
+  }
+}
+```
+
+```javascript
+// module.json with executor type
+{
+  "name": "my-module",
+  "version": "1.2.3",
+  "scopes": [{
+    "name": "my-module-scopes",
+    "displayName": "My Module Scopes"
+  },...],
+  "executor": {
+    "type": "process"
   },
   "dependencies": {
     "bits-base": "^6.0.0",

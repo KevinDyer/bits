@@ -19,14 +19,14 @@ limitations under the License.
 
   describe('Executor', () => {
     it('should return the correct types based on process.argv', () => {
-      const argvs = ['-e', 'thread'];
-
-      const cluster = () => {
-        const {type: execType} = require('../../lib/module-execution/executor');
-        expect(execType).toStrictEqual('cluster');
-      };
+      const argvs = ['-e', 'process'];
 
       const thread = () => {
+        const {type: execType} = require('../../lib/module-execution/executor');
+        expect(execType).toStrictEqual('thread');
+      };
+
+      const cluster = () => {
         jest.resetModules();
 
         if (Array.isArray(process.argv)) {
@@ -36,21 +36,21 @@ limitations under the License.
         }
 
         const {type: execType} = require('../../lib/module-execution/executor');
-        expect(execType).toStrictEqual('thread');
+        expect(execType).toStrictEqual('cluster');
       };
 
-      const threadAsWorker = () => {
+      const clusterAsWorker = () => {
         jest.resetModules();
 
         process.env.argv = JSON.stringify(argvs);
 
         const {type: execType} = require('../../lib/module-execution/executor');
-        expect(execType).toStrictEqual('thread');
+        expect(execType).toStrictEqual('cluster');
       };
 
-      cluster();
       thread();
-      threadAsWorker();
+      cluster();
+      clusterAsWorker();
     });
   });
 })();

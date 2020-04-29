@@ -51,7 +51,7 @@ limitations under the License.
       clusterExecutor.on('created', createdMockFn);
       clusterExecutor.on('disconnect', disconnectMockFn);
 
-      const worker = await clusterExecutor.create({mod: JSON.stringify({id: 0})});
+      const worker = await clusterExecutor.create();
 
       clusterExecutor.on('online', async() => {
         onlineMockFn();

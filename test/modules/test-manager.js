@@ -68,11 +68,11 @@ limitations under the License.
       }];
 
       it('should fail to load module B because of missing dependency', () => {
-        const graph = moduleManager._generateDependencyGraph(MODULES_MISSING_DEPENDENCY);
+        const {graph, missing} = moduleManager._generateDependencyGraph(MODULES_MISSING_DEPENDENCY);
         const nodes = graph.getNodes();
         const nodeB = nodes.find((node) => node.getContent().name === 'B');
         expect(nodeB).toBeDefined();
-        expect(nodeB.getContent().missingDependency).toBe('C');
+        expect(missing[1][0]).toBe('C');
 
         const edges = graph.getEdges();
         const edgeBDne = edges.find((edge) => edge.getNodeStart().getContent().name === 'B' && edge.getNodeEnd().getContent().id === 'DNE');
@@ -80,7 +80,7 @@ limitations under the License.
       });
 
       it('should generate complete graph', () => {
-        const graph = moduleManager._generateDependencyGraph(MODULES_SUCCESS);
+        const {graph} = moduleManager._generateDependencyGraph(MODULES_SUCCESS);
         const nodes = graph.getNodes();
         const nodeB = nodes.find((node) => node.getContent().name === 'B');
         expect(nodeB).toBeDefined();

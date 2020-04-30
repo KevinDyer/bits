@@ -43,12 +43,9 @@ limitations under the License.
     });
 
     it('should emit a created, exit, and online events', async() => {
-      const createdMockFn = jest.fn();
       const exitMockFn = jest.fn();
       const onlineMockFn = jest.fn();
-      workerThreadExecutor.on('created', createdMockFn);
-
-      const worker = await workerThreadExecutor.create();
+      const worker = workerThreadExecutor.create({mod: JSON.stringify({id: 0})});
 
       workerThreadExecutor.on('online', async() => {
         onlineMockFn();
@@ -58,7 +55,6 @@ limitations under the License.
       workerThreadExecutor.on('exit', async() => {
         exitMockFn();
 
-        expect(createdMockFn).toHaveBeenCalled();
         expect(exitMockFn).toHaveBeenCalled();
         expect(onlineMockFn).toHaveBeenCalled();
       });

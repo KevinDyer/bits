@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@lgslabs/bits-eslint": "^1.1.0",
-    "jest": "^25.5.2"
+    "jest": "^26.0.1"
   },
   "dependencies": {
     "@lgslabs/bits-core": "^2.1.0",

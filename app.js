@@ -17,6 +17,14 @@ limitations under the License.
 (() => {
   'use strict';
 
+  if (process.env.argv) {
+    try {
+      process.argv.push(...JSON.parse(process.env.argv).slice(2));
+    } catch (err) {
+      console.warn('Unable to parse command line arguments from process.env.argv', err);
+    }
+  }
+
   const BaseService = require('./lib/base/service');
   const logger = require('@lgslabs/bits-logger').getLogger();
   const parseArgs = require('minimist');
@@ -27,7 +35,7 @@ limitations under the License.
     process.chdir(__dirname);
   }
 
-  const args = parseArgs((process.env.argv ? JSON.parse(process.env.argv) : process.argv), {
+  const args = parseArgs(process.argv, {
     default: {rootDataDir: path.join(__dirname, 'data')},
     alias: {rootDataDir: ['d'], modulesDir: ['m']},
   });
